@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 import jRubbik.constants.Color;
 import jRubbik.moves.IMove;
-import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
+import jRubbik.state.NewCubeDisplayer;
 
 public class CubePanelDraw extends CubePanel {
 	private static final long serialVersionUID = -309685209173596186L;
@@ -55,6 +55,9 @@ public class CubePanelDraw extends CubePanel {
 	private final static int PADDING = 5;
 	private final static int LAT = 40;
 	
+
+	
+	
 	// clear
 	private void draw(Graphics g, int width, int height)
 	{
@@ -65,23 +68,36 @@ public class CubePanelDraw extends CubePanel {
 		if (state == null)
 			return;
 		
-		int xpad = (width - 12*(PADDING+LAT))/2;
-		int ypad = (height - 9*(PADDING+LAT))/2;
+		final Point2i pad = new Point2i((width - 12*(PADDING+LAT))/2, (height - 9*(PADDING+LAT))/2);
+		
+		final Color[][] colors = NewCubeDisplayer.getColors(state);
+		
+		final FontMetrics fm = g.getFontMetrics();
+		final int htext = fm.getAscent();
+		
 		
 		for (Color color : Color.ALL) {
 
-			Point2i offset = offset(color);
-			
-			for (int y=0; y<3; y++)
-				for (int x=0; x<3; x++) {
-					g.setColor(CubeDisplayer.getFuckingColor(state, color, x, y).toAwtColor());
-					g.fillRect(xpad + offset.getX() + x*(PADDING+LAT), ypad + offset.getY() + y*(PADDING+LAT), LAT, LAT);
+			final Point2i offset = Point2i.add(offset(color), pad);
+
+			for (int x=0; x<3; x++)
+				for (int y=0; y<3; y++) {
+					
+					int idx = 3*y+x; //3*(2-y)+x;
+					
+					if (colors[color.toInt()][idx] == null) continue;
+					
+					g.setColor(colors[color.toInt()][idx].toAwtColor());
+					g.fillRect(offset.getX() + x*(PADDING+LAT), offset.getY() + y*(PADDING+LAT), LAT, LAT);
+					
+//					g.setColor(java.awt.Color.BLACK);
+//					g.drawString(""+4, offset.getX() + x*(PADDING+LAT)+18, offset.getY() + y*(PADDING+LAT)+23);
 				}
 		}
-		
+			
+//		System.out.println(CubeDisplayer.toString2(state));
+			
 		if (message != null && !message.isEmpty()) {
-			final FontMetrics fm = g.getFontMetrics();
-			final int htext = fm.getAscent();
 			g.setColor(java.awt.Color.BLACK);
 			g.drawString(message, 1, htext+1);
 			message = "";
@@ -113,4 +129,5 @@ public class CubePanelDraw extends CubePanel {
 		
 		repaint();
 	}
+	
 }

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -87,6 +89,7 @@ public abstract class CubePanel extends JPanel {
 				perform(move);
 			}
 		});
+		clearButton.addKeyListener(new MyKeyListener());
 		return clearButton;
 	}
 	
@@ -106,5 +109,38 @@ public abstract class CubePanel extends JPanel {
 		this.state = state;
 		display();
 	}
-	
+
+	public class MyKeyListener implements KeyListener
+	{
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			char c = arg0.getKeyChar();
+			
+			if (Character.isSpaceChar(c) || c == 0)
+				return;
+			
+			if (Character.isUpperCase(c)) c = Character.toLowerCase(c);
+			else /*if (Character.isUpperCase(c))*/ c = Character.toUpperCase(c);
+			
+			boolean ctrl = arg0.isAltDown();
+			
+			try {
+				String text = ""+c+(ctrl?"'":"");
+				IMove move = MoveParser.parse(text);
+				if (move != null)
+					perform(move);
+			}
+			catch (Exception e) {}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			
+		}
+	}
 }

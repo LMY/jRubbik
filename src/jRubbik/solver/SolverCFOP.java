@@ -63,7 +63,7 @@ public class SolverCFOP implements Solver {
 //		solveCross(state);
 		
 		System.out.println("solving:");
-		CubeDisplayer.display(state);
+//		CubeDisplayer.display(state);
 		
 		IMove pllmove = PLLs.matches(state);
 
@@ -74,11 +74,11 @@ public class SolverCFOP implements Solver {
 			System.out.println("match for: "+pllmove.toString());
 			System.out.println("che porta a:");
 			CubeState PLLdone = pllmove.get(state);
-			CubeDisplayer.display(PLLdone);
+//			CubeDisplayer.display(PLLdone);
 			
 			IMove aufmove = auf(PLLdone, Move.MOVE_U);
 			System.out.println("AUF:");
-			CubeDisplayer.display(aufmove.get(PLLdone));
+//			CubeDisplayer.display(aufmove.get(PLLdone));
 			ret.addMove(aufmove);
 		}
 		

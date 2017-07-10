@@ -11,12 +11,12 @@ public class Constants {
 	public static final int CORNER_UBR = 6;
 	public static final int CORNER_UBL = 7;
 	
-	final public static int[] corners_permF = { CORNER_DFL, CORNER_UFL, CORNER_UFR, CORNER_DFR };
-	final public static int[] corners_permB = { CORNER_DBR, CORNER_DBL, CORNER_UBL, CORNER_UBR }; //   CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR };
+	final public static int[] corners_permF = { CORNER_UFL, CORNER_UFR, CORNER_DFR, CORNER_DFL };
+	final public static int[] corners_permB = { CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR }; //   CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR };
 	final public static int[] corners_permU = { CORNER_UFR, CORNER_UFL, CORNER_UBL, CORNER_UBR };
 	final public static int[] corners_permD = { CORNER_DFL, CORNER_DFR, CORNER_DBR, CORNER_DBL }; //CORNER_DFL, CORNER_DFR, CORNER_DBR, CORNER_DBL };
-	final public static int[] corners_permR = { CORNER_DFR, CORNER_UFR, CORNER_UBR, CORNER_DBR };
-	final public static int[] corners_permL = { CORNER_DBL, CORNER_UBL, CORNER_UFL, CORNER_DFL }; //  CORNER_UFL, CORNER_DFL, CORNER_DBL, CORNER_UBL };
+	final public static int[] corners_permR = { CORNER_UFR, CORNER_UBR, CORNER_DBR, CORNER_DFR };
+	final public static int[] corners_permL = { CORNER_UBL, CORNER_UFL, CORNER_DFL, CORNER_DBL }; //  CORNER_UFL, CORNER_DFL, CORNER_DBL, CORNER_UBL };
 
 	final public static int[][] corners_permutations = {
 		corners_permF,
