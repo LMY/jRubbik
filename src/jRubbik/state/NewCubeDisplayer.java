@@ -137,17 +137,17 @@ public class NewCubeDisplayer {
 			},
 
 			/* front = ORANGE */  {
-				getEffectiveCornerColor(7, 1, corners, state_corners),
-				getEffectiveEdgeColor(11, 1, edges, state_edges),
 				getEffectiveCornerColor(6, 1, corners, state_corners),
+				getEffectiveEdgeColor(11, 1, edges, state_edges),
+				getEffectiveCornerColor(7, 1, corners, state_corners),
 
-				getEffectiveEdgeColor(7, 0, edges, state_edges),
-				Color.ORANGE,
 				getEffectiveEdgeColor(6, 0, edges, state_edges),
+				Color.ORANGE,
+				getEffectiveEdgeColor(7, 0, edges, state_edges),
 
-				getEffectiveCornerColor(3, 1, corners, state_corners),
+				getEffectiveCornerColor(2, 1, corners, state_corners),
 				getEffectiveEdgeColor(3, 1, edges, state_edges),
-				getEffectiveCornerColor(2, 1, corners, state_corners)
+				getEffectiveCornerColor(3, 1, corners, state_corners)
 			},
 
 			/* front = YELLOW */  {
@@ -207,108 +207,170 @@ public class NewCubeDisplayer {
 			}
 		};
 
-		Color up = state.getOrientation().getUp();
-		Color front = state.getOrientation().getFront();
-
-		int rotn = 0;
-		Color[] cycleColors = null;
-		int cyclen = 0;
+		final Color up = state.getOrientation().getUp();
+		final Color front = state.getOrientation().getFront();
 
 		System.out.println("Front: "+front.toString()+"\tUp: "+up.toString());
 
 		if (up == Color.YELLOW) {
-			cycleColors = new Color[] { Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED };
+			Color[] cycleColors = new Color[] { Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED };
 
 			if (front == Color.RED)
 				;
 			else if (front == Color.GREEN) {
-				cycle(colors, cycleColors, 1);
-				rotate(colors[Color.YELLOW.toInt()], 3);
-				rotate(colors[Color.WHITE.toInt()], 1);
-				invertHor(colors[Color.BLUE.toInt()]);
-//				invertHor(colors[Color.GREEN.toInt()]);
-			}
-			else if (front == Color.ORANGE) {
-				cycle(colors, cycleColors, 2);
-				invertHor(colors[Color.YELLOW.toInt()]);
-				invertHor(colors[Color.RED.toInt()]);
-				invertHor(colors[Color.WHITE.toInt()]);
-				
-				invertVert(colors[Color.WHITE.toInt()]);
-				invertVert(colors[Color.YELLOW.toInt()]);
-			}
-			else if (front == Color.BLUE) {
 				cycle(colors, cycleColors, 3);
 				rotate(colors[Color.YELLOW.toInt()], 1);
 				rotate(colors[Color.WHITE.toInt()], 3);
 				invertHor(colors[Color.GREEN.toInt()]);
+				invertHor(colors[Color.ORANGE.toInt()]);
+			}
+			else if (front == Color.ORANGE) {
+				cycle(colors, cycleColors, 2);
+				invert(colors[Color.YELLOW.toInt()]);
+				invertHor(colors[Color.RED.toInt()]);
+				invert(colors[Color.WHITE.toInt()]);
+				
+				invertHor(colors[Color.ORANGE.toInt()]);
+			}
+			else if (front == Color.BLUE) {
+				cycle(colors, cycleColors, 1);
+				rotate(colors[Color.YELLOW.toInt()], 3);
+				rotate(colors[Color.WHITE.toInt()], 1);
+				invertHor(colors[Color.ORANGE.toInt()]);
+				invertHor(colors[Color.BLUE.toInt()]);
 			}
 		}
 		else if (up == Color.WHITE) {
-			rotn = 2;
-			cycleColors = new Color[] { Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED };
-
-			swapVertical(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-			
 			if (front == Color.RED) {
 				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
 				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+				
+				rotate(colors[Color.YELLOW.toInt()], 2);
+				rotate(colors[Color.WHITE.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
+				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.RED.toInt()], 2);
+				rotate(colors[Color.ORANGE.toInt()], 2);
 			}
 			else if (front == Color.GREEN) {
-//				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
-//				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-			}
-			else if (front == Color.ORANGE)
-				cycle(colors, cycleColors, 2);
-			else if (front == Color.BLUE)
-				cycle(colors, cycleColors, 1);
-		}
-		else if (up == Color.GREEN) {
-			rotn = 1;
-			cycleColors = new Color[] { Color.RED, Color.WHITE, Color.ORANGE, Color.YELLOW };
-
-			if (front == Color.RED) {
+				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
 				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+				
+				rotate(colors[Color.RED.toInt()], 2);
+				rotate(colors[Color.GREEN.toInt()], 2);
+				invertVert(colors[Color.BLUE.toInt()]);
+				rotate(colors[Color.ORANGE.toInt()], 3);
+				rotate(colors[Color.WHITE.toInt()], 3);
+				rotate(colors[Color.YELLOW.toInt()], 1);
 			}
-			else if (front == Color.WHITE)
-				cyclen = 1;
-			else if (front == Color.ORANGE)
-				cyclen = 2;
-			else if (front == Color.YELLOW)
-				cyclen = 3;
-		}
-		else if (up == Color.BLUE) {
-			rotn = 3;
-			cycleColors = new Color[] { Color.RED, Color.WHITE, Color.ORANGE, Color.YELLOW };
-
-			if (front == Color.RED)
-				cyclen = 0;
-			else if (front == Color.WHITE)
-				cyclen = 3;
-			else if (front == Color.ORANGE)
-				cyclen = 2;
-			else if (front == Color.YELLOW)
-				cyclen = 1;
-		}
-		else if (up == Color.RED) {
-			cycleColors = new Color[] { Color.WHITE, Color.GREEN, Color.YELLOW, Color.BLUE };
-
-			if (front == Color.WHITE) {
-				rotn = 0;
-				cyclen = 0;
-			}
-			else if (front == Color.GREEN) {
-				rotn = 3;
-				cyclen = 0;
-			}
-			else if (front == Color.YELLOW) {
-				rotn = 2;
-				cyclen = 0;
+			else if (front == Color.ORANGE) {
+				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.RED.toInt(), Color.ORANGE.toInt());
+				
+				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
+				invertVert(colors[Color.ORANGE.toInt()]);
+				invertVert(colors[Color.RED.toInt()]);
 			}
 			else if (front == Color.BLUE) {
-				rotn = 1;
-				cyclen = 0;
+				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.RED.toInt(), Color.BLUE.toInt());
+				swap(colors, Color.ORANGE.toInt(), Color.GREEN.toInt());
+				
+				rotate(colors[Color.RED.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
+				rotate(colors[Color.ORANGE.toInt()], 2);
+				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.WHITE.toInt()], 1);
+				rotate(colors[Color.YELLOW.toInt()], 3);
+				invertHor(colors[Color.GREEN.toInt()]);
+				invertHor(colors[Color.ORANGE.toInt()]);
+			}
+		}
+		else if (up == Color.GREEN) {
+			if (front == Color.RED) {
+				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+				
+				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+				rotate(colors[Color.RED.toInt()], 3);
+				rotate(colors[Color.BLUE.toInt()], 3);
+				rotate(colors[Color.ORANGE.toInt()], 3);
+				rotate(colors[Color.GREEN.toInt()], 3);
+				rotate(colors[Color.WHITE.toInt()], 3);
+				rotate(colors[Color.YELLOW.toInt()], 3);
+			}
+			else if (front == Color.WHITE) {
+				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+				
+				rotate(colors[Color.RED.toInt()], 3);
+				rotate(colors[Color.BLUE.toInt()], 3);
+				rotate(colors[Color.ORANGE.toInt()], 3);
+				rotate(colors[Color.GREEN.toInt()], 3);
+				rotate(colors[Color.WHITE.toInt()], 3);
+				rotate(colors[Color.YELLOW.toInt()], 3);
+//				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+			}
+			else if (front == Color.ORANGE) {
+				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+			}
+			else if (front == Color.YELLOW) {
+				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+			}
+		}
+		else if (up == Color.BLUE) {
+			swap(colors, Color.BLUE.toInt(), Color.YELLOW.toInt());
+			swap(colors, Color.GREEN.toInt(), Color.WHITE.toInt());
+			
+			if (front == Color.RED) {
+				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+				
+				rotate(colors[Color.RED.toInt()], 1);
+				rotate(colors[Color.YELLOW.toInt()], 1);
+				rotate(colors[Color.WHITE.toInt()], 1);
+				
+				rotate(colors[Color.ORANGE.toInt()], 1);
+				rotate(colors[Color.BLUE.toInt()], 1);
+				rotate(colors[Color.GREEN.toInt()], 1);
+			}
+			else if (front == Color.WHITE) {
+				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
+				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
+				
+				rotate(colors[Color.RED.toInt()], 1);
+				rotate(colors[Color.WHITE.toInt()], 2);
+				
+				rotate(colors[Color.BLUE.toInt()], 3);
+				rotate(colors[Color.GREEN.toInt()], 1);
+				rotate(colors[Color.ORANGE.toInt()], 1);
+				
+				invertVert(colors[Color.BLUE.toInt()]);
+				invertHor(colors[Color.ORANGE.toInt()]);
+			}
+			else if (front == Color.ORANGE) {
+				
+				}
+			else if (front == Color.YELLOW) {
+				
+				}
+		}
+		else if (up == Color.RED) {
+			if (front == Color.WHITE) {
+			}
+			else if (front == Color.GREEN) {
+			}
+			else if (front == Color.YELLOW) {
+			}
+			else if (front == Color.BLUE) {
 			}
 		}
 
@@ -317,24 +379,22 @@ public class NewCubeDisplayer {
 
 
 	private static void invertHor(Color[] colors) {
-		
-		for (int y=0; y<3; y++)
-			for (int x=0; x<3; x++)
-				swap(colors, 3*x, 3*x+2);
+		swap(colors, 0, 2);
+		swap(colors, 3, 5);
+		swap(colors, 6, 8);
 	}
 
 	private static void invertVert(Color[] colors) {
-		
-		for (int y=0; y<3; y++)
-			for (int x=0; x<3; x++)
-				swap(colors, 3*y+x, 3*(2-y)+x);
+		swap(colors, 0, 6);
+		swap(colors, 1, 7);
+		swap(colors, 2, 8);
 	}
 	
 	private static void invert(Color[] colors) {
-		
-		for (int y=0; y<3; y++)
-			for (int x=0; x<3; x++)
-				swap(colors, 3*y+x, 3*(2-y)+(2-x));
+		swap(colors, 0, 8);
+		swap(colors, 1, 7);
+		swap(colors, 2, 6);
+		swap(colors, 3, 5);
 	}
 	
 	public static void cycle(Color[][] colors, Color[] c, int times) {
@@ -342,7 +402,7 @@ public class NewCubeDisplayer {
 		if (colors == null)
 			return;
 		
-		int[] itc = new int[c.length];
+		final int[] itc = new int[c.length];
 
 		for (int i=0; i<c.length; i++)
 			itc[i] = c[i].toInt();
@@ -363,14 +423,14 @@ public class NewCubeDisplayer {
 	}
 	
 	public static void swap(Color[][] colors, int i1, int i2) {
-		Color[] temp = colors[i1];
+		final Color[] temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 	}
 	
 	
 	public static void swapVertical(Color[][] colors, int i1, int i2) {
-		Color[] temp = colors[i1];
+		final Color[] temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 		
@@ -380,7 +440,7 @@ public class NewCubeDisplayer {
 	
 	
 	public static void swap(Color[] colors, int i1, int i2) {
-		Color temp = colors[i1];
+		final Color temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 	}
