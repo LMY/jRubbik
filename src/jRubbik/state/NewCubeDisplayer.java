@@ -233,6 +233,9 @@ public class NewCubeDisplayer {
 				invertHor(colors[Color.YELLOW.toInt()]);
 				invertHor(colors[Color.RED.toInt()]);
 				invertHor(colors[Color.WHITE.toInt()]);
+				
+				invertVert(colors[Color.WHITE.toInt()]);
+				invertVert(colors[Color.YELLOW.toInt()]);
 			}
 			else if (front == Color.BLUE) {
 				cycle(colors, cycleColors, 3);
@@ -316,13 +319,24 @@ public class NewCubeDisplayer {
 	private static void invertHor(Color[] colors) {
 		
 		for (int y=0; y<3; y++)
-		for (int i=0; i<3; i++) {
-			Color temp = colors[3*i];
-			colors[3*i] = colors[3*i+2];
-			colors[3*i+2] = temp;
-		}
+			for (int x=0; x<3; x++)
+				swap(colors, 3*x, 3*x+2);
 	}
 
+	private static void invertVert(Color[] colors) {
+		
+		for (int y=0; y<3; y++)
+			for (int x=0; x<3; x++)
+				swap(colors, 3*y+x, 3*(2-y)+x);
+	}
+	
+	private static void invert(Color[] colors) {
+		
+		for (int y=0; y<3; y++)
+			for (int x=0; x<3; x++)
+				swap(colors, 3*y+x, 3*(2-y)+(2-x));
+	}
+	
 	public static void cycle(Color[][] colors, Color[] c, int times) {
 		
 		if (colors == null)
