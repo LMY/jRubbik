@@ -27,6 +27,6 @@ public class CubePanelText extends CubePanel {
 	
 	@Override
 	public void display(IMove move) {
-		debug.setText((move!=null?move.toString():"")+"\n" + CubeDisplayer.toString2(state));
+		debug.setText((move!=null?move.toString():"")+"\n" + CubeDisplayer.toString(state));
 	}
 }

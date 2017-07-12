@@ -5,7 +5,6 @@ import jRubbik.moves.IMove;
 import jRubbik.moves.Move;
 import jRubbik.moves.MoveParser;
 import jRubbik.moves.NullMove;
-import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
 
 public class SolverCFOP implements Solver {

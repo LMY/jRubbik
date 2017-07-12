@@ -127,9 +127,9 @@ public class NewCubeDisplayer {
 				getEffectiveEdgeColor(9, 1, edges, state_edges),
 				getEffectiveCornerColor(5, 1, corners, state_corners),
 
-				getEffectiveEdgeColor(4, 0, edges, state_edges),	// Color.INVALID
+				getEffectiveEdgeColor(4, 0, edges, state_edges),
 				Color.RED,
-				getEffectiveEdgeColor(5, 0, edges, state_edges),	// Color.INVALID
+				getEffectiveEdgeColor(5, 0, edges, state_edges),
 
 				getEffectiveCornerColor(0, 1, corners, state_corners),
 				getEffectiveEdgeColor(1, 1, edges, state_edges),
@@ -413,39 +413,39 @@ public class NewCubeDisplayer {
 		swap(colors, 3, 5);
 	}
 	
-	public static void cycle(Color[][] colors, Color[] c, int times) {
-		
-		if (colors == null)
-			return;
-		
-		final int[] itc = new int[c.length];
-
-		for (int i=0; i<c.length; i++)
-			itc[i] = c[i].toInt();
-
-		cycle(colors, itc, times);
-	}
-
-	public static void cycle(Color[][] colors, int[] c, int times) {
-
-		for (int k=0; k<times; k++) {
-			Color[] temp = colors[c[c.length-1]];
-
-			for (int i=c.length-1; i>0; i--)
-				colors[c[i]] = colors[c[i-1]];
-
-			colors[c[0]] = temp;
-		}
-	}
+//	public static void cycle(Color[][] colors, Color[] c, int times) {
+//		
+//		if (colors == null)
+//			return;
+//		
+//		final int[] itc = new int[c.length];
+//
+//		for (int i=0; i<c.length; i++)
+//			itc[i] = c[i].toInt();
+//
+//		cycle(colors, itc, times);
+//	}
+//
+//	public static void cycle(Color[][] colors, int[] c, int times) {
+//
+//		for (int k=0; k<times; k++) {
+//			Color[] temp = colors[c[c.length-1]];
+//
+//			for (int i=c.length-1; i>0; i--)
+//				colors[c[i]] = colors[c[i-1]];
+//
+//			colors[c[0]] = temp;
+//		}
+//	}
 	
-	public static void swap(Color[][] colors, int i1, int i2) {
+	private static void swap(Color[][] colors, int i1, int i2) {
 		final Color[] temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 	}
 	
 	
-	public static void swapVertical(Color[][] colors, int i1, int i2) {
+	private static void swapVertical(Color[][] colors, int i1, int i2) {
 		final Color[] temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
@@ -455,20 +455,20 @@ public class NewCubeDisplayer {
 	}
 	
 	
-	public static void swap(Color[] colors, int i1, int i2) {
+	private static void swap(Color[] colors, int i1, int i2) {
 		final Color temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 	}
 
-	public static void rotate(Color[][] colors, int q) {
+	private static void rotate(Color[][] colors, int q) {
 		
 		if (q > 0)
 			for (Color color : Color.ALL)
 				rotate(colors[color.toInt()], q);
 	}
 	
-	public static void rotate(Color[] colors, int q) {
+	private static void rotate(Color[] colors, int q) {
 
 		while (q < 0)
 			q += 4;
