@@ -1,29 +1,20 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+fuck fuck fuck cube cube cube
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Fucking cubing man. fucking cubing.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* you get a fucking cube and fucking cube
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Fucking
+* Cube
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Other fucking cubers
