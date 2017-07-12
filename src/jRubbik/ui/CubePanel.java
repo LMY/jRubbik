@@ -55,7 +55,7 @@ public abstract class CubePanel extends JPanel {
 		south.add(buttonMove(MoveParser.parse("y'")));
 		south.add(buttonMove(MoveParser.parse("z")));
 		south.add(buttonMove(MoveParser.parse("z'")));
-		south.add(buttonMove(MoveParser.parseSequence("R U R' U'")));
+		south.add(buttonMove(MoveParser.parseSequence("F R U R' U' F' L' D")));
 		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {

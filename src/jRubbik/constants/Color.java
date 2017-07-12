@@ -45,14 +45,10 @@ public enum Color {
 	public Color next(Color up) {
 		boolean inverse = up == WHITE | up == BLUE | up == ORANGE;
 		
-		Color[] order;
-		
-		if (up == YELLOW || up == WHITE)
-			order = ORDER[0];
-		else if (up == GREEN || up == BLUE)
-			order = ORDER[1];
-		else /* (up == RED || up == ORANGE) */
-			order = ORDER[2];
+		final Color[] order =
+				up == YELLOW || up == WHITE ? ORDER[0] :
+				up == GREEN || up == BLUE ? ORDER[1] :
+				/* up == RED || up == ORANGE ? */ ORDER[2];
 		
 		return this == order[0] ?
 				order[ inverse ? order.length-1 : 1] :
@@ -70,7 +66,7 @@ public enum Color {
 	public java.awt.Color toAwtColor() {
 		switch (this) {
 			case RED: return java.awt.Color.RED;
-			case ORANGE: return java.awt.Color.ORANGE;
+			case ORANGE: return java.awt.Color.MAGENTA;
 			case YELLOW: return java.awt.Color.YELLOW;
 			case WHITE: return java.awt.Color.WHITE;
 			case GREEN: return java.awt.Color.GREEN;
@@ -90,25 +86,4 @@ public enum Color {
 			default: return '?';
 		}
 	}
-	
-
-//	public static Color whatcolorat(Color who, Color up, Color front) {
-//		
-//		if (who == up)
-//			return Color.YELLOW;
-//		if (who == up.opposite())
-//			return Color.WHITE;
-//		
-//		if (who == front)
-//			return Color.RED;
-//		if (who == front.opposite())
-//			return Color.ORANGE;
-//		
-//		if (who == front.next(up))
-//			return Color.GREEN;
-//		
-//		return Color.BLUE;
-//	}
-		
-
 }
