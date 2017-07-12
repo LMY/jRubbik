@@ -207,176 +207,192 @@ public class NewCubeDisplayer {
 			}
 		};
 
-		final Color up = state.getOrientation().getUp();
-		final Color front = state.getOrientation().getFront();
-
-		System.out.println("Front: "+front.toString()+"\tUp: "+up.toString());
-
-		if (up == Color.YELLOW) {
-			Color[] cycleColors = new Color[] { Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED };
-
-			if (front == Color.RED)
-				;
-			else if (front == Color.GREEN) {
-				cycle(colors, cycleColors, 3);
-				rotate(colors[Color.YELLOW.toInt()], 1);
-				rotate(colors[Color.WHITE.toInt()], 3);
-				invertHor(colors[Color.GREEN.toInt()]);
-				invertHor(colors[Color.ORANGE.toInt()]);
-			}
-			else if (front == Color.ORANGE) {
-				cycle(colors, cycleColors, 2);
-				invert(colors[Color.YELLOW.toInt()]);
-				invertHor(colors[Color.RED.toInt()]);
-				invert(colors[Color.WHITE.toInt()]);
-				
-				invertHor(colors[Color.ORANGE.toInt()]);
-			}
-			else if (front == Color.BLUE) {
-				cycle(colors, cycleColors, 1);
-				rotate(colors[Color.YELLOW.toInt()], 3);
-				rotate(colors[Color.WHITE.toInt()], 1);
-				invertHor(colors[Color.ORANGE.toInt()]);
-				invertHor(colors[Color.BLUE.toInt()]);
-			}
-		}
-		else if (up == Color.WHITE) {
-			if (front == Color.RED) {
-				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-				
-				rotate(colors[Color.YELLOW.toInt()], 2);
-				rotate(colors[Color.WHITE.toInt()], 2);
-				rotate(colors[Color.BLUE.toInt()], 2);
-				rotate(colors[Color.GREEN.toInt()], 2);
-				rotate(colors[Color.RED.toInt()], 2);
-				rotate(colors[Color.ORANGE.toInt()], 2);
-			}
-			else if (front == Color.GREEN) {
-				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
-				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-				
-				rotate(colors[Color.RED.toInt()], 2);
-				rotate(colors[Color.GREEN.toInt()], 2);
-				invertVert(colors[Color.BLUE.toInt()]);
-				rotate(colors[Color.ORANGE.toInt()], 3);
-				rotate(colors[Color.WHITE.toInt()], 3);
-				rotate(colors[Color.YELLOW.toInt()], 1);
-			}
-			else if (front == Color.ORANGE) {
-				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.RED.toInt(), Color.ORANGE.toInt());
-				
-				rotate(colors[Color.GREEN.toInt()], 2);
-				rotate(colors[Color.BLUE.toInt()], 2);
-				invertVert(colors[Color.ORANGE.toInt()]);
-				invertVert(colors[Color.RED.toInt()]);
-			}
-			else if (front == Color.BLUE) {
-				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.RED.toInt(), Color.BLUE.toInt());
-				swap(colors, Color.ORANGE.toInt(), Color.GREEN.toInt());
-				
-				rotate(colors[Color.RED.toInt()], 2);
-				rotate(colors[Color.BLUE.toInt()], 2);
-				rotate(colors[Color.ORANGE.toInt()], 2);
-				rotate(colors[Color.GREEN.toInt()], 2);
-				rotate(colors[Color.WHITE.toInt()], 1);
-				rotate(colors[Color.YELLOW.toInt()], 3);
-				invertHor(colors[Color.GREEN.toInt()]);
-				invertHor(colors[Color.ORANGE.toInt()]);
-			}
-		}
-		else if (up == Color.GREEN) {
-			if (front == Color.RED) {
-				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
-				
-				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-				rotate(colors[Color.RED.toInt()], 3);
-				rotate(colors[Color.BLUE.toInt()], 3);
-				rotate(colors[Color.ORANGE.toInt()], 3);
-				rotate(colors[Color.GREEN.toInt()], 3);
-				rotate(colors[Color.WHITE.toInt()], 3);
-				rotate(colors[Color.YELLOW.toInt()], 3);
-			}
-			else if (front == Color.WHITE) {
-				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
-				
-				rotate(colors[Color.RED.toInt()], 3);
-				rotate(colors[Color.BLUE.toInt()], 3);
-				rotate(colors[Color.ORANGE.toInt()], 3);
-				rotate(colors[Color.GREEN.toInt()], 3);
-				rotate(colors[Color.WHITE.toInt()], 3);
-				rotate(colors[Color.YELLOW.toInt()], 3);
+		
+		mapColors(colors, state.getOrientation());
+//		
+//		final Color up = state.getOrientation().getUp();
+//		final Color front = state.getOrientation().getFront();
+//
+//		System.out.println("Front: "+front.toString()+"\tUp: "+up.toString());
+//
+//		if (up == Color.YELLOW) {
+//			Color[] cycleColors = new Color[] { Color.GREEN, Color.ORANGE, Color.BLUE, Color.RED };
+//
+//			if (front == Color.RED)
+//				;
+//			else if (front == Color.GREEN) {
+//				cycle(colors, cycleColors, 3);
+//				rotate(colors[Color.YELLOW.toInt()], 1);
+//				rotate(colors[Color.WHITE.toInt()], 3);
+//				invertHor(colors[Color.GREEN.toInt()]);
+//				invertHor(colors[Color.ORANGE.toInt()]);
+//			}
+//			else if (front == Color.ORANGE) {
+//				cycle(colors, cycleColors, 2);
+//				invert(colors[Color.YELLOW.toInt()]);
+//				invertHor(colors[Color.RED.toInt()]);
+//				invert(colors[Color.WHITE.toInt()]);
+//				
+//				invertHor(colors[Color.ORANGE.toInt()]);
+//			}
+//			else if (front == Color.BLUE) {
+//				cycle(colors, cycleColors, 1);
+//				rotate(colors[Color.YELLOW.toInt()], 3);
+//				rotate(colors[Color.WHITE.toInt()], 1);
+//				invertHor(colors[Color.ORANGE.toInt()]);
+//				invertHor(colors[Color.BLUE.toInt()]);
+//			}
+//		}
+//		else if (up == Color.WHITE) {
+//			if (front == Color.RED) {
 //				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
 //				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-			}
-			else if (front == Color.ORANGE) {
-				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				
+//				rotate(colors[Color.YELLOW.toInt()], 2);
+//				rotate(colors[Color.WHITE.toInt()], 2);
+//				rotate(colors[Color.BLUE.toInt()], 2);
+//				rotate(colors[Color.GREEN.toInt()], 2);
+//				rotate(colors[Color.RED.toInt()], 2);
+//				rotate(colors[Color.ORANGE.toInt()], 2);
+//			}
+//			else if (front == Color.GREEN) {
+//				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
 //				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
-//				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-			}
-			else if (front == Color.YELLOW) {
-				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				
+//				rotate(colors[Color.RED.toInt()], 2);
+//				rotate(colors[Color.GREEN.toInt()], 2);
+//				invertVert(colors[Color.BLUE.toInt()]);
+//				rotate(colors[Color.ORANGE.toInt()], 3);
+//				rotate(colors[Color.WHITE.toInt()], 3);
+//				rotate(colors[Color.YELLOW.toInt()], 1);
+//			}
+//			else if (front == Color.ORANGE) {
 //				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.RED.toInt(), Color.ORANGE.toInt());
+//				
+//				rotate(colors[Color.GREEN.toInt()], 2);
+//				rotate(colors[Color.BLUE.toInt()], 2);
+//				invertVert(colors[Color.ORANGE.toInt()]);
+//				invertVert(colors[Color.RED.toInt()]);
+//			}
+//			else if (front == Color.BLUE) {
+//				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.RED.toInt(), Color.BLUE.toInt());
+//				swap(colors, Color.ORANGE.toInt(), Color.GREEN.toInt());
+//				
+//				rotate(colors[Color.RED.toInt()], 2);
+//				rotate(colors[Color.BLUE.toInt()], 2);
+//				rotate(colors[Color.ORANGE.toInt()], 2);
+//				rotate(colors[Color.GREEN.toInt()], 2);
+//				rotate(colors[Color.WHITE.toInt()], 1);
+//				rotate(colors[Color.YELLOW.toInt()], 3);
+//				invertHor(colors[Color.GREEN.toInt()]);
+//				invertHor(colors[Color.ORANGE.toInt()]);
+//			}
+//		}
+//		else if (up == Color.GREEN) {
+//			if (front == Color.RED) {
+//				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				
 //				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-			}
-		}
-		else if (up == Color.BLUE) {
-			swap(colors, Color.BLUE.toInt(), Color.YELLOW.toInt());
-			swap(colors, Color.GREEN.toInt(), Color.WHITE.toInt());
-			
-			if (front == Color.RED) {
-				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
-				
-				rotate(colors[Color.RED.toInt()], 1);
-				rotate(colors[Color.YELLOW.toInt()], 1);
-				rotate(colors[Color.WHITE.toInt()], 1);
-				
-				rotate(colors[Color.ORANGE.toInt()], 1);
-				rotate(colors[Color.BLUE.toInt()], 1);
-				rotate(colors[Color.GREEN.toInt()], 1);
-			}
-			else if (front == Color.WHITE) {
-				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
-				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
-				
-				rotate(colors[Color.RED.toInt()], 1);
-				rotate(colors[Color.WHITE.toInt()], 2);
-				
-				rotate(colors[Color.BLUE.toInt()], 3);
-				rotate(colors[Color.GREEN.toInt()], 1);
-				rotate(colors[Color.ORANGE.toInt()], 1);
-				
-				invertVert(colors[Color.BLUE.toInt()]);
-				invertHor(colors[Color.ORANGE.toInt()]);
-			}
-			else if (front == Color.ORANGE) {
-				
-				}
-			else if (front == Color.YELLOW) {
-				
-				}
-		}
-		else if (up == Color.RED) {
-			if (front == Color.WHITE) {
-			}
-			else if (front == Color.GREEN) {
-			}
-			else if (front == Color.YELLOW) {
-			}
-			else if (front == Color.BLUE) {
-			}
-		}
+//				rotate(colors[Color.RED.toInt()], 3);
+//				rotate(colors[Color.BLUE.toInt()], 3);
+//				rotate(colors[Color.ORANGE.toInt()], 3);
+//				rotate(colors[Color.GREEN.toInt()], 3);
+//				rotate(colors[Color.WHITE.toInt()], 3);
+//				rotate(colors[Color.YELLOW.toInt()], 3);
+//			}
+//			else if (front == Color.WHITE) {
+//				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+//				
+//				rotate(colors[Color.RED.toInt()], 3);
+//				rotate(colors[Color.BLUE.toInt()], 3);
+//				rotate(colors[Color.ORANGE.toInt()], 3);
+//				rotate(colors[Color.GREEN.toInt()], 3);
+//				rotate(colors[Color.WHITE.toInt()], 3);
+//				rotate(colors[Color.YELLOW.toInt()], 3);
+////				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+////				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+//			}
+//			else if (front == Color.ORANGE) {
+//				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+////				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+////				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+//			}
+//			else if (front == Color.YELLOW) {
+//				swap(colors, Color.GREEN.toInt(), Color.YELLOW.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.WHITE.toInt());
+////				swap(colors, Color.WHITE.toInt(), Color.YELLOW.toInt());
+////				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+//			}
+//		}
+//		else if (up == Color.BLUE) {
+//			swap(colors, Color.BLUE.toInt(), Color.YELLOW.toInt());
+//			swap(colors, Color.GREEN.toInt(), Color.WHITE.toInt());
+//			
+//			if (front == Color.RED) {
+//				swap(colors, Color.BLUE.toInt(), Color.GREEN.toInt());
+//				
+//				rotate(colors[Color.RED.toInt()], 1);
+//				rotate(colors[Color.YELLOW.toInt()], 1);
+//				rotate(colors[Color.WHITE.toInt()], 1);
+//				
+//				rotate(colors[Color.ORANGE.toInt()], 1);
+//				rotate(colors[Color.BLUE.toInt()], 1);
+//				rotate(colors[Color.GREEN.toInt()], 1);
+//			}
+//			else if (front == Color.WHITE) {
+//				swap(colors, Color.RED.toInt(), Color.GREEN.toInt());
+//				swap(colors, Color.BLUE.toInt(), Color.ORANGE.toInt());
+//				
+//				rotate(colors[Color.RED.toInt()], 1);
+//				rotate(colors[Color.WHITE.toInt()], 2);
+//				
+//				rotate(colors[Color.BLUE.toInt()], 3);
+//				rotate(colors[Color.GREEN.toInt()], 1);
+//				rotate(colors[Color.ORANGE.toInt()], 1);
+//				
+//				invertVert(colors[Color.BLUE.toInt()]);
+//				invertHor(colors[Color.ORANGE.toInt()]);
+//			}
+//			else if (front == Color.ORANGE) {
+//				
+//				}
+//			else if (front == Color.YELLOW) {
+//				
+//				}
+//		}
+//		else if (up == Color.RED) {
+//			if (front == Color.WHITE) {
+//			}
+//			else if (front == Color.GREEN) {
+//			}
+//			else if (front == Color.YELLOW) {
+//			}
+//			else if (front == Color.BLUE) {
+//			}
+//		}
 
 		return colors;
 	}
 
+	
+	private static void mapColors(Color[][] colors, OrientatonState state)
+	{
+		Color[][] newcolors = new Color[colors.length][];
+		
+		for (Color c : Color.ALL)
+			newcolors[state.whereis(c).toInt()] = colors[c.toInt()];
+		
+		for (int i=0; i<newcolors.length; i++)
+			colors[i] = newcolors[i];
+	}
+	
+	
 
 	private static void invertHor(Color[] colors) {
 		swap(colors, 0, 2);
