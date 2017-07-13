@@ -112,7 +112,7 @@ public class CubePanelDraw extends CubePanel {
 		g.setColor(c.toAwtColor());
 		
 		// mirror view for back face
-		x = facecolor == Color.ORANGE ? 2-x : x;
+//		x = facecolor == Color.ORANGE ? 2-x : x;
 		
 		g.fillRect(offset.getX() + x*(PADDING+LAT), offset.getY() + y*(PADDING+LAT), LAT, LAT);
 	}
