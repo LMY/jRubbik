@@ -284,7 +284,7 @@ public class NewCubeDisplayer {
 				rotate(colors[Color.RED.toInt()], 2);
 			}
 		}
-		else if (up == Color.ORANGE) {	// todo
+		else if (up == Color.ORANGE) {
 			int t = front == Color.GREEN ? 1 : front == Color.YELLOW ? 2 : front == Color.BLUE ? 3 : 0;
 			
 			rotate(colors[Color.GREEN.toInt()], t);
@@ -292,25 +292,39 @@ public class NewCubeDisplayer {
 			rotate(colors[Color.RED.toInt()], t);
 			rotate(colors[Color.ORANGE.toInt()], t);
 			
-			if (front == Color.GREEN || front == Color.BLUE)
-				rotate(colors[Color.WHITE.toInt()], 2);
+			if (front == Color.WHITE || front == Color.YELLOW) {
+				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
+				rotate(colors[Color.RED.toInt()], 2);
+				rotate(colors[Color.ORANGE.toInt()], 2);	
+			}
+			else if (front == Color.BLUE || front == Color.GREEN) {
+				rotate(colors[Color.YELLOW.toInt()], 2);
+				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
+				rotate(colors[Color.RED.toInt()], 2);
+				rotate(colors[Color.ORANGE.toInt()], 2);
+			}
 		}
-		else if (up == Color.BLUE) {	// todo
+		else if (up == Color.BLUE) {
 			if (front != Color.RED)
 				rotate(colors[Color.ORANGE.toInt()], 2);
 			
 			if (front == Color.ORANGE) {
 				rotate(colors[Color.RED.toInt()], 2);
 			}
-			else if (front == Color.YELLOW || front == Color.WHITE) {
+			else if (front == Color.YELLOW) {
 				rotate(colors[Color.YELLOW.toInt()], 2);
-				rotate(colors[Color.GREEN.toInt()], 2);
+				rotate(colors[Color.GREEN.toInt()], 2);				
+			}
+			else if (front == Color.WHITE) {
+				rotate(colors[Color.YELLOW.toInt()], 2);
+				rotate(colors[Color.BLUE.toInt()], 2);
 			}
 		}
 		else if (up == Color.WHITE) {
 			if (front == Color.GREEN || front == Color.BLUE) {
 				rotate(colors[Color.YELLOW.toInt()], 2);
-//				rotate(colors[Color.WHITE.toInt()], 2);
 			}
 		}
 		else if (up == Color.GREEN) {
