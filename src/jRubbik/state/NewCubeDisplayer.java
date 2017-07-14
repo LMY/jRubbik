@@ -240,34 +240,11 @@ public class NewCubeDisplayer {
 		rotate(colors[Color.YELLOW.toInt()], howmany);
 		rotate(colors[Color.WHITE.toInt()], howmany);
 		
-		// Front: GREEN		Up: RED	Lookfor: WHITE	Rot=1		i 4 centrali: 3
-		// Front: YELLOW	Up: RED	Lookfor: WHITE	Rot=2		i 4 centrali: 2
-		// Front: BLUE		Up: RED	Lookfor: WHITE	Rot=3		i 4 centrali: 1
-		
-		// Front: GREEN		Up: ORANGE	Lookfor: YELLOW	Rot=1	i 4 centrali: 1, white 2
-		// Front: WHITE		Up: ORANGE	Lookfor: YELLOW	Rot=2	i 4 centrali: 2
-		// Front: BLUE		Up: ORANGE	Lookfor: YELLOW	Rot=3	i 4 centrali: 3, white 2
-		
-		// Front: YELLOW	Up: BLUE	Lookfor: RED	Rot=13  right, down, back 2
-		// Front: ORANGE	Up: BLUE	Lookfor: RED	Rot=2	front, back 2
-		// Front: WHITE		Up: BLUE	Lookfor: RED	Rot=3	left,down, back 2
-		
-		// Front: GREEN		Up: WHITE	Lookfor: ORANGE	Rot=1 	down 2
-		// Front: BLUE		Up: WHITE	Lookfor: ORANGE	Rot=3 	down 2
-		
-		// Front: WHITE		Up: GREEN	Lookfor: RED	Rot=1	right, down, back 2
-		// Front: ORANGE	Up: GREEN	Lookfor: RED	Rot=2	front, back 2
-		// Front: YELLOW	Up: GREEN	Lookfor: RED	Rot=3	left, down, back 2
-		
-		
-		
-		
-//		Front: GREEN	Up: RED	Lookfor: WHITE	Rot=3	up right
-//		Front: BLUE	Up: RED	Lookfor: WHITE	Rot=1		front left up
+		final int[] rot = new int[6];
 		
 		if (up == Color.YELLOW) {
 			if (front == Color.GREEN || front == Color.BLUE)
-				rotate(colors[Color.YELLOW.toInt()], 2);
+				rot[Color.YELLOW.toInt()] += 2;
 		}
 		else if (up == Color.RED) {
 			int t = front == Color.GREEN ? 3 : front == Color.YELLOW ? 2 : front == Color.BLUE ? 1 : 0;
@@ -292,19 +269,13 @@ public class NewCubeDisplayer {
 			rotate(colors[Color.RED.toInt()], t);
 			rotate(colors[Color.ORANGE.toInt()], t);
 			
-			if (front == Color.WHITE || front == Color.YELLOW) {
-				rotate(colors[Color.GREEN.toInt()], 2);
-				rotate(colors[Color.BLUE.toInt()], 2);
-				rotate(colors[Color.RED.toInt()], 2);
-				rotate(colors[Color.ORANGE.toInt()], 2);	
-			}
-			else if (front == Color.BLUE || front == Color.GREEN) {
+			rotate(colors[Color.GREEN.toInt()], 2);
+			rotate(colors[Color.BLUE.toInt()], 2);
+			rotate(colors[Color.RED.toInt()], 2);
+			rotate(colors[Color.ORANGE.toInt()], 2);	
+				
+			if (front == Color.BLUE || front == Color.GREEN)
 				rotate(colors[Color.YELLOW.toInt()], 2);
-				rotate(colors[Color.GREEN.toInt()], 2);
-				rotate(colors[Color.BLUE.toInt()], 2);
-				rotate(colors[Color.RED.toInt()], 2);
-				rotate(colors[Color.ORANGE.toInt()], 2);
-			}
 		}
 		else if (up == Color.BLUE) {
 			if (front != Color.RED)
@@ -343,6 +314,11 @@ public class NewCubeDisplayer {
 				rotate(colors[Color.YELLOW.toInt()], 2);
 				rotate(colors[Color.GREEN.toInt()], 2);
 			}
+		}
+		
+		for (Color color : Color.ALL) {
+			final int idx = color.toInt();
+			rotate(colors[idx], rot[idx]);
 		}
 		
 		System.out.println("Front: "+front.toString()+"\tUp: "+up.toString()+"\tLookfor: "+lookfor+"\tRot="+howmany);

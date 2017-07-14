@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import jRubbik.jRubbik;
 import jRubbik.moves.IMove;
 import jRubbik.moves.MoveParser;
 import jRubbik.state.CubeState;
@@ -56,6 +57,7 @@ public abstract class CubePanel extends JPanel {
 		south.add(buttonMove(MoveParser.parse("z")));
 		south.add(buttonMove(MoveParser.parse("z'")));
 		south.add(buttonMove(MoveParser.parseSequence("F R U R' U' F' L' D")));
+		south.add(buttonMove(MoveParser.parseSequence(jRubbik.OFFICIAL_SCRAMBLE)));
 		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {
