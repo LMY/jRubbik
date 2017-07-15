@@ -1,4 +1,4 @@
-package jRubbik.ui;
+package jRubbik.utils;
 
 public class Point2i
 {

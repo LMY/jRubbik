@@ -1,6 +1,6 @@
 package jRubbik.state;
 
-import jRubbik.Utils;
+import jRubbik.utils.Utils;
 
 public class CubeState {
 

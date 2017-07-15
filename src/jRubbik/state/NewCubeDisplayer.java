@@ -162,6 +162,19 @@ public class NewCubeDisplayer {
 	}
 
 	
+	private static int obtain_rot(Color up, Color front, Color face)
+	{
+		final int upidx = up.toInt();
+		final int frontidx = front.toInt();
+		
+		for (int i=0; i<Constants.orientationFaceRotations.length; i++)
+			if (Constants.orientationFaceRotations[i][0] == upidx && Constants.orientationFaceRotations[i][1] == frontidx)
+				return Constants.orientationFaceRotations[i][2 + face.toInt()];
+		
+		return -1;
+	}
+	
+	
 	private static Color[][] applyOrientation(Color[][] colors, OrientatonState state)
 	{
 		final Color[][] newcolors = new Color[colors.length][];
@@ -176,192 +189,10 @@ public class NewCubeDisplayer {
 			colors[i] = newcolors[i];
 		
 		// now rotate the faces
-		
-		// rotate up/down layer
-		// right and left (blue and green) rotate +1 for each step rotate
-		
-		// up	front	rot_RED	rot_ORANGE	rot_YELLOW	rot_WHITE	rot_GREEN	rot_BLUE
-		final int[][] realrot = {{ 0, 2, 2, 4, 2, 4, 3, 5 },
-				{ 0, 3, 0, 2, 0, 2, 1, 3 },
-				{ 0, 4, 5, 5, 5, 5, 6, 8 },
-				{ 0, 5, 3, 3, 3, 3, 4, 6 },
-				{ 1, 2, 4, 6, 2, 0, 7, 5 },
-				{ 1, 3, 2, 4, 4, 2, 5, 3 },
-				{ 1, 4, 3, 5, 7, 3, 6, 4 },
-				{ 1, 5, 5, 7, 5, 1, 8, 6 },
-				{ 2, 0, 0, 0, 0, 0, 0, 0 },
-				{ 2, 1, 0, 0, 2, 2, 0, 0 },
-				{ 2, 4, 0, 0, 5, 3, 0, 0 },
-				{ 2, 5, 0, 0, 3, 1, 0, 0 },
-				{ 3, 0, 2, 2, 2, 2, 2, 2 },
-				{ 3, 1, 2, 2, 0, 0, 2, 2 },
-				{ 3, 4, 2, 2, 5, 3, 2, 2 },
-				{ 3, 5, 2, 2, 3, 1, 2, 2 },
-				{ 4, 0, 3, 1, 3, 3, 3, 3 },
-				{ 4, 1, 3, 5, 5, 5, 3, 3 },
-				{ 4, 2, 3, 3, 6, 4, 7, 5 },
-				{ 4, 3, 3, 3, 8, 6, 5, 3 },
-				{ 5, 0, 1, 3, 1, 1, 1, 1 },
-				{ 5, 1, 3, 5, 3, 3, 1, 1 },
-				{ 5, 2, 1, 5, 6, 4, 3, 1 },
-				{ 5, 3, 1, 5, 4, 2, 1, 3 } }; 
-		
-		
-		
-		
-		final int[] rot = new int[6];
-		
-		
-		if (up == Color.YELLOW) {
-		}
-		else if (up == Color.RED) {
-			rot[Color.GREEN.toInt()] += 1;
-			rot[Color.BLUE.toInt()] += 3;
-			
-			rot[Color.WHITE.toInt()] += 2;
-			rot[Color.ORANGE.toInt()] += 2;
-		}
-		else if (up == Color.WHITE) {
-			rot[Color.BLUE.toInt()] += 2;
-			rot[Color.GREEN.toInt()] += 2;
-			
-			rot[Color.RED.toInt()] += 2;
-			rot[Color.ORANGE.toInt()] += 2;
-		}
-		else if (up == Color.ORANGE) {
-			rot[Color.GREEN.toInt()] += 3;
-			rot[Color.BLUE.toInt()] += 1;
-
-			rot[Color.YELLOW.toInt()] += 2;
-			rot[Color.ORANGE.toInt()] += 2;
-		}
-		else if (up == Color.BLUE) {
-			// rotate ALL
-			rot[Color.GREEN.toInt()] += 1;
-			rot[Color.BLUE.toInt()] += 1;
-
-			rot[Color.YELLOW.toInt()] += 1;
-			rot[Color.ORANGE.toInt()] += 3;
-			rot[Color.RED.toInt()] += 1;
-			rot[Color.WHITE.toInt()] += 1;
-		}		
-		else if (up == Color.GREEN) {
-			//opposite of blue
-			rot[Color.GREEN.toInt()] += 3;
-			rot[Color.BLUE.toInt()] += 3;
-
-			rot[Color.YELLOW.toInt()] += 3;
-			rot[Color.ORANGE.toInt()] += 1;
-			rot[Color.RED.toInt()] += 3;
-			rot[Color.WHITE.toInt()] += 3;
-		}			
-		// front.next(up) = { Color.GREEN | Color.BLUE } | up = GREEN (front should be red) | up = BLUE (front should be orange)
-		
-		final Color lookfor = 
-							up == Color.YELLOW ? Color.RED :
-							up == Color.WHITE ? Color.ORANGE :
-							up == Color.ORANGE ? Color.YELLOW :
-							up == Color.RED ? Color.WHITE :
-							up == Color.BLUE ? Color.RED :
-							up == Color.GREEN ? Color.RED :
-								Color.INVALID;
-		
-		final int howmany = 
-						lookfor == front ? 0 :
-							lookfor == front.next(up) ? 1:
-								lookfor == front.opposite() ? 2 : 3;
-		
-
-		rot[Color.YELLOW.toInt()] += howmany;
-		rot[Color.WHITE.toInt()] += howmany;
-
-		if (up == Color.YELLOW) {
-			if (front == Color.GREEN || front == Color.BLUE)
-				rot[Color.YELLOW.toInt()] += 2;
-		}
-		else if (up == Color.RED) {
-			int t = front == Color.GREEN ? 3 : front == Color.YELLOW ? 2 : front == Color.BLUE ? 1 : 0;
-			
-			rot[Color.GREEN.toInt()] += t;
-			rot[Color.BLUE.toInt()] += t;
-			rot[Color.RED.toInt()] += t;
-			rot[Color.ORANGE.toInt()] += t;
-			
-			if (front == Color.GREEN || front == Color.BLUE) {
-				rot[Color.YELLOW.toInt()] += 2;
-				rot[Color.BLUE.toInt()] += 2;
-				rot[Color.GREEN.toInt()] += 2;
-				rot[Color.RED.toInt()] += 2;
-			}
-		}
-		else if (up == Color.ORANGE) {
-			int t = front == Color.GREEN ? 1 : front == Color.YELLOW ? 2 : front == Color.BLUE ? 3 : 0;
-			
-			rot[Color.GREEN.toInt()] += t;
-			rot[Color.BLUE.toInt()] += t;
-			rot[Color.RED.toInt()] += t;
-			rot[Color.ORANGE.toInt()] += t;
-			
-			rot[Color.GREEN.toInt()] += 2;
-			rot[Color.BLUE.toInt()] += 2;
-			rot[Color.RED.toInt()] += 2;
-			rot[Color.ORANGE.toInt()] += 2;
-				
-			if (front == Color.BLUE || front == Color.GREEN)
-				rot[Color.YELLOW.toInt()] += 2;
-		}
-		else if (up == Color.BLUE) {
-			if (front != Color.RED)
-				rot[Color.ORANGE.toInt()] += 2;
-			
-			if (front == Color.ORANGE) {
-				rot[Color.RED.toInt()] += 2;
-			}
-			else if (front == Color.YELLOW) {
-				rot[Color.YELLOW.toInt()] += 2;
-				rot[Color.GREEN.toInt()] += 2;		
-			}
-			else if (front == Color.WHITE) {
-				rot[Color.YELLOW.toInt()] += 2;
-				rot[Color.BLUE.toInt()] += 2;
-			}
-		}
-		else if (up == Color.WHITE) {
-			if (front == Color.GREEN || front == Color.BLUE) {
-				rot[Color.YELLOW.toInt()] += 2;
-			}
-		}
-		else if (up == Color.GREEN) {
-			if (front != Color.RED)
-				rot[Color.ORANGE.toInt()] += 2;
-
-			if (front == Color.YELLOW) {
-				rot[Color.BLUE.toInt()] += 2;
-				rot[Color.GREEN.toInt()] += 2;
-			}			
-			
-			if (front == Color.ORANGE) {
-				rot[Color.ORANGE.toInt()] += 2;
-			}
-			else if (front == Color.YELLOW || front == Color.WHITE) {
-				rot[Color.YELLOW.toInt()] += 2;
-				rot[Color.GREEN.toInt()] += 2;
-			}
-		}
-		
-//		System.out.print("Front: "+front.toString()+"\tUp: "+up.toString()+"\tLookfor: "+lookfor+"\tRot="+howmany);
-//		System.out.print("\tIdx: ");
-		
-		System.out.print(""+up.toInt()+"\t"+front.toInt());
-		
 		for (Color color : Color.ALL) {
 			final int idx = color.toInt();
-			rotate(colors[idx], rot[idx]);
-			
-//			System.out.print(color.toString()+"="+rot[idx]+ " ");
-			System.out.print("\t"+rot[idx]);
+			rotate(colors[idx], obtain_rot(up, front, color));
 		}
-		System.out.println();
 
 		return newcolors;
 	}
@@ -406,23 +237,4 @@ public class NewCubeDisplayer {
 			swap(colors, 0, 6);
 		}
 	}
-
-//	private static void invertHor(Color[] colors) {
-//		swap(colors, 0, 2);
-//		swap(colors, 3, 5);
-//		swap(colors, 6, 8);
-//	}
-//
-//	private static void invertVert(Color[] colors) {
-//		swap(colors, 0, 6);
-//		swap(colors, 1, 7);
-//		swap(colors, 2, 8);
-//	}
-//	
-//	private static void invert(Color[] colors) {
-//		swap(colors, 0, 8);
-//		swap(colors, 1, 7);
-//		swap(colors, 2, 6);
-//		swap(colors, 3, 5);
-//	}
 }

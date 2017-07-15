@@ -1,4 +1,4 @@
-package jRubbik;
+package jRubbik.utils;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -97,22 +97,6 @@ public class Constants {
 		if (x == 0) return const_rot_axis == 1 ? 2 : 1;
 		if (x == 1) return const_rot_axis == 0 ? 2 : 0;
 		/*if (x == 2)*/ return const_rot_axis == 1 ? 0 : 1;
-		
-//		if (const_rot_axis == 0) {
-//			if (x == 0) return 0;
-//			else if (x == 1) return 2;
-//			else /*if (x == 2)*/ return 1;
-//		}
-//		else if (const_rot_axis == 1) {
-//			if (x == 0) return 2;
-//			else if (x == 1) return 1;
-//			else /*if (x == 2)*/ return 0;
-//		}
-//		else /*if (const_rot_axis == 2)*/ {
-//			if (x == 0) return 1;
-//			else if (x == 1) return 0;
-//			else /*if (x == 2)*/ return 2;
-//		}		
 	}
 
 	// for a given move, get the state that is left unchanged
@@ -121,8 +105,6 @@ public class Constants {
 		else if (value < 4) return 0;	// U, D
 		else return 2;					// R, L
 	}
-	
-	
 	
 	private final static int[][] corners_incommon = new int[][] {
 		{ 3, 2, 1, 2,  2, 1, 0, 1 },
@@ -236,4 +218,33 @@ public class Constants {
 				/* front = BLUE */ 		{ null, null },
 			}
 	};
+	
+
+	//up	front	rot_RED	rot_ORANGE	rot_YELLOW	rot_WHITE	rot_GREEN	rot_BLUE
+	public final static int[][] orientationFaceRotations = {
+	/* up		front */			/* red, orange, yellow, white, green, blue */
+	/* RED		YELLOW */	{ 0, 2,		2, 4, 2, 4, 3, 5 },
+	/* RED		WHITE */	{ 0, 3, 	0, 2, 0, 2, 1, 3 },
+	/* RED		GREEN */	{ 0, 4, 	1, 1, 1, 1, 2, 0 },
+	/* RED		BLUE */		{ 0, 5, 	3, 3, 3, 3, 0, 2 },
+	/* ORANGE	YELLOW */	{ 1, 2, 	0, 2, 2, 0, 3, 1 },
+	/* ORANGE	WHITE */	{ 1, 3, 	2, 0, 0, 2, 1, 3 },
+	/* ORANGE	GREEN */	{ 1, 4, 	3, 1, 3, 3, 2, 0 },
+	/* ORANGE	BLUE */		{ 1, 5, 	1, 3, 1, 1, 0, 2 },
+	/* YELLOW	RED */		{ 2, 0, 	0, 0, 0, 0, 0, 0 },
+	/* YELLOW	ORANGE */	{ 2, 1, 	0, 0, 2, 2, 0, 0 },
+	/* YELLOW	GREEN */	{ 2, 4, 	0, 0, 1, 3, 0, 0 },
+	/* YELLOW	BLUE */		{ 2, 5, 	0, 0, 3, 1, 0, 0 },
+	/* WHITE	RED */		{ 3, 0, 	2, 2, 2, 2, 2, 2 },
+	/* WHITE	ORANGE */	{ 3, 1, 	2, 2, 0, 0, 2, 2 },
+	/* WHITE	GREEN */	{ 3, 4, 	2, 2, 1, 3, 2, 2 },
+	/* WHITE	BLUE */		{ 3, 5, 	2, 2, 3, 1, 2, 2 },
+	/* GREEN	RED */		{ 4, 0, 	3, 1, 3, 3, 3, 3 },
+	/* GREEN	ORANGE */	{ 4, 1, 	3, 1, 1, 1, 3, 3 },
+	/* GREEN	YELLOW */	{ 4, 2, 	3, 3, 2, 0, 3, 1 },
+	/* GREEN	WHITE */	{ 4, 3, 	3, 3, 0, 2, 2, 3 },
+	/* BLUE		RED */		{ 5, 0, 	1, 3, 1, 1, 1, 1 },
+	/* BLUE		ORANGE */	{ 5, 1, 	3, 1, 3, 3, 1, 1 },
+	/* BLUE		YELLOW */	{ 5, 2, 	1, 1, 2, 0, 3, 1 },
+	/* BLUE		WHITE */	{ 5, 3, 	1, 1, 0, 2, 1, 3 } }; 
 }

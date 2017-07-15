@@ -17,9 +17,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
-import jRubbik.LastUsedFolder;
-import jRubbik.Utils;
 import jRubbik.state.CubeState;
+import jRubbik.utils.LastUsedFolder;
+import jRubbik.utils.Utils;
 
 
 public class jRubikWindow extends JFrame {

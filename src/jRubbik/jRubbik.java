@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.swing.UIManager;
 
 import jRubbik.ui.jRubikWindow;
+import jRubbik.utils.Utils;
 
 public class jRubbik {
 	
