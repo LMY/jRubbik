@@ -51,7 +51,7 @@ public class jRubikWindow extends JFrame {
 		CreateMenuBar();
 		
 		tabs = new JTabbedPane();
-		addPanelCube();
+		addPanelCube(new CubeState());
 		
 		this.add(tabs);
 
@@ -62,14 +62,11 @@ public class jRubikWindow extends JFrame {
 		Utils.centerWindow(this);
 	}
 	
-	public void addPanelCube()
-	{
-		addPanelCube(new CubeState());
-	}
-	
+
 	public void addPanelCube(CubeState state)
 	{
 		tabs.add("Cube", new CubePanelDraw(state));
+		tabs.setSelectedComponent(tabs.getComponent(tabs.getTabCount()-1));
 	}
 	
 	
@@ -94,7 +91,7 @@ public class jRubikWindow extends JFrame {
 
 		final JMenuItem closemenu = new JMenuItem("Close");
 		closemenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {  }
+			public void actionPerformed(ActionEvent ae) { tabs.remove(tabs.getSelectedComponent()); }
 		});
 		closemenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK));
 
@@ -130,9 +127,19 @@ public class jRubikWindow extends JFrame {
 		final JMenu cubemenu = new JMenu("Cube");
 		final JMenuItem newcubemenu = new JMenuItem("New Cube");
 		newcubemenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { addPanelCube(); }
+			public void actionPerformed(ActionEvent ae) { addPanelCube(new CubeState()); }
 		});
 		cubemenu.add(newcubemenu);
+		
+		final JMenuItem clonecubemenu = new JMenuItem("Clone Cube");
+		clonecubemenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { 
+				final CubeState act = getActiveCubeState();
+				if (act != null)
+					addPanelCube(act.clone());
+			}
+		});
+		cubemenu.add(clonecubemenu);
 		
 		menubar.add(filemenu);
 		menubar.add(cubemenu);
@@ -140,6 +147,11 @@ public class jRubikWindow extends JFrame {
 		menubar.add(Box.createHorizontalGlue());
 
 		setJMenuBar(menubar);
+	}
+	
+	public CubeState getActiveCubeState() {
+		final CubePanel sel = (CubePanel) tabs.getSelectedComponent();
+		return sel != null ? sel.getState() : null;
 	}
 
 }

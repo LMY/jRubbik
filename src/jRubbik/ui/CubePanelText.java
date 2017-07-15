@@ -3,7 +3,7 @@ package jRubbik.ui;
 import java.awt.BorderLayout;
 
 import jRubbik.moves.IMove;
-import jRubbik.state.CubeDisplayer;
+import jRubbik.state.CubeDisplayerChar;
 import jRubbik.state.CubeState;
 
 public class CubePanelText extends CubePanel {
@@ -27,6 +27,6 @@ public class CubePanelText extends CubePanel {
 	
 	@Override
 	public void display(IMove move) {
-		debug.setText((move!=null?move.toString():"")+"\n" + CubeDisplayer.toString(state));
+		debug.setText((move!=null?move.toString():"")+"\n" + CubeDisplayerChar.toString(state));
 	}
 }
