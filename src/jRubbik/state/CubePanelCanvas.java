@@ -69,7 +69,7 @@ public abstract class CubePanelCanvas extends CubePanel {
 		final FontMetrics fm = g.getFontMetrics();
 		final int htext = fm.getAscent();
 		
-		final Color[][] colors = NewCubeDisplayer.getColors(state);
+		final Color[][] colors = CubeDisplayer.getColors(state);
 
 		// draw all faces
 		for (Color color : Color.ALL)

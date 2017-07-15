@@ -3,8 +3,7 @@ package jRubbik.state;
 import jRubbik.constants.Color;
 import jRubbik.constants.Constants;
 
-public class NewCubeDisplayer {
-
+public class CubeDisplayer {
 
 	public static Color[][] CORNER_COLORS = {
 			{ Color.WHITE, Color.RED, Color.BLUE },
@@ -64,7 +63,7 @@ public class NewCubeDisplayer {
 	}
 
 
-	public static Color[][] getColors(CubeState state) {
+	public static Color[][] getUnorientedColors(CubeState state) {
 
 		final int[] corners = state.getCorners();
 		final int[] edges = state.getEdges();
@@ -158,7 +157,7 @@ public class NewCubeDisplayer {
 			}
 		};
 		
-		return applyOrientation(colors, state.getOrientation());
+		return colors;
 	}
 
 	
@@ -174,9 +173,12 @@ public class NewCubeDisplayer {
 		return -1;
 	}
 	
-	
-	private static Color[][] applyOrientation(Color[][] colors, OrientatonState state)
+	public static Color[][] getColors(CubeState cube)
 	{
+		final Color[][] colors = getUnorientedColors(cube);
+		
+		final OrientatonState state = cube.getOrientation();
+		
 		final Color[][] newcolors = new Color[colors.length][];
 		final Color up = state.getUp();
 		final Color front = state.getFront();

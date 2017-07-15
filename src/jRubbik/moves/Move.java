@@ -62,9 +62,8 @@ public class Move extends IMove {
 
 	protected void permCorners(CubeState st) {
 
-		int[] dispo = st.getCorners();
-		int[] state = st.getState_corners();
-		
+		final int[] dispo = st.getCorners();
+		final int[] state = st.getState_corners();
 		
 		final int[] permutation = st.getOrientation().corners_permutations(dir);
 		final int const_rot_axis = st.getOrientation().const_rot_axis(dir);
@@ -75,7 +74,6 @@ public class Move extends IMove {
 				final int p = permutation[k];
 				
 				state[dispo[p]] = Constants.rotate_corner(state[dispo[p]], const_rot_axis);
-//				state[p] = Constants.rotate_corner(state[p], const_rot_axis);				
 			}
 	
 			// permutation of corners

@@ -4,7 +4,7 @@ import jRubbik.utils.Utils;
 
 public class CubeState {
 
-	public final static CubeState SOLVED_CUBE = new CubeState();
+//	private final static CubeState SOLVED_CUBE = new CubeState();
 	
 	private int[] edges;
 	private int[] corners;

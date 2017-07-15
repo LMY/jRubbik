@@ -2,7 +2,7 @@ package jRubbik.state;
 
 import jRubbik.constants.Constants;
 
-public class CubeDisplayer {
+public class CubeDisplayerChar {
 
 	public final static int CORNER_RED_SW = 0;
 	public final static int CORNER_RED_SE = 1;
