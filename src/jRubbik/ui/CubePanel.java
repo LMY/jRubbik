@@ -2,6 +2,7 @@ package jRubbik.ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -39,50 +40,36 @@ public abstract class CubePanel extends JPanel {
 		south.setLayout(new FlowLayout());
 		add(south, BorderLayout.SOUTH);
 		
-		south.add(buttonMove(BasicMoves.MOVE_U));
-		south.add(buttonMove(BasicMoves.MOVE_Ui));
-		south.add(buttonMove(BasicMoves.MOVE_D));
-		south.add(buttonMove(BasicMoves.MOVE_Di));
-		south.add(buttonMove(BasicMoves.MOVE_R));
-		south.add(buttonMove(BasicMoves.MOVE_Ri));
-		south.add(buttonMove(BasicMoves.MOVE_L));
-		south.add(buttonMove(BasicMoves.MOVE_Li));
-		
-		south.add(buttonMove(BasicMoves.MOVE_F));
-		south.add(buttonMove(BasicMoves.MOVE_Fi));
-		south.add(buttonMove(BasicMoves.MOVE_B));
-		south.add(buttonMove(BasicMoves.MOVE_Bi));
-		
-		
-		south.add(buttonMove(BasicMoves.MOVE_M));
-		south.add(buttonMove(BasicMoves.MOVE_Mi));
+		{
+			final JPanel Panelbasic = new JPanel();
+			Panelbasic.setLayout(new GridLayout(2,6));
+			for (int i = 0; i<6; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE[i]));
+			for (int i = 0; i<6; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE_INV[i]));
+			south.add(Panelbasic);
+		}
+		{
+			final JPanel Panelbasic = new JPanel();
+			Panelbasic.setLayout(new GridLayout(2,3));
+			for (int i = 0; i<3; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE[i]));
+			for (int i = 0; i<3; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE_INV[i]));
+			south.add(Panelbasic);
+		}
+		{
+			final JPanel Panelbasic = new JPanel();
+			Panelbasic.setLayout(new GridLayout(2,3));
+			for (int i = 0; i<3; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION[i]));
+			for (int i = 0; i<3; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
+			south.add(Panelbasic);
+		}
 
-		south.add(buttonMove(BasicMoves.MOVE_E));
-		south.add(buttonMove(BasicMoves.MOVE_Ei));
-
-		south.add(buttonMove(BasicMoves.MOVE_S));
-		south.add(buttonMove(BasicMoves.MOVE_Si));
-
-		
-//		south.add(buttonMove(MoveParser.parse("U'")));
-//		south.add(buttonMove(MoveParser.parse("D")));
-//		south.add(buttonMove(MoveParser.parse("D'")));
-//		south.add(buttonMove(MoveParser.parse("R")));
-//		south.add(buttonMove(MoveParser.parse("R'")));
-//		south.add(buttonMove(MoveParser.parse("L")));
-//		south.add(buttonMove(MoveParser.parse("L'")));
-//		south.add(buttonMove(MoveParser.parse("F")));
-//		south.add(buttonMove(MoveParser.parse("F'")));
-//		south.add(buttonMove(MoveParser.parse("B")));
-//		south.add(buttonMove(MoveParser.parse("B'")));
-		south.add(buttonMove(MoveParser.parse("x")));
-		south.add(buttonMove(MoveParser.parse("x'")));
-		south.add(buttonMove(MoveParser.parse("y")));
-		south.add(buttonMove(MoveParser.parse("y'")));
-		south.add(buttonMove(MoveParser.parse("z")));
-		south.add(buttonMove(MoveParser.parse("z'")));
-		south.add(buttonMove(MoveParser.parseSequence("F R U R' U' F' L' D")));
-		south.add(buttonMove(MoveParser.parseSequence(jRubbik.OFFICIAL_SCRAMBLE)));
+//		south.add(buttonMove(MoveParser.parseSequence("F R U R' U' F' L' D")));
+		south.add(buttonMove(BasicMoves.OFFICIAL_SCRAMBLE));
 		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {

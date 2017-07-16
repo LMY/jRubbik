@@ -10,11 +10,7 @@ import jRubbik.utils.Utils;
 
 public class jRubbik {
 	
-	public static boolean USE_SCRAMBLE_DEBUG = true;
-	public static String OFFICIAL_SCRAMBLE = "R2 B2 R2 L' B' R2 U2 B2 F R U2 B2 F' D' R' F R2 L2 B' U'";
-	
-	public static String SCRAMBLE_DEBUG = "U2 (R U')(R U)(R U)(R U') R' U' R2 U'"; 
-			//OFFICIAL_SCRAMBLE;
+
 	
 	public static void main(String args[])
 	{
