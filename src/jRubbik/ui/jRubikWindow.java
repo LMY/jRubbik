@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import jRubbik.state.CubePanelDraw3D;
 import jRubbik.state.CubeState;
 import jRubbik.utils.LastUsedFolder;
 import jRubbik.utils.Utils;

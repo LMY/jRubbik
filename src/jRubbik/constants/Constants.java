@@ -226,8 +226,8 @@ public class Constants {
 	/* up		front */			/* red, orange, yellow, white, green, blue */
 	/* RED		YELLOW */	{ 0, 2,		2, 0, 2, 0, 3, 1 },
 	/* RED		WHITE */	{ 0, 3, 	0, 2, 0, 2, 1, 3 },
-	/* RED		GREEN */	{ 0, 4, 	1, 1, 1, 1, 2, 0 },
-	/* RED		BLUE */		{ 0, 5, 	3, 3, 3, 3, 0, 2 },
+	/* RED		GREEN */	{ 0, 4, 	1, 3, 1, 1, 2, 0 },
+	/* RED		BLUE */		{ 0, 5, 	3, 1, 3, 3, 0, 2 },
 	
 	/* ORANGE	YELLOW */	{ 1, 2, 	0, 2, 2, 0, 3, 1 },
 	/* ORANGE	WHITE */	{ 1, 3, 	2, 0, 0, 2, 1, 3 },
@@ -245,12 +245,12 @@ public class Constants {
 	/* WHITE	BLUE */		{ 3, 5, 	2, 2, 3, 1, 2, 2 },
 	
 	/* GREEN	RED */		{ 4, 0, 	3, 1, 3, 3, 3, 3 },
-	/* GREEN	ORANGE */	{ 4, 1, 	3, 1, 1, 1, 3, 3 },
+	/* GREEN	ORANGE */	{ 4, 1, 	1, 3, 1, 1, 3, 3 },
 	/* GREEN	YELLOW */	{ 4, 2, 	3, 3, 2, 0, 3, 1 },
-	/* GREEN	WHITE */	{ 4, 3, 	3, 3, 0, 2, 2, 3 },
+	/* GREEN	WHITE */	{ 4, 3, 	3, 3, 0, 2, 1, 3 },	//here green
 	
 	/* BLUE		RED */		{ 5, 0, 	1, 3, 1, 1, 1, 1 },
 	/* BLUE		ORANGE */	{ 5, 1, 	3, 1, 3, 3, 1, 1 },
-	/* BLUE		YELLOW */	{ 5, 2, 	1, 1, 2, 0, 3, 1 },
-	/* BLUE		WHITE */	{ 5, 3, 	1, 1, 0, 2, 1, 3 } }; 
+	/* BLUE		YELLOW */	{ 5, 2, 	1, 3, 2, 0, 3, 1 },
+	/* BLUE		WHITE */	{ 5, 3, 	1, 3, 0, 2, 1, 3 } }; 
 }
