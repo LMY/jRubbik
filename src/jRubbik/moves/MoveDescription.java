@@ -6,11 +6,13 @@ public class MoveDescription extends IMove {
 
 	private IMove move;
 	private String description;
+	private boolean suppress_original;
 	
-	public MoveDescription(IMove move, String description)
+	public MoveDescription(IMove move, String description, boolean suppress_original)
 	{
 		this.move = move;
 		this.description = description;
+		this.suppress_original = suppress_original;
 	}
 	
 	@Override
@@ -20,12 +22,12 @@ public class MoveDescription extends IMove {
 
 	@Override
 	public IMove reverse() {
-		return new MoveDescription(move.reverse(), description+"-rev");
+		return new MoveDescription(move.reverse(), description+"-rev", suppress_original);
 	}
 
 	@Override
 	public IMove times(int n) {
-		return new MoveDescription(move.reverse(), description+"2");
+		return new MoveDescription(move.reverse(), description+"2", suppress_original);
 	}
 
 	@Override
@@ -41,6 +43,6 @@ public class MoveDescription extends IMove {
 	@Override
 	public String toString()
 	{
-		return description+":"+move.toString();
+		return description+(suppress_original?"":":"+move.toString());
 	}
 }
