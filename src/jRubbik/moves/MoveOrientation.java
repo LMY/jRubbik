@@ -5,12 +5,26 @@ import jRubbik.state.CubeState;
 import jRubbik.state.OrientatonState;
 
 public class MoveOrientation extends IMove{
-
+	
 	public static final int MOVE_Z = 0;
 	public static final int MOVE_X = 1;
 	public static final int MOVE_Y = 2; 
 	public static final int MOVE_INVALID = 255; // will cause crashes; and this is intended (-fno-exceptions)
 	
+	public static IMove MOVE_x = new Move(Color.create(MOVE_X), 0);
+	public static IMove MOVE_y = new Move(Color.create(MOVE_Y), 0);
+	public static IMove MOVE_z = new Move(Color.create(MOVE_Z), 0);
+	
+	public static IMove MOVE_xi = new Move(Color.create(MOVE_X), 1);
+	public static IMove MOVE_yi = new Move(Color.create(MOVE_Y), 1);
+	public static IMove MOVE_zi = new Move(Color.create(MOVE_Z), 1);
+	
+	public static IMove MOVE_x2 = new Move(Color.create(MOVE_X), 2);
+	public static IMove MOVE_y2 = new Move(Color.create(MOVE_Y), 2);
+	public static IMove MOVE_z2 = new Move(Color.create(MOVE_Z), 2);
+	
+	
+
 	final public static String[] RotMoveNames = { "z", "x", "y" };
 	
 	private int dir;

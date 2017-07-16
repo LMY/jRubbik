@@ -11,7 +11,7 @@ public class MoveParser {
 	public static final IMove MOVE_M = parseSequence("L' R");
 	
 	public static IMove parse(String name, String string) {
-		return new MoveDescription(parse(string), name);
+		return new MoveDescription(parse(string), name, false);
 	}
 	
 	public static IMove parse(String string) {
@@ -26,7 +26,7 @@ public class MoveParser {
 	}
 	
 	public static IMove parseSequence(String name, String string) {
-		return new MoveDescription(parseSequence(string), name);
+		return new MoveDescription(parseSequence(string), name, false);
 	}
 	
 	public static IMove parseSequence(String string) {
