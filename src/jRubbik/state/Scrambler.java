@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import jRubbik.constants.Color;
 import jRubbik.moves.Algorithm;
 import jRubbik.moves.Move;
 
@@ -49,7 +50,7 @@ public class Scrambler {
 			if (last >= 0)
 				possible.add(last);
 			
-			ret.addMove(new Move(this_move, random.nextInt(3)));
+			ret.addMove(new Move(Color.create(this_move), random.nextInt(3)));
 			
 			last = this_move;
 		}

@@ -1,23 +1,24 @@
 package jRubbik.moves;
 
+import jRubbik.constants.Color;
 import jRubbik.constants.Constants;
 import jRubbik.state.CubeState;
 
 public class Move extends IMove {
 	
-	public static IMove MOVE_U = new Move(2, 0);
+	public static IMove MOVE_U = new Move(Color.YELLOW, 0);
 	
-	private int dir;
+	private Color dir;
 	private boolean reverse;
 	private int reps;
 	
-	public Move(int dir, int reverse) {
+	public Move(Color dir, int reverse) {
 		this.dir = dir;
 		this.reverse = reverse==1;
 		this.reps = reverse==2?2:1;
 	}
 
-	public int getDir() {
+	public Color getDir() {
 		return dir;
 	}
 
@@ -32,7 +33,7 @@ public class Move extends IMove {
 	
 	@Override
 	public String toString() {
-		return Constants.KubeMoveNames[dir]+(reps==2?"2":reverse?"'":"");
+		return Constants.KubeMoveNames[dir.toInt()]+(reps==2?"2":reverse?"'":"");
 	}
 
 	@Override

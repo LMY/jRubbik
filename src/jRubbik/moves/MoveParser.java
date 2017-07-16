@@ -3,6 +3,7 @@ package jRubbik.moves;
 import java.util.ArrayList;
 import java.util.List;
 
+import jRubbik.constants.Color;
 import jRubbik.constants.Constants;
 
 public class MoveParser {
@@ -52,7 +53,7 @@ public class MoveParser {
 
 		for (int i = 0; i < Constants.KubeMoveNames.length; ++i)
 			if (name.equals(Constants.KubeMoveNames[i]))
-				return new Move(i, modifiers);
+				return new Move(Color.create(i), modifiers);
 
 		for (int i = 0; i < MoveOrientation.RotMoveNames.length; ++i)
 			if (name.equals(MoveOrientation.RotMoveNames[i]))

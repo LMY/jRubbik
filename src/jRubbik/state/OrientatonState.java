@@ -85,29 +85,21 @@ public class OrientatonState {
 	}
 	
 	
-	public int[] edges_permutations(Color c) {
-		return edges_permutations(c.toInt());
+
+	public int[] edges_permutations(Color dir) {
+		return Constants.edges_permutations[get(dir).toInt()];
 	}
 	
-	public int[] edges_permutations(int dir) {
-		return Constants.edges_permutations[get(Color.create(dir)).toInt()];
+	public int[] corners_permutations(Color dir) { 
+		return Constants.corners_permutations[get(dir).toInt()];
 	}
 	
-	public int[] corners_permutations(Color c) {
-		return corners_permutations(c.toInt());
-	}
-	
-	public int[] corners_permutations(int dir) { 
-		return Constants.corners_permutations[get(Color.create(dir)).toInt()];
-	}
-	
-	
-	public int const_rot_axis(int dir) {
-		return Constants.move_final_rot_axis(get(Color.create(dir)).toInt());
+		public int const_rot_axis(Color dir) {
+		return Constants.move_final_rot_axis(get(dir).toInt());
 	}
 
-	public boolean inverts_edges(int dir) {
-		Color where = get(Color.create(dir));
+	public boolean inverts_edges(Color dir) {
+		final Color where = get(dir);
 		
 		if (where == Color.RED || where == Color.ORANGE)
 			return true;
