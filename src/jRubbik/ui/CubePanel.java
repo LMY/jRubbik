@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import jRubbik.jRubbik;
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
 import jRubbik.moves.MoveParser;
@@ -42,34 +41,53 @@ public abstract class CubePanel extends JPanel {
 		
 		{
 			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2,6));
-			for (int i = 0; i<6; i++)
+			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_SIMPLE.length));
+			
+			for (int i = 0; i<BasicMoves.ALL_SIMPLE.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE[i]));
-			for (int i = 0; i<6; i++)
+			for (int i = 0; i<BasicMoves.ALL_SIMPLE_INV.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE_INV[i]));
 			south.add(Panelbasic);
 		}
 		{
 			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2,3));
-			for (int i = 0; i<3; i++)
+			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_DOUBLE.length));
+			for (int i = 0; i<BasicMoves.ALL_DOUBLE.length; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_DOUBLE[i]));
+			for (int i = 0; i<BasicMoves.ALL_DOUBLE_INV.length; i++)
+				Panelbasic.add(buttonMove(BasicMoves.ALL_DOUBLE_INV[i]));
+			south.add(Panelbasic);
+		}
+		
+		{
+			final JPanel Panelbasic = new JPanel();
+			Panelbasic.setLayout(new GridLayout(2,BasicMoves.ALL_MIDDLE.length));
+			
+			for (int i = 0; i<BasicMoves.ALL_MIDDLE.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE[i]));
-			for (int i = 0; i<3; i++)
+			for (int i = 0; i<BasicMoves.ALL_MIDDLE_INV.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE_INV[i]));
 			south.add(Panelbasic);
 		}
 		{
 			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2,3));
-			for (int i = 0; i<3; i++)
+			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_ORIENTATION.length));
+			for (int i = 0; i<BasicMoves.ALL_ORIENTATION.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION[i]));
-			for (int i = 0; i<3; i++)
+			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i++)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
 			south.add(Panelbasic);
 		}
-
-//		south.add(buttonMove(MoveParser.parseSequence("F R U R' U' F' L' D")));
-		south.add(buttonMove(BasicMoves.OFFICIAL_SCRAMBLE));
+		{
+			final JPanel Panelbasic = new JPanel();
+			Panelbasic.setLayout(new GridLayout(2, BasicMoves.CUSTOM_SEQUENCES.length));
+			for (int i = 0; i<BasicMoves.CUSTOM_SEQUENCES.length; i++)
+				Panelbasic.add(buttonMove(BasicMoves.CUSTOM_SEQUENCES[i]));
+//			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i++)
+//				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
+			south.add(Panelbasic);
+		}
+		
 		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {

@@ -3,26 +3,28 @@ package jRubbik.moves;
 import java.util.ArrayList;
 import java.util.List;
 
-import jRubbik.constants.Color;
-import jRubbik.constants.Constants;
-
 public class MoveParser {
 
-	public static final IMove MOVE_M = parseSequence("L' R");
-	
 	public static IMove parse(String name, String string) {
 		return new MoveDescription(parse(string), name, false);
 	}
 	
+	private static final IMove[][] PARSE_COLLECTIONS = { 
+			BasicMoves.ALL_SIMPLE, BasicMoves.ALL_SIMPLE_INV, BasicMoves.ALL_SIMPLE2,
+			BasicMoves.ALL_ORIENTATION, BasicMoves.ALL_ORIENTATION_INV, BasicMoves.ALL_ORIENTATION2,
+			BasicMoves.ALL_MIDDLE, BasicMoves.ALL_MIDDLE_INV, BasicMoves.ALL_MIDDLE2,
+			BasicMoves.ALL_DOUBLE, BasicMoves.ALL_DOUBLE_INV, BasicMoves.ALL_DOUBLE2 };
+
+	
 	public static IMove parse(String string) {
 		
-		int modifiers = 0;
-		if (string.endsWith("i") || string.endsWith("'"))
-			modifiers = 1;
-		else if (string.endsWith("2"))
-			modifiers = 2;
+		// do not use BasicMoves.ALL_COLLECTIONS! otherwise in BasicMoves you can't call parse/parseSequence because BasicMoves.ALL_COLLECTIONS would still be null
+		for (IMove[] collection : PARSE_COLLECTIONS)
+			for (IMove move : collection)
+				if (string.equals(move.toString()))
+					return move;
 		
-		return atoMove(""+string.charAt(0), modifiers);
+		return null; //throw
 	}
 	
 	public static IMove parseSequence(String name, String string) {
@@ -31,8 +33,11 @@ public class MoveParser {
 	
 	public static IMove parseSequence(String string) {
 		
-		String[] parts = string.split("[,\\s()]");
-		List<IMove> moves = new ArrayList<IMove>();
+//		string = string.replace("'", "i");
+		
+		
+		final String[] parts = string.split("[,\\s()]");
+		final List<IMove> moves = new ArrayList<IMove>();
 		
 		for (int i=0; i<parts.length; i++)
 		{
@@ -45,23 +50,5 @@ public class MoveParser {
 		}
 		
 		return new Algorithm(moves);
-	}
-	
-
-
-	private static IMove atoMove(final String name, int modifiers) {
-
-		for (int i = 0; i < Constants.KubeMoveNames.length; ++i)
-			if (name.equals(Constants.KubeMoveNames[i]))
-				return new Move(Color.create(i), modifiers);
-
-		for (int i = 0; i < MoveOrientation.RotMoveNames.length; ++i)
-			if (name.equals(MoveOrientation.RotMoveNames[i]))
-				return new MoveOrientation(i, modifiers);
-		
-		if (name.equals("M"))
-			return modifiers < 0 ? MOVE_M.reverse() : modifiers==0?MOVE_M:MOVE_M.times(modifiers);
-		
-		return null; // throw
 	}
 }

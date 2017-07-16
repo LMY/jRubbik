@@ -49,7 +49,7 @@ public class MoveOrientation extends IMove{
 		Color up = op.getUp();
 		
 		if (dir == MOVE_Y) {
-			op.setFront(reps == 2 ? front.opposite() : front.next(!reverse ? up.opposite() : up));
+			op.setFront(reps == 2 ? front.opposite() : front.next(reverse ? up.opposite() : up));
 		}
 		else if (dir == MOVE_X) {
 			if (reps == 2) {
@@ -57,8 +57,8 @@ public class MoveOrientation extends IMove{
 				op.setUp(up.opposite());
 			}
 			else {
-				Color newfront = reverse ? up.opposite() : up;
-				Color newup = reverse ? front : front.opposite();
+				Color newfront = reverse ? up : up.opposite();
+				Color newup = reverse ? front.opposite() : front;
 				
 				op.setFront(newfront);
 				op.setUp(newup);
