@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jRubbik.moves.Algorithm;
+import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
-import jRubbik.moves.Move;
 import jRubbik.moves.NullMove;
 import jRubbik.state.CubeState;
 
@@ -32,7 +32,7 @@ public class Library {
 			// for each pattern of this alg
 			for (int k=0; k<pattern.length; k++) {
 				
-				IMove auf = pattern[k].getAdjMatch(state, Move.MOVE_U);
+				IMove auf = pattern[k].getAdjMatch(state, BasicMoves.MOVE_U);
 				
 				// if matches
 				if (auf != null) {
@@ -66,7 +66,7 @@ public class Library {
 	
 	private static Pattern[] createPatterns(IMove algorithm)
 	{
-		IMove move = Move.MOVE_U;
+		IMove move = BasicMoves.MOVE_U;
 		IMove revAlg = algorithm.reverse();
 		
 		Pattern[] patterns = new Pattern[4];

@@ -1,8 +1,8 @@
 package jRubbik.solver;
 
 import jRubbik.moves.Algorithm;
+import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
-import jRubbik.moves.Move;
 import jRubbik.moves.MoveParser;
 import jRubbik.moves.NullMove;
 import jRubbik.state.CubeState;
@@ -75,7 +75,7 @@ public class SolverCFOP implements Solver {
 			CubeState PLLdone = pllmove.get(state);
 //			CubeDisplayer.display(PLLdone);
 			
-			IMove aufmove = auf(PLLdone, Move.MOVE_U);
+			IMove aufmove = auf(PLLdone, BasicMoves.MOVE_U);
 			System.out.println("AUF:");
 //			CubeDisplayer.display(aufmove.get(PLLdone));
 			ret.addMove(aufmove);

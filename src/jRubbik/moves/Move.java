@@ -5,30 +5,7 @@ import jRubbik.constants.Constants;
 import jRubbik.state.CubeState;
 
 public class Move extends IMove {
-	
-	public static IMove MOVE_F = new Move(Color.RED, 0);
-	public static IMove MOVE_B = new Move(Color.ORANGE, 0);
-	public static IMove MOVE_U = new Move(Color.YELLOW, 0);
-	public static IMove MOVE_D = new Move(Color.WHITE, 0);
-	public static IMove MOVE_R = new Move(Color.GREEN, 0);
-	public static IMove MOVE_L = new Move(Color.BLUE, 0);
-	
-	public static IMove MOVE_Fi = new Move(Color.RED, 1);
-	public static IMove MOVE_Bi = new Move(Color.ORANGE, 1);
-	public static IMove MOVE_Ui = new Move(Color.YELLOW, 1);
-	public static IMove MOVE_Di = new Move(Color.WHITE, 1);
-	public static IMove MOVE_Ri = new Move(Color.GREEN, 1);
-	public static IMove MOVE_Li = new Move(Color.BLUE, 1);
-	
-	public static IMove MOVE_F2 = new Move(Color.RED, 2);
-	public static IMove MOVE_B2 = new Move(Color.ORANGE, 2);
-	public static IMove MOVE_U2 = new Move(Color.YELLOW, 2);
-	public static IMove MOVE_D2 = new Move(Color.WHITE, 2);
-	public static IMove MOVE_R2 = new Move(Color.GREEN, 2);
-	public static IMove MOVE_L2 = new Move(Color.BLUE, 2);
-	
-	
-	
+
 	private Color dir;
 	private boolean reverse;
 	private int reps;
