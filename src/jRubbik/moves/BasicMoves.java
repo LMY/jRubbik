@@ -42,12 +42,12 @@ public class BasicMoves {
 	
 
 	// MIDDLE LAYER MOVES
-	public static IMove MOVE_M = new MoveDescription(new CombinedMove(MOVE_R, MOVE_Li, MOVE_x), "M", true);
-	public static IMove MOVE_Mi = new MoveDescription(new CombinedMove(MOVE_Ri, MOVE_L, MOVE_xi), "M'", true);
+	public static IMove MOVE_M = new MoveDescription(new CombinedMove(MOVE_R, MOVE_Li, MOVE_xi), "M", true);
+	public static IMove MOVE_Mi = new MoveDescription(new CombinedMove(MOVE_Ri, MOVE_L, MOVE_x), "M'", true);
 	public static IMove MOVE_M2 = new MoveDescription(new CombinedMove(MOVE_R2, MOVE_L2, MOVE_x2), "M2", true);
 	
-	public static IMove MOVE_E = new MoveDescription(new CombinedMove(MOVE_U, MOVE_Di, MOVE_y), "E", true);
-	public static IMove MOVE_Ei = new MoveDescription(new CombinedMove(MOVE_Ui, MOVE_D, MOVE_yi), "E'", true);
+	public static IMove MOVE_E = new MoveDescription(new CombinedMove(MOVE_U, MOVE_Di, MOVE_yi), "E", true);
+	public static IMove MOVE_Ei = new MoveDescription(new CombinedMove(MOVE_Ui, MOVE_D, MOVE_y), "E'", true);
 	public static IMove MOVE_E2 = new MoveDescription(new CombinedMove(MOVE_U2, MOVE_D2, MOVE_y2), "E2", true);
 
 	public static IMove MOVE_S = new MoveDescription(new CombinedMove(MOVE_Fi, MOVE_B, MOVE_z), "S", true);
@@ -56,17 +56,17 @@ public class BasicMoves {
 	
 	
 	// FAT TURNS
-	public static IMove MOVE_r = new MoveDescription(new CombinedMove(MOVE_L, null, MOVE_xi), "r", true);
-	public static IMove MOVE_l = new MoveDescription(new CombinedMove(MOVE_R, null, MOVE_x), "l", true);
-	public static IMove MOVE_u = new MoveDescription(new CombinedMove(MOVE_D, null, MOVE_yi), "u", true);
-	public static IMove MOVE_d = new MoveDescription(new CombinedMove(MOVE_U, null, MOVE_y), "d", true);
+	public static IMove MOVE_r = new MoveDescription(new CombinedMove(MOVE_L, null, MOVE_x), "r", true);
+	public static IMove MOVE_l = new MoveDescription(new CombinedMove(MOVE_R, null, MOVE_xi), "l", true);
+	public static IMove MOVE_u = new MoveDescription(new CombinedMove(MOVE_D, null, MOVE_y), "u", true);
+	public static IMove MOVE_d = new MoveDescription(new CombinedMove(MOVE_U, null, MOVE_yi), "d", true);
 	public static IMove MOVE_f = new MoveDescription(new CombinedMove(MOVE_B, null, MOVE_z), "f", true);
 	public static IMove MOVE_b = new MoveDescription(new CombinedMove(MOVE_F, null, MOVE_zi), "b", true);
 	
-	public static IMove MOVE_ri = new MoveDescription(new CombinedMove(MOVE_Li, null, MOVE_x), "r'", true);
-	public static IMove MOVE_li = new MoveDescription(new CombinedMove(MOVE_Ri, null, MOVE_xi), "l'", true);
-	public static IMove MOVE_ui = new MoveDescription(new CombinedMove(MOVE_Di, null, MOVE_y), "u'", true);
-	public static IMove MOVE_di = new MoveDescription(new CombinedMove(MOVE_Ui, null, MOVE_yi), "d'", true);
+	public static IMove MOVE_ri = new MoveDescription(new CombinedMove(MOVE_Li, null, MOVE_xi), "r'", true);
+	public static IMove MOVE_li = new MoveDescription(new CombinedMove(MOVE_Ri, null, MOVE_x), "l'", true);
+	public static IMove MOVE_ui = new MoveDescription(new CombinedMove(MOVE_Di, null, MOVE_yi), "u'", true);
+	public static IMove MOVE_di = new MoveDescription(new CombinedMove(MOVE_Ui, null, MOVE_y), "d'", true);
 	public static IMove MOVE_fi = new MoveDescription(new CombinedMove(MOVE_Bi, null, MOVE_zi), "f'", true);
 	public static IMove MOVE_bi = new MoveDescription(new CombinedMove(MOVE_Fi, null, MOVE_z), "b'", true);
 	
