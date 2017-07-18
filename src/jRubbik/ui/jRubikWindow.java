@@ -142,16 +142,46 @@ public class jRubikWindow extends JFrame {
 		});
 		cubemenu.add(clonecubemenu);
 		
+		
+		final JMenu debugmenu = new JMenu("Cube");
+		final JMenuItem debugmenu1 = new JMenuItem("Fork");
+		debugmenu1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { 
+				try{
+					getActiveCubePanel().fork();
+				}
+				catch (Exception e) {}
+			}
+		});
+		debugmenu.add(debugmenu1);
+		
+		final JMenuItem debugmenu2 = new JMenuItem("New");
+		debugmenu2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { 
+				try{
+					getActiveCubePanel().newnode();
+				}
+				catch (Exception e) {}
+			}
+		});
+		debugmenu.add(debugmenu2);
+		
+		
 		menubar.add(filemenu);
 		menubar.add(cubemenu);
+		menubar.add(debugmenu);
 		
 		menubar.add(Box.createHorizontalGlue());
 
 		setJMenuBar(menubar);
 	}
 	
+	public CubePanel getActiveCubePanel() {
+		return (CubePanel) tabs.getSelectedComponent();
+	}
+	
 	public CubeState getActiveCubeState() {
-		final CubePanel sel = (CubePanel) tabs.getSelectedComponent();
+		final CubePanel sel = getActiveCubePanel();
 		return sel != null ? sel.getState() : null;
 	}
 
