@@ -8,6 +8,7 @@ import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
 import jRubbik.moves.NullMove;
 import jRubbik.state.CubeState;
+import jRubbik.utils.Utils;
 
 public class Library {
 
@@ -59,6 +60,7 @@ public class Library {
 	}
 	
 	public void addAlgorithm(IMove alg) {
+			
 		algorithms.add(alg);
 		patterns.add(createPatterns(alg));
 	}
@@ -66,8 +68,8 @@ public class Library {
 	
 	private static Pattern[] createPatterns(IMove algorithm)
 	{
-		IMove move = BasicMoves.MOVE_U;
-		IMove revAlg = algorithm.reverse();
+		final IMove move = BasicMoves.MOVE_U;
+		final IMove revAlg = algorithm.reverse();
 		
 		Pattern[] patterns = new Pattern[4];
 		patterns[0] = Pattern.fromState(revAlg.get(move.times(0).get()));

@@ -97,7 +97,11 @@ public class BasicMoves {
 	public static final IMove[] ALL_DOUBLE_INV = { MOVE_fi, MOVE_bi, MOVE_ui, MOVE_di, MOVE_ri, MOVE_li };
 	public static final IMove[] ALL_DOUBLE2 = { MOVE_f2, MOVE_b2, MOVE_u2, MOVE_d2, MOVE_r2, MOVE_l2 };
 	
-	
+	public static IMove color2move(Color color, int mod) {
+			return mod == 2 ? ALL_SIMPLE2[color.toInt()] :
+				   mod == 1 ? ALL_SIMPLE_INV[color.toInt()] :
+					   ALL_SIMPLE[color.toInt()];
+	}
 	
 	
 	// CUSTOM SEQUENCES
@@ -111,13 +115,35 @@ public class BasicMoves {
 	public static IMove PLL_Aa = new MoveDescription(MoveParser.parseSequence("x (R' U R') D2 (R U' R') D2 R2 x'"), "Aa", true);
 	public static IMove PLL_Ab = new MoveDescription(MoveParser.parseSequence("x' (R U' R) D2 (R' U R) D2 R2 x"), "Ab", true);
 	public static IMove PLL_E = new MoveDescription(MoveParser.parseSequence("x' (R U' R') D (R U R') D' (R U R') D (R U' R') D' x"), "E", true);
+
+	public static IMove PLL_Ra = new MoveDescription(MoveParser.parseSequence("(L U2 L' U2)(L F')(L' U' L U)(L F) L2 U"), "Ra", true);
+	public static IMove PLL_Rb = new MoveDescription(MoveParser.parseSequence("(R' U2 R U2 )(R' F)(R U R' U')(R' F') R2 U'"), "Rb", true);
+	
+	public static IMove PLL_Ja = new MoveDescription(MoveParser.parseSequence("(R' U L')(U2 R U' R' U2 )(R L U')"), "Ja", true);
+	public static IMove PLL_Jb = new MoveDescription(MoveParser.parseSequence("(R U R' F')(R U R' U')(R' F)(R2 U' R') U'"), "Jb", true);
+	
+	public static IMove PLL_T = new MoveDescription(MoveParser.parseSequence("(R U R' U')(R' F)(R2 U' R') U' (R U R' F')"), "T", true);
+	public static IMove PLL_F = new MoveDescription(MoveParser.parseSequence("(R' U2 R' d')(R' F')(R2 U' R' U)(R' F R U' F)"), "F", true);
+	public static IMove PLL_V = new MoveDescription(MoveParser.parseSequence("(R' U R' d')(R' F')(R2 U' R' U)(R' F R F)"), "V", true);
+	public static IMove PLL_Y = new MoveDescription(MoveParser.parseSequence("F R U' R' U' (R U R' F')(R U R' U')(R' F R F')"), "Y", true);
+	public static IMove PLL_Na = new MoveDescription(MoveParser.parseSequence("(L U' R) U2 (L' U R')(L U' R) U2 (L' U R') U"), "Na", true);
+	public static IMove PLL_Nb = new MoveDescription(MoveParser.parseSequence("(R' U L') U2 (R U' L)(R' U L') U2 (R U' L) U'"), "Nb", true);
+	
+	public static IMove PLL_Ga = new MoveDescription(MoveParser.parseSequence("R2 u R' U R' U' R u' R2 (y' R' U R)"), "Ga", true);
+	public static IMove PLL_Gb = new MoveDescription(MoveParser.parseSequence("(R' U' R) y R2 u R' U R U' R u' R2"), "Gb", true);
+	public static IMove PLL_Gc = new MoveDescription(MoveParser.parseSequence("R2 u' R U' R U R' u R2 (y R U' R')"), "Gc", true);
+	public static IMove PLL_Gd = new MoveDescription(MoveParser.parseSequence("(R U R') y' R2 u' R U' R' U R' u R2"), "Gd", true);
+	
+
+	public static final IMove[] PLLs = {
+			PLL_Ua, PLL_Ub, PLL_Z, PLL_H, PLL_Aa, PLL_Ab, PLL_E, PLL_Ra, PLL_Rb, PLL_Ja, 
+			PLL_Jb, PLL_T, PLL_F, PLL_V, PLL_Y, PLL_Na, PLL_Nb, PLL_Ga, PLL_Gb, PLL_Gc, PLL_Gd };
 	
 	
-	public static final IMove[] CUSTOM_SEQUENCES = { PLL_Ua, PLL_Ub, PLL_Z, PLL_H, PLL_Aa, PLL_Ab, PLL_E, OFFICIAL_SCRAMBLE };
-	
-	
-	
-	
+	public static final IMove[] CUSTOM_SEQUENCES = {
+			PLL_Y, PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Aa, PLL_Ab,
+//			OFFICIAL_SCRAMBLE 
+			};
 	
 	
 	
@@ -127,6 +153,9 @@ public class BasicMoves {
 			ALL_ORIENTATION, ALL_ORIENTATION_INV, ALL_ORIENTATION2,
 			ALL_MIDDLE, ALL_MIDDLE_INV, ALL_MIDDLE2,
 			ALL_DOUBLE, ALL_DOUBLE_INV, ALL_DOUBLE2,
+			
+			PLLs,
+			
 			CUSTOM_SEQUENCES,
 	};
 }

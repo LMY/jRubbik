@@ -3,9 +3,9 @@ package jRubbik.solver;
 import jRubbik.moves.Algorithm;
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
-import jRubbik.moves.MoveParser;
 import jRubbik.moves.NullMove;
 import jRubbik.state.CubeState;
+import jRubbik.utils.Utils;
 
 public class SolverCFOP implements Solver {
 
@@ -26,13 +26,8 @@ public class SolverCFOP implements Solver {
 	public SolverCFOP()
 	{
 		PLLs = new Library();
-		PLLs.addAlgorithm(MoveParser.parseSequence("Aperm1", "(R U')(R U)(R U)(R U') R' U' R2"));
-		PLLs.addAlgorithm(MoveParser.parseSequence("Aperm2", "R2 U R U R' U' R' U' R' U R'"));
-		
-		PLLs.addAlgorithm(MoveParser.parseSequence("Zperm", "U R' U' R U' R U R U' R' U R U R2 U' R' U"));
-		
-		PLLs.addAlgorithm(MoveParser.parseSequence("Rperm1", "(L U2 L' U2)(L F')(L' U' L U)(L F) L2 U"));
-		
+		for (IMove x : BasicMoves.PLLs)
+			PLLs.addAlgorithm(x);
 	}
 	
 	

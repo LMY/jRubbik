@@ -17,7 +17,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
-import jRubbik.state.CubePanelDraw3D;
+import jRubbik.moves.IMove;
+import jRubbik.solver.SolverCFOP;
 import jRubbik.state.CubeState;
 import jRubbik.utils.LastUsedFolder;
 import jRubbik.utils.Utils;
@@ -143,7 +144,7 @@ public class jRubikWindow extends JFrame {
 		cubemenu.add(clonecubemenu);
 		
 		
-		final JMenu debugmenu = new JMenu("Cube");
+		final JMenu debugmenu = new JMenu("Debug");
 		final JMenuItem debugmenu1 = new JMenuItem("Fork");
 		debugmenu1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) { 
@@ -167,9 +168,29 @@ public class jRubikWindow extends JFrame {
 		debugmenu.add(debugmenu2);
 		
 		
+		final JMenu solvermenu = new JMenu("Solver");
+		{
+			final JMenuItem cfopmenu = new JMenuItem("CFOP");
+			cfopmenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) { 
+					try{
+						final IMove solve = new SolverCFOP().solve(getActiveCubeState());
+						getActiveCubePanel().perform(solve);
+					}
+					catch (Exception e) {
+						Utils.MessageBox(e.toString(), "");
+					}
+				}
+			});
+			solvermenu.add(cfopmenu);
+		}
+		
+		
+		
 		menubar.add(filemenu);
 		menubar.add(cubemenu);
 		menubar.add(debugmenu);
+		menubar.add(solvermenu);
 		
 		menubar.add(Box.createHorizontalGlue());
 

@@ -165,12 +165,17 @@ public abstract class CubePanel extends JPanel {
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				perform(move);
 				sequenceField.setText(sequenceField.getText()+" "+move.toString());
+				performMove(move);
 			}
 		});
 		clearButton.addKeyListener(new MyKeyListener());
 		return clearButton;
+	}
+	
+	private void performMove(final IMove move) {
+		perform(move);
+
 	}
 	
 	
@@ -179,6 +184,7 @@ public abstract class CubePanel extends JPanel {
 	public void perform(IMove move) {
 		move.apply(state);
 		display(move);
+		fork(move.toString());
 	}
 
 	public CubeState getState() {
