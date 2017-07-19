@@ -41,5 +41,4 @@ public class CombinedMove extends IMove {
 	public int length_htm() {
 		return facemove1.length_htm()+facemove2.length_htm()+orient.length_htm();
 	}
-
 }

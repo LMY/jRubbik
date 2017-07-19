@@ -197,7 +197,7 @@ public class BasicMoves {
 	
 	
 	public static final IMove[] CUSTOM_SEQUENCES = {
-			PLL_Y, PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Aa, PLL_Ab,
+			PLL_Y, //PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Aa, PLL_Ab,
 //			OFFICIAL_SCRAMBLE 
 			};
 	

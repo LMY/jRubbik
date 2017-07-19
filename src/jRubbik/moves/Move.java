@@ -82,7 +82,9 @@ public class Move extends IMove {
 
 	@Override
 	public IMove reverse() {
-		return new Move(dir, reps==2?2 :  reverse?0:1 );
+		
+		return reps==2? this :
+			reverse ? BasicMoves.ALL_SIMPLE[dir.toInt()] : BasicMoves.ALL_SIMPLE_INV[dir.toInt()];
 	}
 
 	@Override
@@ -100,7 +102,7 @@ public class Move extends IMove {
 			if (reps == 2)
 				return NullMove.NULL;
 			else
-				return  new Move(dir, 2);
+				return BasicMoves.ALL_SIMPLE2[dir.toInt()];
 		}
 		//if (n == 3)
 			return reverse();

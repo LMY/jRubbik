@@ -27,7 +27,13 @@ public class SolverCFOP implements Solver {
 	{
 		PLLs = new Library();
 		for (IMove x : BasicMoves.PLLs)
+			try {
+				PLLs.addAlgorithm(x);
+			}
+		catch (Exception e) {
+			Utils.MessageBox(e.getMessage(), "");
 			PLLs.addAlgorithm(x);
+		}
 	}
 	
 	
@@ -59,7 +65,7 @@ public class SolverCFOP implements Solver {
 		System.out.println("solving:");
 //		CubeDisplayer.display(state);
 		
-		IMove pllmove = PLLs.matches(state);
+		IMove pllmove = PLLs.matches(state, BasicMoves.MOVE_U);
 
 		if (pllmove == null)
 			System.out.println("NO MATCH SORRY);");
@@ -157,4 +163,68 @@ public class SolverCFOP implements Solver {
 //	public static void fill(int[] n, int starti)
 //	{
 //	}
+		
+	
+	public final static int[][] cdowns = {
+	    {0, 1, 4, 5},
+	    {2, 3, 6, 7},
+	    {4, 5, 6, 7},
+	    {0, 1, 2, 3},
+	    {1, 5, 6, 2},
+	    {0, 4, 7, 3}
+	};
+	public final static int[][] cups = {
+	    {2, 3, 6, 7},
+	    {0, 1, 4, 5},
+	    {0, 1, 2, 3},
+	    {4, 5, 6, 7},
+	    {0, 4, 7, 3},
+	    {1, 5, 6, 2},
+	};
+	public final static int[][] edowns = {
+	    {1, 4, 5, 9},
+	    {3, 6, 7, 11},
+	    {8, 9, 10, 11},
+	    {0, 1, 2, 3},
+	    {2, 5, 6, 10},
+	    {0, 4, 7, 8},
+	};
+	
+	public final static int[][] eups = {
+	    {3, 6, 7, 11},
+	    {1, 4, 5, 9},
+	    {0, 1, 2, 3},
+	    {8, 9, 10, 11},
+	    {0, 4, 7, 8},
+	    {2, 5, 6, 10},
+	};
+	
+	public final static int[][] emids = {
+	    {0, 2, 8, 10},
+	    {0, 2, 8, 10},
+	    {4, 5, 6, 7},
+	    {4, 5, 6, 7},
+	    {1, 3, 9, 11},
+	    {1, 3, 9, 11},
+	};
+	
+	public static int getposC(int[] corners, int idx) {
+		for (int i=0; i<8; i++)
+			if (corners[i] == idx)
+				return i;
+		return -1;
+	}
+	
+	public static int getPosE(int[] edges, int idx) {
+		for (int i=0; i<8; i++)
+			if (edges[i] == idx)
+				return i;
+		return -1;
+	}
+	
+	public static boolean isUpC(int pos)		{ return pos>=4; }
+	public static boolean isDownC(int pos)		{ return pos<4; }
+	public static boolean isUpE(int pos)		{ return pos>=8; }
+	public static boolean isMiddleE(int pos)	{ return pos>=4 && pos<8; }
+	public static boolean isDownE(int pos)		{ return pos<4; }
 }

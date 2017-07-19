@@ -22,7 +22,7 @@ public class MoveDescription extends IMove {
 
 	@Override
 	public IMove reverse() {
-		return new MoveDescription(move.reverse(), description+"-rev", suppress_original);
+		return new MoveDescription(move.reverse(), description+"'", suppress_original);
 	}
 
 	@Override

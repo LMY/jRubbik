@@ -45,8 +45,7 @@ public class MoveParser {
 	
 	public static IMove parseSequence(String string) {
 		
-//		string = string.replace("'", "i");
-		
+//		string = string.replaceAll("\\[\\]", "");
 		
 		final String[] parts = string.split("[,\\s()]");
 		final List<IMove> moves = new ArrayList<IMove>();
