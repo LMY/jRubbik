@@ -2,6 +2,7 @@ package jRubbik.moves;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class MoveParser {
 
@@ -18,6 +19,9 @@ public class MoveParser {
 	
 	public static IMove parse(String string) {
 		
+		if (string.isEmpty())
+			return NullMove.NULL;
+		
 		// do not use BasicMoves.ALL_COLLECTIONS! otherwise in BasicMoves you can't call parse/parseSequence because BasicMoves.ALL_COLLECTIONS would still be null
 		for (IMove[] collection : PARSE_COLLECTIONS)
 			for (IMove move : collection)
@@ -29,6 +33,14 @@ public class MoveParser {
 	
 	public static IMove parseSequence(String name, String string) {
 		return new MoveDescription(parseSequence(string), name, false);
+	}
+	
+	public static IMove parseLine(String string) {
+		
+		final StringTokenizer tok = new StringTokenizer(string, ";");
+		final String name = tok.nextToken();
+		
+		return new MoveDescription(parseSequence(tok.hasMoreTokens() ? tok.nextToken() : ""), name, false);
 	}
 	
 	public static IMove parseSequence(String string) {
