@@ -36,11 +36,14 @@ public class MoveParser {
 	}
 	
 	public static IMove parseLine(String string) {
+		return parseLine(string, true);
+	}
+	public static IMove parseLine(String string, boolean suppress) {
 		
 		final StringTokenizer tok = new StringTokenizer(string, ";");
 		final String name = tok.nextToken();
 		
-		return new MoveDescription(parseSequence(tok.hasMoreTokens() ? tok.nextToken() : ""), name, false);
+		return new MoveDescription(parseSequence(tok.hasMoreTokens() ? tok.nextToken() : ""), name, suppress);
 	}
 	
 	public static IMove parseSequence(String string) {

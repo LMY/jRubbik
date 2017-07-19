@@ -65,7 +65,8 @@ public class Constants {
 	public static final int MOVE_INVALID = 255; // will cause crashes; and this is intended (-fno-exceptions)
 	
 	final public static String[] KubeMoveNames = { "F", "B", "U", "D", "R", "L" };
-
+	final public static String[] RotMoveNames = { "z", "z", "y", "y", "x", "x" };
+	
 
 	
 	// PERMUTATIONS and RUBIK functions

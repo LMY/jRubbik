@@ -24,12 +24,26 @@ public class CombinedMove extends IMove {
 
 	@Override
 	public IMove reverse() {
-		return new CombinedMove(facemove1.reverse(), facemove2.reverse(), orient.reverse());
+		return new CombinedMove(facemove1 != null ? facemove1.reverse() : null,
+								facemove2 != null ? facemove2.reverse() : null,
+								orient != null ? orient.reverse() : null);
 	}
 
 	@Override
 	public IMove times(int n) {
-		return new CombinedMove(facemove1.times(n), facemove2.times(n), orient.times(n));
+		
+		while (n < 0)
+			n += 4;
+		n %= 4;
+		
+		if (n == 0)
+			return NullMove.NULL;
+		if (n == 1)
+			return this;
+		if (n == 2)
+			return NullMove.NULL;
+		//if (n == 3)
+			return reverse();
 	}
 
 	@Override

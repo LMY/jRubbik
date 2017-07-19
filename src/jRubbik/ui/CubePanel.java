@@ -35,11 +35,10 @@ public abstract class CubePanel extends JPanel {
 
 	private static final long serialVersionUID = -8791902983413545183L;
 
-
-
+	
 	public abstract void display(IMove move);
 	protected abstract void init();
-	
+
 	
 	protected CubeState state;
 	private JTextField sequenceField;
@@ -123,9 +122,9 @@ public abstract class CubePanel extends JPanel {
 		{
 			final JPanel Panelbasic = new JPanel();
 			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_ORIENTATION.length));
-			for (int i = 0; i<BasicMoves.ALL_ORIENTATION.length; i++)
+			for (int i = 0; i<BasicMoves.ALL_ORIENTATION.length; i+=2)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION[i]));
-			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i++)
+			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i+=2)
 				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
 			movePanel.add(Panelbasic);
 		}
@@ -234,8 +233,8 @@ public abstract class CubePanel extends JPanel {
 	}
 	
 	public void fork() {
-		final String text = sequenceField.getText();
-		sequenceField.setText("");
+//		final String text = sequenceField.getText();
+//		sequenceField.setText("");
 		fork("FORK");
 	}
 	public void newnode() {

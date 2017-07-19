@@ -1,30 +1,23 @@
 package jRubbik.moves;
 
 import jRubbik.constants.Color;
+import jRubbik.constants.Constants;
 import jRubbik.state.CubeState;
 import jRubbik.state.OrientatonState;
 
 public class MoveOrientation extends IMove{
 	
-	public static final int MOVE_Z = 0;
-	public static final int MOVE_X = 1;
-	public static final int MOVE_Y = 2; 
-	public static final int MOVE_INVALID = 255; // will cause crashes; and this is intended (-fno-exceptions)
-	
-
-	final public static String[] RotMoveNames = { "z", "x", "y" };
-	
-	private int dir;
+	private Color dir;
 	private boolean reverse;
 	private int reps;
 	
-	public MoveOrientation(int dir, int reverse) {
+	public MoveOrientation(Color dir, int reverse) {
 		this.dir = dir;
 		this.reverse = reverse==1;
 		this.reps = reverse==2?2:1;
 	}
 
-	public int getDir() {
+	public Color getDir() {
 		return dir;
 	}
 
@@ -37,7 +30,7 @@ public class MoveOrientation extends IMove{
 	}
 	@Override
 	public String toString() {
-		return RotMoveNames[dir]+(reps==2?"2":reverse?"'":"");
+		return Constants.RotMoveNames[dir.toInt()]+(reps==2?"2":reverse?"'":"");
 	}
 
 	
@@ -48,10 +41,10 @@ public class MoveOrientation extends IMove{
 		Color front = op.getFront();
 		Color up = op.getUp();
 		
-		if (dir == MOVE_Y) {
+		if (dir == Color.WHITE || dir == Color.YELLOW) {
 			op.setFront(reps == 2 ? front.opposite() : front.next(reverse ? up.opposite() : up));
 		}
-		else if (dir == MOVE_X) {
+		else if (dir == Color.RED || dir == Color.ORANGE) {
 			if (reps == 2) {
 				op.setFront(front.opposite());
 				op.setUp(up.opposite());
@@ -73,7 +66,8 @@ public class MoveOrientation extends IMove{
 
 	@Override
 	public IMove reverse() {
-		return new MoveOrientation(dir, reps==2?2 :  reverse?0:1 );
+		return reps==2 ? this :
+			reverse ? BasicMoves.ALL_ORIENTATION[dir.toInt()] : BasicMoves.ALL_ORIENTATION_INV[dir.toInt()];
 	}
 
 	@Override

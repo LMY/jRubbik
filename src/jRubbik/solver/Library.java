@@ -57,9 +57,17 @@ public class Library {
 	}
 	
 	public void addAlgorithm(IMove alg) {
-			
-		algorithms.add(alg);
-		final IMove revAlg = alg.reverse();
-		patterns.add(Pattern.createPLL_fromState(revAlg.get()));
-	}	
+		try {
+			algorithms.add(alg);
+			final IMove revAlg = alg.reverse();
+			patterns.add(Pattern.createPLL_fromState(revAlg.get()));
+		}	
+		catch (Exception e) {
+			@SuppressWarnings("unused")
+			int xsd = 4;
+			alg.reverse();
+	//		Utils.MessageBox(e.toString()+" "+e.getMessage(), "");
+	//		PLLs.addAlgorithm(x);
+		}
+	}
 }

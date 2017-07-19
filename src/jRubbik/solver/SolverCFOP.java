@@ -5,7 +5,6 @@ import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
 import jRubbik.moves.NullMove;
 import jRubbik.state.CubeState;
-import jRubbik.utils.Utils;
 
 public class SolverCFOP implements Solver {
 
@@ -27,13 +26,7 @@ public class SolverCFOP implements Solver {
 	{
 		PLLs = new Library();
 		for (IMove x : BasicMoves.PLLs)
-			try {
 				PLLs.addAlgorithm(x);
-			}
-		catch (Exception e) {
-			Utils.MessageBox(e.getMessage(), "");
-			PLLs.addAlgorithm(x);
-		}
 	}
 	
 	
@@ -56,8 +49,7 @@ public class SolverCFOP implements Solver {
 		
 		state.resetOrientation();
 		
-		
-		Algorithm ret = new Algorithm();
+		final Algorithm ret = new Algorithm();
 		
 //		inspect(state);
 //		solveCross(state);
@@ -82,6 +74,12 @@ public class SolverCFOP implements Solver {
 			ret.addMove(aufmove);
 		}
 		
+//		for (IMove move : BasicMoves.ALL_MIDDLE)
+//			System.out.println(""+move.toString()+" "+move.reverse().toString());
+//		for (IMove move : BasicMoves.ALL_DOUBLE_INV)
+//			System.out.println(""+move.toString()+" "+move.reverse().toString());
+//		for (IMove move : BasicMoves.ALL_DOUBLE2)
+//			System.out.println(""+move.toString()+" "+move.reverse().toString());
 		return ret;
 	}
 	
