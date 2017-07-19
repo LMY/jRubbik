@@ -169,6 +169,7 @@ public abstract class CubePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 //				sequenceField.setText(sequenceField.getText()+" "+move.toString());
 				performMove(move);
+//				performMove(move.reverse());
 			}
 		});
 		clearButton.addKeyListener(new MyKeyListener());

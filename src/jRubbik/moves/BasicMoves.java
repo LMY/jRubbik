@@ -201,7 +201,7 @@ public class BasicMoves {
 			OLL_C2, OLL_I1, OLL_I2, OLL_I3, OLL_I4, OLL_K1, OLL_K2, OLL_K3, OLL_K4, OLL_O1, OLL_O2, OLL_O3, OLL_O4, OLL_O5, OLL_O6, OLL_O7, OLL_O8 };
 	
 	public final static IMove[] CUSTOM_SEQUENCES = {
-			PLL_Y, PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Ja, PLL_Jb,
+			PLL_Y, PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Ab, PLL_Jb,
 //			OFFICIAL_SCRAMBLE 
 			};
 	

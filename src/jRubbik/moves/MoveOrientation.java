@@ -44,7 +44,7 @@ public class MoveOrientation extends IMove{
 		if (dir == Color.WHITE || dir == Color.YELLOW) {
 			op.setFront(reps == 2 ? front.opposite() : front.next(reverse ? up.opposite() : up));
 		}
-		else if (dir == Color.RED || dir == Color.ORANGE) {
+		else if (dir == Color.BLUE || dir == Color.GREEN) {
 			if (reps == 2) {
 				op.setFront(front.opposite());
 				op.setUp(up.opposite());
