@@ -1,6 +1,7 @@
 package jRubbik.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -63,8 +64,6 @@ public abstract class CubePanel extends JPanel {
 		stateTree.addTreeSelectionListener(new MyTreeSelectionListener());
 		stateTree.setShowsRootHandles(true);
 		
-
-		
 		
 		final JPanel south = new JPanel();
 		south.setLayout(new BorderLayout());
@@ -85,7 +84,11 @@ public abstract class CubePanel extends JPanel {
 		south.add(sequenceField, BorderLayout.CENTER);
 		south.add(movePanel, BorderLayout.SOUTH);
 		add(south, BorderLayout.SOUTH);
-		add(new JScrollPane(stateTree), BorderLayout.EAST);
+		
+		final JScrollPane scrolltree = new JScrollPane(stateTree);
+//		scrolltree.setMinimumSize(new Dimension(100,0));
+		scrolltree.setPreferredSize(new Dimension(100,0));
+		add(scrolltree, BorderLayout.EAST);
 		
 		{
 			final JPanel Panelbasic = new JPanel();
@@ -165,7 +168,7 @@ public abstract class CubePanel extends JPanel {
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sequenceField.setText(sequenceField.getText()+" "+move.toString());
+//				sequenceField.setText(sequenceField.getText()+" "+move.toString());
 				performMove(move);
 			}
 		});
@@ -304,7 +307,7 @@ public abstract class CubePanel extends JPanel {
 		    
 		    try {
 //		    if (node.isLeaf())
-		        setState(((DescribedState)nodeInfo).state);
+		        setState(e.getPath().getPathCount() == 1 ? new CubeState() : ((DescribedState)nodeInfo).state);
 		    }
 		    catch (Exception exc) {}
 //		    else
