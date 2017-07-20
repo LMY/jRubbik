@@ -1,23 +1,26 @@
 package jRubbik.moves;
 
-import java.util.Stack;
-
 import jRubbik.state.CubeState;
-import jRubbik.state.OrientatonState;
 
 public class MoveResetOrientation extends IMove {
 
+	public final static IMove INSTANCE = new MoveResetOrientation();
+	
+	private MoveResetOrientation() {}
+	
+	@Override
+	public String toString() {
+		return "$";
+	}
+	
 	@Override
 	public void apply(CubeState state) {
-		orientations.push(state.getOrientation());
 		state.resetOrientation();
 	}
-
-	private Stack<OrientatonState> orientations = new Stack<OrientatonState>();
 	
 	@Override
 	public IMove reverse() {
-		return new MoveApplyOrientation(orientations.pop());
+		return this;
 	}
 
 	@Override

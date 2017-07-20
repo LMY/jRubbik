@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import jRubbik.constants.Color;
 import jRubbik.moves.Algorithm;
-import jRubbik.moves.Move;
+import jRubbik.moves.BasicMoves;
+import jRubbik.moves.IMove;
 
 public class Scrambler {
 
-	private static final int LEN = 20;
+	private final static int LEN = 20;
 	
 	private Random random;
 	
@@ -24,16 +24,16 @@ public class Scrambler {
 		random = new Random();
 	}
 	
-	public Algorithm scramble()
+	public IMove scramble()
 	{
 		return scramble(LEN);
 	}
 	
-	public Algorithm scramble(int len)
+	public IMove scramble(int len)
 	{
-		Algorithm ret = new Algorithm();
+		final Algorithm ret = new Algorithm();
 		
-		List<Integer> possible = new ArrayList<Integer>();
+		final List<Integer> possible = new ArrayList<Integer>();
 		for (int i=0; i<6; i++)
 			possible.add(i);
 		
@@ -41,16 +41,15 @@ public class Scrambler {
 		
 		for (int i=0; i<len; i++)
 		{
-			int this_move;
-			
-			int m = random.nextInt(possible.size());
-			this_move = possible.get(m);
+			final int m = random.nextInt(possible.size());
+			final int this_move = possible.get(m);
 			
 			possible.remove(m);
 			if (last >= 0)
 				possible.add(last);
 			
-			ret.addMove(new Move(Color.create(this_move), random.nextInt(3)));
+			final int mod = random.nextInt(3);
+			ret.addMove((mod == 2 ? BasicMoves.PUBLIC_ALL_SIMPLE2 : mod == 1 ? BasicMoves.PUBLIC_ALL_SIMPLE_INV : BasicMoves.PUBLIC_ALL_SIMPLE)[this_move]);
 			
 			last = this_move;
 		}
@@ -58,21 +57,11 @@ public class Scrambler {
 		return ret;		
 	}
 	
-	public static void scramble(CubeState state)
-	{
-		new Scrambler().scramble().apply(state);
+	public static IMove getScramble() {
+		return getScramble(LEN);
 	}
 	
-	
-	public static CubeState getScrambledCube()
-	{
-		return getScrambledCube(LEN);
-	}
-	
-	public static CubeState getScrambledCube(int len)
-	{
-		CubeState state = new CubeState();
-		new Scrambler().scramble(len).apply(state);
-		return state;
+	public static IMove getScramble(int len) { 
+		return new Scrambler().scramble(len);
 	}
 }

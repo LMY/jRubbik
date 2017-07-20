@@ -3,7 +3,7 @@ package jRubbik.solver;
 import jRubbik.moves.Algorithm;
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
-import jRubbik.moves.NullMove;
+import jRubbik.moves.MoveNull;
 import jRubbik.state.CubeState;
 
 public class SolverCFOP implements Solver {
@@ -74,12 +74,7 @@ public class SolverCFOP implements Solver {
 			ret.addMove(aufmove);
 		}
 		
-//		for (IMove move : BasicMoves.ALL_MIDDLE)
-//			System.out.println(""+move.toString()+" "+move.reverse().toString());
-//		for (IMove move : BasicMoves.ALL_DOUBLE_INV)
-//			System.out.println(""+move.toString()+" "+move.reverse().toString());
-//		for (IMove move : BasicMoves.ALL_DOUBLE2)
-//			System.out.println(""+move.toString()+" "+move.reverse().toString());
+
 		return ret;
 	}
 	
@@ -87,7 +82,7 @@ public class SolverCFOP implements Solver {
 
 	private IMove auf(CubeState pLLdone, IMove mOVE_U) {
 		if (pLLdone.isSolved())
-			return NullMove.NULL;
+			return MoveNull.NULL;
 		if (mOVE_U.get(pLLdone).isSolved())
 			return mOVE_U;
 		

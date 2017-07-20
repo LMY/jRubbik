@@ -34,34 +34,33 @@ public class CubeDisplayer {
 	};
 
 
-	public static Color getEffectiveCornerColor(int idx, int face, int[] corners, int[] state_corners) {
-
-		final int state = state_corners[corners[idx]];
+	
+	public static Color[][] getColors(CubeState cube)
+	{
+		final Color[][] colors = getUnorientedColors(cube);
 		
-		final int colorIdx = state == face ? 0 :
-			!((state+1)%3 == face)^(Constants.how_many_colors_in_common_corners(idx, corners[idx]) % 2 == 1) ? 1 : 2;
-
-		return CORNER_COLORS[corners[idx]][colorIdx];
-	}
-
-	public static Color getEffectiveEdgeColor(int idx, int face, int[] edges, int[] state_edges) {
-
-		final int state = state_edges[edges[idx]];
-		idx = edges[idx];
+		final OrientatonState state = cube.getOrientation();
 		
-		if (state == 0)
-			return EDGE_COLORS[idx][0 != face ? 1 : 0];
-		else
-		{
-			boolean good_edge = Constants.isEdgeBad(idx, state);
-
-			if (good_edge)
-				return EDGE_COLORS[idx][face==0 ? 1 : 0];
-			else
-				return EDGE_COLORS[idx][face==0 ? 0 : 1];
+		final Color[][] newcolors = new Color[colors.length][];
+		final Color up = state.getUp();
+		final Color front = state.getFront();
+		
+		// swap faces to new direction
+		for (Color c : Color.ALL)
+			newcolors[state.whereis(c).toInt()] = colors[c.toInt()];
+		
+		for (int i=0; i<newcolors.length; i++)
+			colors[i] = newcolors[i];
+		
+		// now rotate the faces
+		for (Color color : Color.ALL) {
+			final int idx = color.toInt();
+			rotate(colors[idx], obtain_rot(up, front, color));
 		}
-	}
 
+		return newcolors;
+	}
+	
 
 	public static Color[][] getUnorientedColors(CubeState state) {
 
@@ -173,31 +172,35 @@ public class CubeDisplayer {
 		return -1;
 	}
 	
-	public static Color[][] getColors(CubeState cube)
-	{
-		final Color[][] colors = getUnorientedColors(cube);
-		
-		final OrientatonState state = cube.getOrientation();
-		
-		final Color[][] newcolors = new Color[colors.length][];
-		final Color up = state.getUp();
-		final Color front = state.getFront();
-		
-		// swap faces to new direction
-		for (Color c : Color.ALL)
-			newcolors[state.whereis(c).toInt()] = colors[c.toInt()];
-		
-		for (int i=0; i<newcolors.length; i++)
-			colors[i] = newcolors[i];
-		
-		// now rotate the faces
-		for (Color color : Color.ALL) {
-			final int idx = color.toInt();
-			rotate(colors[idx], obtain_rot(up, front, color));
-		}
+	private static Color getEffectiveCornerColor(int idx, int face, int[] corners, int[] state_corners) {
 
-		return newcolors;
+		final int state = state_corners[corners[idx]];
+		
+		final int colorIdx = state == face ? 0 :
+			!((state+1)%3 == face)^(Constants.how_many_colors_in_common_corners(idx, corners[idx]) % 2 == 1) ? 1 : 2;
+
+		return CORNER_COLORS[corners[idx]][colorIdx];
 	}
+
+	private static Color getEffectiveEdgeColor(int idx, int face, int[] edges, int[] state_edges) {
+
+		final int state = state_edges[edges[idx]];
+		idx = edges[idx];
+		
+		if (state == 0)
+			return EDGE_COLORS[idx][0 != face ? 1 : 0];
+		else
+		{
+			boolean good_edge = Constants.isEdgeBad(idx, state);
+
+			if (good_edge)
+				return EDGE_COLORS[idx][face==0 ? 1 : 0];
+			else
+				return EDGE_COLORS[idx][face==0 ? 0 : 1];
+		}
+	}
+
+	
 
 	private static void swap(Color[] colors, int i1, int i2) {
 		final Color temp = colors[i1];
@@ -239,4 +242,86 @@ public class CubeDisplayer {
 			swap(colors, 0, 6);
 		}
 	}
+	
+	
+	
+	public static String toString(CubeState state) {
+
+		final StringBuilder ret = new StringBuilder();
+		final Color[][] colors = CubeDisplayer.getColors(state);
+		
+		// YELLOW FACE
+		ret.append("        ---------\n");
+		ret.append("        | ");
+		ret.append(colors[Color.YELLOW.toInt()][0].toChar()+" "+colors[Color.YELLOW.toInt()][1].toChar()+" "+colors[Color.YELLOW.toInt()][2].toChar()+" |\n");
+		ret.append("        | ");
+		ret.append(colors[Color.YELLOW.toInt()][3].toChar()+" "+colors[Color.YELLOW.toInt()][4].toChar()+" "+colors[Color.YELLOW.toInt()][5].toChar()+" |\n");
+		ret.append("        | ");
+		ret.append(colors[Color.YELLOW.toInt()][6].toChar()+" "+colors[Color.YELLOW.toInt()][7].toChar()+" "+colors[Color.YELLOW.toInt()][8].toChar()+" |\n");
+		ret.append("---------------------------------\n");
+		
+		// UP LINE
+		ret.append("| ");
+		ret.append(colors[Color.BLUE.toInt()][0].toChar()+" "+colors[Color.BLUE.toInt()][1].toChar()+" "+colors[Color.BLUE.toInt()][2].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.RED.toInt()][0].toChar()+" "+colors[Color.RED.toInt()][1].toChar()+" "+colors[Color.RED.toInt()][2].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.GREEN.toInt()][0].toChar()+" "+colors[Color.GREEN.toInt()][1].toChar()+" "+colors[Color.GREEN.toInt()][2].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.ORANGE.toInt()][0].toChar()+" "+colors[Color.ORANGE.toInt()][1].toChar()+" "+colors[Color.ORANGE.toInt()][2].toChar()+" ");
+		ret.append("| ");
+		ret.append("\n");
+		
+		//MIDDLE LINE
+		ret.append("| ");
+		ret.append(colors[Color.BLUE.toInt()][3].toChar()+" "+colors[Color.BLUE.toInt()][4].toChar()+" "+colors[Color.BLUE.toInt()][5].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.RED.toInt()][3].toChar()+" "+colors[Color.RED.toInt()][4].toChar()+" "+colors[Color.RED.toInt()][5].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.GREEN.toInt()][3].toChar()+" "+colors[Color.GREEN.toInt()][4].toChar()+" "+colors[Color.GREEN.toInt()][5].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.ORANGE.toInt()][3].toChar()+" "+colors[Color.ORANGE.toInt()][4].toChar()+" "+colors[Color.ORANGE.toInt()][5].toChar()+" ");
+		ret.append("| ");
+		ret.append("\n");
+		
+		// BOTTOM LINE
+		ret.append("| ");
+		ret.append(colors[Color.BLUE.toInt()][6].toChar()+" "+colors[Color.BLUE.toInt()][7].toChar()+" "+colors[Color.BLUE.toInt()][8].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.RED.toInt()][6].toChar()+" "+colors[Color.RED.toInt()][7].toChar()+" "+colors[Color.RED.toInt()][8].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.GREEN.toInt()][6].toChar()+" "+colors[Color.GREEN.toInt()][7].toChar()+" "+colors[Color.GREEN.toInt()][8].toChar()+" ");
+		ret.append("| ");
+		ret.append(colors[Color.ORANGE.toInt()][6].toChar()+" "+colors[Color.ORANGE.toInt()][7].toChar()+" "+colors[Color.ORANGE.toInt()][8].toChar()+" ");
+		ret.append("| ");
+		ret.append("\n");
+		
+		
+		// WHITE FACE
+		ret.append("        ---------\n");
+		ret.append("        | ");
+		ret.append(colors[Color.WHITE.toInt()][0].toChar()+" "+colors[Color.WHITE.toInt()][1].toChar()+" "+colors[Color.WHITE.toInt()][2].toChar()+" |\n");
+		ret.append("        | ");
+		ret.append(colors[Color.WHITE.toInt()][3].toChar()+" "+colors[Color.WHITE.toInt()][4].toChar()+" "+colors[Color.WHITE.toInt()][5].toChar()+" |\n");
+		ret.append("        | ");
+		ret.append(colors[Color.WHITE.toInt()][6].toChar()+" "+colors[Color.WHITE.toInt()][7].toChar()+" "+colors[Color.WHITE.toInt()][8].toChar()+" |\n");
+		ret.append("---------------------------------\n");
+		
+		ret.append("\n");
+//		ret.append(appendArray("pC", corners, state_corners));
+//		ret.append(appendArray("pE", edges, state_edges));
+		
+		return ret.toString();
+	}
+	
+//	private static String appendArray(String string, int[] s2, int[] state) {
+//		StringBuilder sb = new StringBuilder();
+//		
+//		sb.append(string+ " = { ");
+//		for (int i = 0; i < s2.length; i++)
+//			sb.append(s2[i] + "("+state[s2[i]]+")"+	(i != s2.length - 1 ? ", " : " }"));
+//		sb.append("\n");
+//		
+//		return sb.toString();
+//	}
 }

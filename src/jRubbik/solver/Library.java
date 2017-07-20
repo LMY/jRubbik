@@ -5,7 +5,7 @@ import java.util.List;
 
 import jRubbik.moves.Algorithm;
 import jRubbik.moves.IMove;
-import jRubbik.moves.NullMove;
+import jRubbik.moves.MoveNull;
 import jRubbik.state.CubeState;
 
 public class Library {
@@ -34,7 +34,7 @@ public class Library {
 				
 				// if matches
 				if (auf != null) {
-					if (auf == NullMove.NULL)	// without auf, simply return the algorithm
+					if (auf == MoveNull.NULL)	// without auf, simply return the algorithm
 						return alg;		
 					else						// with auf, add auf sequence and then algorithm
 					{						

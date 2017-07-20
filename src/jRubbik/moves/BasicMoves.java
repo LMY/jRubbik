@@ -4,105 +4,128 @@ import jRubbik.constants.Color;
 
 public class BasicMoves {
 	
+	public final static int MODIFIER_PLAIN = 0;
+	public final static int MODIFIER_INVERSE = 3;
+	public final static int MODIFIER_DOUBLE = 2;
+	
+	
 	// STANDARD MOVES
-	public final static IMove MOVE_F = new Move(Color.RED, 0);
-	public final static IMove MOVE_B = new Move(Color.ORANGE, 0);
-	public final static IMove MOVE_U = new Move(Color.YELLOW, 0);
-	public final static IMove MOVE_D = new Move(Color.WHITE, 0);
-	public final static IMove MOVE_R = new Move(Color.GREEN, 0);
-	public final static IMove MOVE_L = new Move(Color.BLUE, 0);
+	public final static IMove MOVE_F = new MoveSimple(Color.RED, MODIFIER_PLAIN);
+	public final static IMove MOVE_B = new MoveSimple(Color.ORANGE, MODIFIER_PLAIN);
+	public final static IMove MOVE_U = new MoveSimple(Color.YELLOW, MODIFIER_PLAIN);
+	public final static IMove MOVE_D = new MoveSimple(Color.WHITE, MODIFIER_PLAIN);
+	public final static IMove MOVE_R = new MoveSimple(Color.GREEN, MODIFIER_PLAIN);
+	public final static IMove MOVE_L = new MoveSimple(Color.BLUE, MODIFIER_PLAIN);
 	
-	public final static IMove MOVE_Fi = new Move(Color.RED, 1);
-	public final static IMove MOVE_Bi = new Move(Color.ORANGE, 1);
-	public final static IMove MOVE_Ui = new Move(Color.YELLOW, 1);
-	public final static IMove MOVE_Di = new Move(Color.WHITE, 1);
-	public final static IMove MOVE_Ri = new Move(Color.GREEN, 1);
-	public final static IMove MOVE_Li = new Move(Color.BLUE, 1);
+	public final static IMove MOVE_Fi = new MoveSimple(Color.RED, MODIFIER_INVERSE);
+	public final static IMove MOVE_Bi = new MoveSimple(Color.ORANGE, MODIFIER_INVERSE);
+	public final static IMove MOVE_Ui = new MoveSimple(Color.YELLOW, MODIFIER_INVERSE);
+	public final static IMove MOVE_Di = new MoveSimple(Color.WHITE, MODIFIER_INVERSE);
+	public final static IMove MOVE_Ri = new MoveSimple(Color.GREEN, MODIFIER_INVERSE);
+	public final static IMove MOVE_Li = new MoveSimple(Color.BLUE, MODIFIER_INVERSE);
 	
-	public final static IMove MOVE_F2 = new Move(Color.RED, 2);
-	public final static IMove MOVE_B2 = new Move(Color.ORANGE, 2);
-	public final static IMove MOVE_U2 = new Move(Color.YELLOW, 2);
-	public final static IMove MOVE_D2 = new Move(Color.WHITE, 2);
-	public final static IMove MOVE_R2 = new Move(Color.GREEN, 2);
-	public final static IMove MOVE_L2 = new Move(Color.BLUE, 2);
+	public final static IMove MOVE_F2 = new MoveSimple(Color.RED, MODIFIER_DOUBLE);
+	public final static IMove MOVE_B2 = new MoveSimple(Color.ORANGE, MODIFIER_DOUBLE);
+	public final static IMove MOVE_U2 = new MoveSimple(Color.YELLOW, MODIFIER_DOUBLE);
+	public final static IMove MOVE_D2 = new MoveSimple(Color.WHITE, MODIFIER_DOUBLE);
+	public final static IMove MOVE_R2 = new MoveSimple(Color.GREEN, MODIFIER_DOUBLE);
+	public final static IMove MOVE_L2 = new MoveSimple(Color.BLUE, MODIFIER_DOUBLE);
 	
 	
 	// ORIENTATION
-	public final static IMove MOVE_x = new MoveOrientation(Color.GREEN, 0);
-	public final static IMove MOVE_y = new MoveOrientation(Color.WHITE, 0);
-	public final static IMove MOVE_z = new MoveOrientation(Color.RED, 0);
+	public final static IMove MOVE_x = new MoveOrientation(Color.GREEN, MODIFIER_PLAIN);
+	public final static IMove MOVE_y = new MoveOrientation(Color.WHITE, MODIFIER_PLAIN);
+	public final static IMove MOVE_z = new MoveOrientation(Color.RED, MODIFIER_PLAIN);
 	
-	public final static IMove MOVE_xi = new MoveOrientation(Color.GREEN, 1);
-	public final static IMove MOVE_yi = new MoveOrientation(Color.WHITE, 1);
-	public final static IMove MOVE_zi = new MoveOrientation(Color.RED, 1);
+	public final static IMove MOVE_xi = new MoveOrientation(Color.GREEN, MODIFIER_INVERSE);
+	public final static IMove MOVE_yi = new MoveOrientation(Color.WHITE, MODIFIER_INVERSE);
+	public final static IMove MOVE_zi = new MoveOrientation(Color.RED, MODIFIER_INVERSE);
 	
-	public final static IMove MOVE_x2 = new MoveOrientation(Color.GREEN, 2);
-	public final static IMove MOVE_y2 = new MoveOrientation(Color.WHITE, 2);
-	public final static IMove MOVE_z2 = new MoveOrientation(Color.RED, 2);
+	public final static IMove MOVE_x2 = new MoveOrientation(Color.GREEN, MODIFIER_DOUBLE);
+	public final static IMove MOVE_y2 = new MoveOrientation(Color.WHITE, MODIFIER_DOUBLE);
+	public final static IMove MOVE_z2 = new MoveOrientation(Color.RED, MODIFIER_DOUBLE);
 	
 
 	// MIDDLE LAYER MOVES
-	public final static IMove MOVE_M = new MoveDescription(new CombinedMove(MOVE_R, MOVE_Li, MOVE_xi), "M", true);
-	public final static IMove MOVE_Mi = new MoveDescription(new CombinedMove(MOVE_Ri, MOVE_L, MOVE_x), "M'", true);
-	public final static IMove MOVE_M2 = new MoveDescription(new CombinedMove(MOVE_R2, MOVE_L2, MOVE_x2), "M2", true);
-	
-	public final static IMove MOVE_E = new MoveDescription(new CombinedMove(MOVE_U, MOVE_Di, MOVE_yi), "E", true);
-	public final static IMove MOVE_Ei = new MoveDescription(new CombinedMove(MOVE_Ui, MOVE_D, MOVE_y), "E'", true);
-	public final static IMove MOVE_E2 = new MoveDescription(new CombinedMove(MOVE_U2, MOVE_D2, MOVE_y2), "E2", true);
+	public final static IMove MOVE_M = new MoveMiddle(Color.GREEN, MODIFIER_PLAIN);
+	public final static IMove MOVE_E = new MoveMiddle(Color.YELLOW, MODIFIER_PLAIN);
+	public final static IMove MOVE_S = new MoveMiddle(Color.RED, MODIFIER_PLAIN);
 
-	public final static IMove MOVE_S = new MoveDescription(new CombinedMove(MOVE_Fi, MOVE_B, MOVE_z), "S", true);
-	public final static IMove MOVE_Si = new MoveDescription(new CombinedMove(MOVE_F, MOVE_Bi, MOVE_zi), "S'", true);
-	public final static IMove MOVE_S2 = new MoveDescription(new CombinedMove(MOVE_F2, MOVE_B2, MOVE_z2), "S2", true);
+	public final static IMove MOVE_Mi = new MoveMiddle(Color.GREEN, MODIFIER_INVERSE);
+	public final static IMove MOVE_Ei = new MoveMiddle(Color.YELLOW, MODIFIER_INVERSE);
+	public final static IMove MOVE_Si = new MoveMiddle(Color.RED, MODIFIER_INVERSE);
+	
+	public final static IMove MOVE_M2 = new MoveMiddle(Color.GREEN, MODIFIER_DOUBLE);
+	public final static IMove MOVE_E2 = new MoveMiddle(Color.YELLOW, MODIFIER_DOUBLE);
+	public final static IMove MOVE_S2 = new MoveMiddle(Color.RED, MODIFIER_DOUBLE);
 	
 	
 	// FAT TURNS
-	public final static IMove MOVE_r = new MoveDescription(new CombinedMove(MOVE_L, null, MOVE_x), "r", true);
-	public final static IMove MOVE_l = new MoveDescription(new CombinedMove(MOVE_R, null, MOVE_xi), "l", true);
-	public final static IMove MOVE_u = new MoveDescription(new CombinedMove(MOVE_D, null, MOVE_y), "u", true);
-	public final static IMove MOVE_d = new MoveDescription(new CombinedMove(MOVE_U, null, MOVE_yi), "d", true);
-	public final static IMove MOVE_f = new MoveDescription(new CombinedMove(MOVE_B, null, MOVE_z), "f", true);
-	public final static IMove MOVE_b = new MoveDescription(new CombinedMove(MOVE_F, null, MOVE_zi), "b", true);
+	public final static IMove MOVE_f = new MoveDouble(Color.RED, MODIFIER_PLAIN);
+	public final static IMove MOVE_b = new MoveDouble(Color.ORANGE, MODIFIER_PLAIN);
+	public final static IMove MOVE_u = new MoveDouble(Color.YELLOW, MODIFIER_PLAIN);
+	public final static IMove MOVE_d = new MoveDouble(Color.WHITE, MODIFIER_PLAIN);
+	public final static IMove MOVE_r = new MoveDouble(Color.GREEN, MODIFIER_PLAIN);
+	public final static IMove MOVE_l = new MoveDouble(Color.BLUE, MODIFIER_PLAIN);
 	
-	public final static IMove MOVE_ri = new MoveDescription(new CombinedMove(MOVE_Li, null, MOVE_xi), "r'", true);
-	public final static IMove MOVE_li = new MoveDescription(new CombinedMove(MOVE_Ri, null, MOVE_x), "l'", true);
-	public final static IMove MOVE_ui = new MoveDescription(new CombinedMove(MOVE_Di, null, MOVE_yi), "u'", true);
-	public final static IMove MOVE_di = new MoveDescription(new CombinedMove(MOVE_Ui, null, MOVE_y), "d'", true);
-	public final static IMove MOVE_fi = new MoveDescription(new CombinedMove(MOVE_Bi, null, MOVE_zi), "f'", true);
-	public final static IMove MOVE_bi = new MoveDescription(new CombinedMove(MOVE_Fi, null, MOVE_z), "b'", true);
+	public final static IMove MOVE_fi = new MoveDouble(Color.RED, MODIFIER_INVERSE);
+	public final static IMove MOVE_bi = new MoveDouble(Color.ORANGE, MODIFIER_INVERSE);
+	public final static IMove MOVE_ui = new MoveDouble(Color.YELLOW, MODIFIER_INVERSE);
+	public final static IMove MOVE_di = new MoveDouble(Color.WHITE, MODIFIER_INVERSE);
+	public final static IMove MOVE_ri = new MoveDouble(Color.GREEN, MODIFIER_INVERSE);
+	public final static IMove MOVE_li = new MoveDouble(Color.BLUE, MODIFIER_INVERSE);
 	
-	public final static IMove MOVE_r2 = new MoveDescription(new CombinedMove(MOVE_L2, null, MOVE_x2), "r2", true);
-	public final static IMove MOVE_l2 = new MoveDescription(new CombinedMove(MOVE_R2, null, MOVE_x2), "l2", true);
-	public final static IMove MOVE_u2 = new MoveDescription(new CombinedMove(MOVE_D2, null, MOVE_y2), "u2", true);
-	public final static IMove MOVE_d2 = new MoveDescription(new CombinedMove(MOVE_U2, null, MOVE_y2), "d2", true);
-	public final static IMove MOVE_f2 = new MoveDescription(new CombinedMove(MOVE_B2, null, MOVE_z2), "f2", true);
-	public final static IMove MOVE_b2 = new MoveDescription(new CombinedMove(MOVE_F2, null, MOVE_z2), "b2", true);
-	
-	
-	
-	// DEFINE COLLECTIONS
-	public static final IMove[] ALL_SIMPLE = { MOVE_F, MOVE_B, MOVE_U, MOVE_D, MOVE_R, MOVE_L };
-	public static final IMove[] ALL_SIMPLE_INV = { MOVE_Fi, MOVE_Bi, MOVE_Ui, MOVE_Di, MOVE_Ri, MOVE_Li };
-	public static final IMove[] ALL_SIMPLE2 = { MOVE_F2, MOVE_B2, MOVE_U2, MOVE_D2, MOVE_R2, MOVE_L2 };
-	
-	public static final IMove[] ALL_ORIENTATION = {  MOVE_z, MOVE_z, MOVE_y, MOVE_y, MOVE_x, MOVE_x };
-	public static final IMove[] ALL_ORIENTATION_INV = {  MOVE_zi, MOVE_zi, MOVE_yi, MOVE_yi, MOVE_xi, MOVE_xi };
-	public static final IMove[] ALL_ORIENTATION2 = {  MOVE_z2, MOVE_z2, MOVE_y2, MOVE_y2, MOVE_x2, MOVE_x2 };
-	
-	public static final IMove[] ALL_MIDDLE = { MOVE_M, MOVE_E, MOVE_S };
-	public static final IMove[] ALL_MIDDLE_INV = { MOVE_Mi, MOVE_Ei, MOVE_Si };
-	public static final IMove[] ALL_MIDDLE2 = { MOVE_M2, MOVE_E2, MOVE_S2 };
+	public final static IMove MOVE_f2 = new MoveDouble(Color.RED, MODIFIER_DOUBLE);
+	public final static IMove MOVE_b2 = new MoveDouble(Color.ORANGE, MODIFIER_DOUBLE);
+	public final static IMove MOVE_u2 = new MoveDouble(Color.YELLOW, MODIFIER_DOUBLE);
+	public final static IMove MOVE_d2 = new MoveDouble(Color.WHITE, MODIFIER_DOUBLE);
+	public final static IMove MOVE_r2 = new MoveDouble(Color.GREEN, MODIFIER_DOUBLE);
+	public final static IMove MOVE_l2 = new MoveDouble(Color.BLUE, MODIFIER_DOUBLE);
 	
 	
-	public static final IMove[] ALL_DOUBLE = { MOVE_f, MOVE_b, MOVE_u, MOVE_d, MOVE_r, MOVE_l };
-	public static final IMove[] ALL_DOUBLE_INV = { MOVE_fi, MOVE_bi, MOVE_ui, MOVE_di, MOVE_ri, MOVE_li };
-	public static final IMove[] ALL_DOUBLE2 = { MOVE_f2, MOVE_b2, MOVE_u2, MOVE_d2, MOVE_r2, MOVE_l2 };
 	
-	public static IMove color2move(Color color, int mod) {
-			return mod == 2 ? ALL_SIMPLE2[color.toInt()] :
-				   mod == 1 ? ALL_SIMPLE_INV[color.toInt()] :
-					   ALL_SIMPLE[color.toInt()];
-	}
+	// DEFINE COLLECTIONS (visible only inside this package)
+	// these are defined for each color: array[color.toInt()]
+	final static IMove[] ALL_SIMPLE = { MOVE_F, MOVE_B, MOVE_U, MOVE_D, MOVE_R, MOVE_L };
+	final static IMove[] ALL_SIMPLE_INV = { MOVE_Fi, MOVE_Bi, MOVE_Ui, MOVE_Di, MOVE_Ri, MOVE_Li };
+	final static IMove[] ALL_SIMPLE2 = { MOVE_F2, MOVE_B2, MOVE_U2, MOVE_D2, MOVE_R2, MOVE_L2 };
+	final static String[] NAMES_SIMPLE = { "F", "B", "U", "D", "R", "L" };
 	
+	final static IMove[] ALL_ORIENTATION = {  MOVE_z, MOVE_z, MOVE_y, MOVE_y, MOVE_x, MOVE_x };
+	final static IMove[] ALL_ORIENTATION_INV = {  MOVE_zi, MOVE_zi, MOVE_yi, MOVE_yi, MOVE_xi, MOVE_xi };
+	final static IMove[] ALL_ORIENTATION2 = {  MOVE_z2, MOVE_z2, MOVE_y2, MOVE_y2, MOVE_x2, MOVE_x2 };
+	final static String[] NAMES_ORIENTATION = { "z", "z", "y", "y", "x", "x" };
+	
+	final static IMove[] ALL_MIDDLE = { MOVE_S, MOVE_S, MOVE_E, MOVE_E, MOVE_M, MOVE_M };
+	final static IMove[] ALL_MIDDLE_INV = { MOVE_Si, MOVE_Si, MOVE_Ei, MOVE_Ei, MOVE_Mi, MOVE_Mi };
+	final static IMove[] ALL_MIDDLE2 = { MOVE_S2, MOVE_S2, MOVE_E2, MOVE_E2, MOVE_M2, MOVE_M2 };
+	final static String[] NAMES_MIDDLE = { "S", "S", "E", "E", "M", "M" };
+	
+	final static IMove[] ALL_DOUBLE = { MOVE_f, MOVE_b, MOVE_u, MOVE_d, MOVE_r, MOVE_l };
+	final static IMove[] ALL_DOUBLE_INV = { MOVE_fi, MOVE_bi, MOVE_ui, MOVE_di, MOVE_ri, MOVE_li };
+	final static IMove[] ALL_DOUBLE2 = { MOVE_f2, MOVE_b2, MOVE_u2, MOVE_d2, MOVE_r2, MOVE_l2 };
+	final static String[] NAMES_DOUBLE = { "f", "b", "u", "d", "r", "l" };
+	
+	
+	// DEFINE PUBLIC COLLECTIONS
+	public final static IMove[] PUBLIC_ALL_SIMPLE = ALL_SIMPLE;
+	public final static IMove[] PUBLIC_ALL_SIMPLE_INV = ALL_SIMPLE_INV;
+	public final static IMove[] PUBLIC_ALL_SIMPLE2 = ALL_SIMPLE2;
+	
+	public final static IMove[] PUBLIC_ALL_ORIENTATION = {  MOVE_x, MOVE_y, MOVE_z };
+	public final static IMove[] PUBLIC_ALL_ORIENTATION_INV = {  MOVE_xi, MOVE_yi, MOVE_zi };
+	public final static IMove[] PUBLIC_ALL_ORIENTATION2 = {  MOVE_x2, MOVE_y2, MOVE_z2 };
+	
+	public final static IMove[] PUBLIC_ALL_MIDDLE = {  MOVE_M, MOVE_E, MOVE_S };
+	public final static IMove[] PUBLIC_ALL_MIDDLE_INV = {  MOVE_Mi, MOVE_Ei, MOVE_Si };
+	public final static IMove[] PUBLIC_ALL_MIDDLE2 = {  MOVE_M2, MOVE_E2, MOVE_S2 };
+	
+	public final static IMove[] PUBLIC_ALL_DOUBLE = ALL_DOUBLE;
+	public final static IMove[] PUBLIC_ALL_DOUBLE_INV = ALL_DOUBLE_INV;
+	public final static IMove[] PUBLIC_ALL_DOUBLE2 = ALL_DOUBLE2;
+	
+	
+
 	
 	// CUSTOM SEQUENCES
 	public static IMove OFFICIAL_SCRAMBLE = new MoveDescription(MoveParser.parseSequence("R2 B2 R2 L' B' R2 U2 B2 F R U2 B2 F' D' R' F R2 L2 B' U'"), "OFFICIAL SCRAMBLE", true);
@@ -172,8 +195,8 @@ public class BasicMoves {
 	public final static IMove PLL_Z = MoveParser.parseLine("PLL_Z;U2 (R U R' U)(R' U' R' U)(R U' R' U') R2 U R");
 	public final static IMove PLL_H = MoveParser.parseLine("PLL_H;M2 U M2 U2 M2 U M2");
 	public final static IMove PLL_Aa = MoveParser.parseLine("PLL_Aa;x ((R' U R') D2)((R U' R') D2) R2 x'");
-	public final static IMove PLL_Ab = MoveParser.parseLine("PLL_Ab;x' ((R U' R) D2)((R' U R) D2) R x");
-	public final static IMove PLL_E = MoveParser.parseLine("PLL_E;x'((R U' R') D (R U R')) D' ((R U R') D (R U' R')) D'");
+	public final static IMove PLL_Ab = MoveParser.parseLine("PLL_Ab;x' ((R U' R) D2)((R' U R) D2) R2 x");
+	public final static IMove PLL_E = MoveParser.parseLine("PLL_E;x'((R U' R') D (R U R')) D' ((R U R') D (R U' R')) D' x");
 	public final static IMove PLL_solved = MoveParser.parseLine("PLL_solved;");
 	public final static IMove PLL_Ra = MoveParser.parseLine("PLL_Ra;(L U2 L' U2)(L F')(L' U' L U)(L F) L2 U");
 	public final static IMove PLL_Rb = MoveParser.parseLine("PLL_Rb;(R' U2 R U2)(R' F)(R U R' U')(R' F') R2 U'");
@@ -201,7 +224,9 @@ public class BasicMoves {
 			OLL_C2, OLL_I1, OLL_I2, OLL_I3, OLL_I4, OLL_K1, OLL_K2, OLL_K3, OLL_K4, OLL_O1, OLL_O2, OLL_O3, OLL_O4, OLL_O5, OLL_O6, OLL_O7, OLL_O8 };
 	
 	public final static IMove[] CUSTOM_SEQUENCES = {
-			PLL_Y, PLL_T, PLL_F, PLL_Ua, PLL_Ub, PLL_Ab, PLL_Jb,
+//			PLL_Y, PLL_T, PLL_F,
+			PLL_Ua, PLL_Ub,
+			PLL_Aa, PLL_Ab,
 //			OFFICIAL_SCRAMBLE 
 			};
 	
@@ -212,8 +237,35 @@ public class BasicMoves {
 			ALL_MIDDLE, ALL_MIDDLE_INV, ALL_MIDDLE2,
 			ALL_DOUBLE, ALL_DOUBLE_INV, ALL_DOUBLE2,
 			
+			OLLs,
 			PLLs,
 			
-			CUSTOM_SEQUENCES,
+//			CUSTOM_SEQUENCES,
 	};
+	
+	
+	
+	
+	// HELPER FUNCTIONS
+	public static IMove color2move(Color color, int mod, IMove[] msimple, IMove[] mrev, IMove[] mdouble) {
+			return mod == MODIFIER_DOUBLE ? mdouble[color.toInt()] :
+				   mod == MODIFIER_INVERSE ? mrev[color.toInt()] :
+					   msimple[color.toInt()];
+	}
+	
+	public static IMove color2simpleMove(Color color, int mod) {
+		return color2move(color, mod, ALL_SIMPLE, ALL_SIMPLE_INV, ALL_SIMPLE2);
+	}
+	
+	public static IMove color2orientationMove(Color color, int mod) {
+		return color2move(color, mod, ALL_ORIENTATION, ALL_ORIENTATION_INV, ALL_ORIENTATION2);
+	}
+	
+	public static IMove color2middleMove(Color color, int mod) {
+		return color2move(color, mod, ALL_MIDDLE, ALL_MIDDLE_INV, ALL_MIDDLE2);
+	}
+	
+	public static IMove color2doubleMove(Color color, int mod) {
+		return color2move(color, mod, ALL_DOUBLE, ALL_DOUBLE_INV, ALL_DOUBLE2);
+	}
 }

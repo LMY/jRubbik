@@ -67,7 +67,6 @@ public class Algorithm extends IMove {
 	@Override
 	public void apply(CubeState state) {
 		
-		
 		for (IMove m : moves)
 			m.apply(state);
 	}
@@ -80,7 +79,7 @@ public class Algorithm extends IMove {
 		if (n == -1)
 			return reverse();
 		if (n == 0)
-			return NullMove.NULL;
+			return MoveNull.NULL;
 		if (n == 1)
 			return this;
 		

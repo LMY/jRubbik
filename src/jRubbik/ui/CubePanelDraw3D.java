@@ -1,8 +1,9 @@
-package jRubbik.state;
+package jRubbik.ui;
 
 import java.awt.Graphics;
 
 import jRubbik.constants.Color;
+import jRubbik.state.CubeState;
 import jRubbik.utils.Point2d;
 import jRubbik.utils.Point2i;
 import jRubbik.utils.Point3d;

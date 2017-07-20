@@ -2,23 +2,23 @@ package jRubbik.constants;
 
 public class Constants {
 	
-	public static final int CORNER_DFL = 0;
-	public static final int CORNER_DFR = 1;
-	public static final int CORNER_DBR = 2;
-	public static final int CORNER_DBL = 3;
-	public static final int CORNER_UFL = 4;
-	public static final int CORNER_UFR = 5;
-	public static final int CORNER_UBR = 6;
-	public static final int CORNER_UBL = 7;
+	final static int CORNER_DFL = 0;
+	final static int CORNER_DFR = 1;
+	final static int CORNER_DBR = 2;
+	final static int CORNER_DBL = 3;
+	final static int CORNER_UFL = 4;
+	final static int CORNER_UFR = 5;
+	final static int CORNER_UBR = 6;
+	final static int CORNER_UBL = 7;
 	
-	final public static int[] corners_permF = { CORNER_UFL, CORNER_UFR, CORNER_DFR, CORNER_DFL };
-	final public static int[] corners_permB = { CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR }; //   CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR };
-	final public static int[] corners_permU = { CORNER_UFR, CORNER_UFL, CORNER_UBL, CORNER_UBR };
-	final public static int[] corners_permD = { CORNER_DFL, CORNER_DFR, CORNER_DBR, CORNER_DBL }; //CORNER_DFL, CORNER_DFR, CORNER_DBR, CORNER_DBL };
-	final public static int[] corners_permR = { CORNER_UFR, CORNER_UBR, CORNER_DBR, CORNER_DFR };
-	final public static int[] corners_permL = { CORNER_UBL, CORNER_UFL, CORNER_DFL, CORNER_DBL }; //  CORNER_UFL, CORNER_DFL, CORNER_DBL, CORNER_UBL };
+	final static int[] corners_permF = { CORNER_UFL, CORNER_UFR, CORNER_DFR, CORNER_DFL };
+	final static int[] corners_permB = { CORNER_UBR, CORNER_UBL, CORNER_DBL, CORNER_DBR };
+	final static int[] corners_permU = { CORNER_UFR, CORNER_UFL, CORNER_UBL, CORNER_UBR };
+	final static int[] corners_permD = { CORNER_DFL, CORNER_DFR, CORNER_DBR, CORNER_DBL };
+	final static int[] corners_permR = { CORNER_UFR, CORNER_UBR, CORNER_DBR, CORNER_DFR };
+	final static int[] corners_permL = { CORNER_UBL, CORNER_UFL, CORNER_DFL, CORNER_DBL };
 
-	final public static int[][] corners_permutations = {
+	public final static int[][] corners_permutations = {
 		corners_permF,
 		corners_permB,
 		corners_permU,
@@ -27,26 +27,27 @@ public class Constants {
 		corners_permL
 	};
 
-	public static final int EDGE_SW = 0;
-	public static final int EDGE_SF = 1;
-	public static final int EDGE_SE = 2;
-	public static final int EDGE_SB = 3;
-	public static final int EDGE_MFW = 4;
-	public static final int EDGE_MFE = 5;
-	public static final int EDGE_MBE = 6;
-	public static final int EDGE_MBW = 7;
-	public static final int EDGE_NW = 8;
-	public static final int EDGE_NF = 9;
-	public static final int EDGE_NE = 10;
-	public static final int EDGE_NB = 11;
+	final static int EDGE_SW = 0;
+	final static int EDGE_SF = 1;
+	final static int EDGE_SE = 2;
+	final static int EDGE_SB = 3;
+	final static int EDGE_MFW = 4;
+	final static int EDGE_MFE = 5;
+	final static int EDGE_MBE = 6;
+	final static int EDGE_MBW = 7;
+	final static int EDGE_NW = 8;
+	final static int EDGE_NF = 9;
+	final static int EDGE_NE = 10;
+	final static int EDGE_NB = 11;
 
-	final public static int[] edges_permF = { EDGE_MFW, EDGE_NF,  EDGE_MFE, EDGE_SF };
-	final public static int[] edges_permB = { EDGE_SB,  EDGE_MBE, EDGE_NB,  EDGE_MBW };
-	final public static int[] edges_permU = { EDGE_NF,  EDGE_NW,  EDGE_NB,  EDGE_NE };
-	final public static int[] edges_permD = { EDGE_SW , EDGE_SF,  EDGE_SE,  EDGE_SB };
-	final public static int[] edges_permR = { EDGE_MFE, EDGE_NE,  EDGE_MBE, EDGE_SE };
-	final public static int[] edges_permL = { EDGE_MFW, EDGE_SW,  EDGE_MBW, EDGE_NW };
-	final public static int[][] edges_permutations = {
+	final static int[] edges_permF = { EDGE_MFW, EDGE_NF,  EDGE_MFE, EDGE_SF };
+	final static int[] edges_permB = { EDGE_SB,  EDGE_MBE, EDGE_NB,  EDGE_MBW };
+	final static int[] edges_permU = { EDGE_NF,  EDGE_NW,  EDGE_NB,  EDGE_NE };
+	final static int[] edges_permD = { EDGE_SW , EDGE_SF,  EDGE_SE,  EDGE_SB };
+	final static int[] edges_permR = { EDGE_MFE, EDGE_NE,  EDGE_MBE, EDGE_SE };
+	final static int[] edges_permL = { EDGE_MFW, EDGE_SW,  EDGE_MBW, EDGE_NW };
+	
+	public final static int[][] edges_permutations = {
 		edges_permF,
 		edges_permB,
 		edges_permU,
@@ -56,21 +57,7 @@ public class Constants {
 	};
 	
 	
-	public static final int MOVE_F = 0;
-	public static final int MOVE_B = 1;
-	public static final int MOVE_U = 2;
-	public static final int MOVE_D = 3;
-	public static final int MOVE_R = 4; 
-	public static final int MOVE_L = 5;
-	public static final int MOVE_INVALID = 255; // will cause crashes; and this is intended (-fno-exceptions)
-	
-	final public static String[] KubeMoveNames = { "F", "B", "U", "D", "R", "L" };
-	final public static String[] RotMoveNames = { "z", "z", "y", "y", "x", "x" };
-	
-
-	
 	// PERMUTATIONS and RUBIK functions
-
 	public static void permutate(int[] data, final int[] perm, boolean inverse)
 	{
 		if (inverse) {
@@ -248,7 +235,7 @@ public class Constants {
 	/* GREEN	RED */		{ 4, 0, 	3, 1, 3, 3, 3, 3 },
 	/* GREEN	ORANGE */	{ 4, 1, 	1, 3, 1, 1, 3, 3 },
 	/* GREEN	YELLOW */	{ 4, 2, 	3, 3, 2, 0, 3, 1 },
-	/* GREEN	WHITE */	{ 4, 3, 	3, 3, 0, 2, 1, 3 },	//here green
+	/* GREEN	WHITE */	{ 4, 3, 	3, 3, 0, 2, 1, 3 },
 	
 	/* BLUE		RED */		{ 5, 0, 	1, 3, 1, 1, 1, 1 },
 	/* BLUE		ORANGE */	{ 5, 1, 	3, 1, 3, 3, 1, 1 },

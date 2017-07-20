@@ -1,45 +1,43 @@
 package jRubbik.moves;
 
 import jRubbik.constants.Color;
-import jRubbik.constants.Constants;
 import jRubbik.state.CubeState;
 import jRubbik.state.OrientatonState;
 
-public class MoveOrientation extends IMove{
+public class MoveOrientation extends FlyWeightMove {
 	
-	private Color dir;
-	private boolean reverse;
-	private int reps;
-	
-	public MoveOrientation(Color dir, int reverse) {
-		this.dir = dir;
-		this.reverse = reverse==1;
-		this.reps = reverse==2?2:1;
+	public MoveOrientation(Color dir, int reps) {
+		super(dir, reps);
 	}
 
-	public Color getDir() {
-		return dir;
-	}
-
-	public boolean isReverse() {
-		return reverse;
-	}
-
-	public int getReps() {
-		return reps;
-	}
 	@Override
-	public String toString() {
-		return Constants.RotMoveNames[dir.toInt()]+(reps==2?"2":reverse?"'":"");
+	protected String[] getArrayNames()  { return BasicMoves.NAMES_ORIENTATION; }
+	@Override
+	protected IMove[] getArrayNormal()  { return BasicMoves.ALL_ORIENTATION; }
+	@Override
+	protected IMove[] getArrayInverse() { return BasicMoves.ALL_ORIENTATION_INV; }
+	@Override
+	protected IMove[] getArrayDouble()  { return BasicMoves.ALL_ORIENTATION2; }
+	
+	@Override
+	public int length() {
+		return 0;
 	}
 
+	@Override
+	public int length_htm() {
+		return 0;
+	}
 	
 	@Override
 	public void apply(CubeState state) {
+		final Color dir = getDir();
+		final int reps = getReps();
 		
-		OrientatonState op = state.getOrientation();
-		Color front = op.getFront();
-		Color up = op.getUp();
+		final OrientatonState op = state.getOrientation();
+		final Color front = op.getFront();
+		final Color up = op.getUp();
+		final boolean reverse = isReverse();
 		
 		if (dir == Color.WHITE || dir == Color.YELLOW) {
 			op.setFront(reps == 2 ? front.opposite() : front.next(reverse ? up.opposite() : up));
@@ -50,53 +48,12 @@ public class MoveOrientation extends IMove{
 				op.setUp(up.opposite());
 			}
 			else {
-				Color newfront = reverse ? up : up.opposite();
-				Color newup = reverse ? front.opposite() : front;
-				
-				op.setFront(newfront);
-				op.setUp(newup);
+				op.setFront(reverse ? up : up.opposite());
+				op.setUp(reverse ? front.opposite() : front);
 			}
 		}
 		else /*if (dir == MOVE_Z)*/ {
 			op.setUp(reps == 2 ? up.opposite() : up.next(reverse ? front.opposite() : front));
 		}
-		
-//		state.setOrientation(op);
 	}
-
-	@Override
-	public IMove reverse() {
-		return reps==2 ? this :
-			reverse ? BasicMoves.ALL_ORIENTATION[dir.toInt()] : BasicMoves.ALL_ORIENTATION_INV[dir.toInt()];
-	}
-
-	@Override
-	public IMove times(int n) {
-		while (n < 0)
-			n += 4;
-		n %= 4;
-		
-		if (n == 0)
-			return NullMove.NULL;
-		if (n == 1)
-			return this;
-		if (n == 2) {
-			if (reps == 2)
-				return NullMove.NULL;
-			else
-				return  new MoveOrientation(dir, 2);
-		}
-		//if (n == 3)
-			return reverse();
-	}
-
-	@Override
-	public int length() {
-		return 0;
-	}
-
-	@Override
-	public int length_htm() {
-		return 0;
-	}	
 }

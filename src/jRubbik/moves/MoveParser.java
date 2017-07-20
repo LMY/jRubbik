@@ -19,14 +19,17 @@ public class MoveParser {
 	
 	public static IMove parse(String string) {
 		
-		if (string.isEmpty())
-			return NullMove.NULL;
+		if (string.equals(MoveNull.NULL.toString()))
+			return MoveNull.NULL;
 		
 		// do not use BasicMoves.ALL_COLLECTIONS! otherwise in BasicMoves you can't call parse/parseSequence because BasicMoves.ALL_COLLECTIONS would still be null
 		for (IMove[] collection : PARSE_COLLECTIONS)
 			for (IMove move : collection)
 				if (string.equals(move.toString()))
 					return move;
+		
+		if (string.equals(MoveResetOrientation.INSTANCE.toString()))
+			return MoveResetOrientation.INSTANCE;
 		
 		return null; //throw
 	}

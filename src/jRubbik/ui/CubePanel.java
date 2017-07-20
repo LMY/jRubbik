@@ -89,56 +89,12 @@ public abstract class CubePanel extends JPanel {
 		scrolltree.setPreferredSize(new Dimension(100,0));
 		add(scrolltree, BorderLayout.EAST);
 		
-		{
-			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_SIMPLE.length));
-			
-			for (int i = 0; i<BasicMoves.ALL_SIMPLE.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE[i]));
-			for (int i = 0; i<BasicMoves.ALL_SIMPLE_INV.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_SIMPLE_INV[i]));
-			movePanel.add(Panelbasic);
-		}
-		{
-			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_DOUBLE.length));
-			for (int i = 0; i<BasicMoves.ALL_DOUBLE.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_DOUBLE[i]));
-			for (int i = 0; i<BasicMoves.ALL_DOUBLE_INV.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_DOUBLE_INV[i]));
-			movePanel.add(Panelbasic);
-		}
-		
-		{
-			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2,BasicMoves.ALL_MIDDLE.length));
-			
-			for (int i = 0; i<BasicMoves.ALL_MIDDLE.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE[i]));
-			for (int i = 0; i<BasicMoves.ALL_MIDDLE_INV.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_MIDDLE_INV[i]));
-			movePanel.add(Panelbasic);
-		}
-		{
-			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2, BasicMoves.ALL_ORIENTATION.length));
-			for (int i = 0; i<BasicMoves.ALL_ORIENTATION.length; i+=2)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION[i]));
-			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i+=2)
-				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
-			movePanel.add(Panelbasic);
-		}
-		{
-			final JPanel Panelbasic = new JPanel();
-			Panelbasic.setLayout(new GridLayout(2, BasicMoves.CUSTOM_SEQUENCES.length));
-			for (int i = 0; i<BasicMoves.CUSTOM_SEQUENCES.length; i++)
-				Panelbasic.add(buttonMove(BasicMoves.CUSTOM_SEQUENCES[i]));
-//			for (int i = 0; i<BasicMoves.ALL_ORIENTATION_INV.length; i++)
-//				Panelbasic.add(buttonMove(BasicMoves.ALL_ORIENTATION_INV[i]));
-			movePanel.add(Panelbasic);
-		}
-		
-		
+		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_SIMPLE, BasicMoves.PUBLIC_ALL_SIMPLE_INV, BasicMoves.PUBLIC_ALL_SIMPLE2);
+		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_DOUBLE, BasicMoves.PUBLIC_ALL_DOUBLE_INV, BasicMoves.PUBLIC_ALL_DOUBLE2);
+		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_MIDDLE, BasicMoves.PUBLIC_ALL_MIDDLE_INV, BasicMoves.PUBLIC_ALL_MIDDLE2);
+		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_ORIENTATION, BasicMoves.PUBLIC_ALL_ORIENTATION_INV, BasicMoves.PUBLIC_ALL_ORIENTATION2);
+		addMovesToPanel(movePanel, BasicMoves.CUSTOM_SEQUENCES, null, null);
+
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {
 			@Override
@@ -162,25 +118,42 @@ public abstract class CubePanel extends JPanel {
 		display();
 	}
 	
+	public void addMovesToPanel(final JPanel movePanel, IMove[] normal, IMove[] inverse, IMove[] mdouble)
+	{
+		final JPanel Panelbasic = new JPanel();
+		final int howmany = (normal == null ? 0 : 1) + (inverse == null ? 0 : 1) + (mdouble == null ? 0 : 1);
+		
+		Panelbasic.setLayout(new GridLayout(howmany, normal.length));
+		
+		if (normal != null)
+			for (int i = 0; i<normal.length; i++)
+				Panelbasic.add(buttonMove(normal[i]));
+		
+		if (inverse != null)
+			for (int i = 0; i<inverse.length; i++)
+				Panelbasic.add(buttonMove(inverse[i]));
+		
+		if (mdouble != null)
+			for (int i = 0; i<inverse.length; i++)
+				Panelbasic.add(buttonMove(mdouble[i]));
+		
+		movePanel.add(Panelbasic);
+	}
+	
+	
+	
 	public JButton buttonMove(final IMove move) {
 		final JButton clearButton = new JButton(move.toString());
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				sequenceField.setText(sequenceField.getText()+" "+move.toString());
-				performMove(move);
-//				performMove(move.reverse());
+				perform(move);
 			}
 		});
 		clearButton.addKeyListener(new MyKeyListener());
 		return clearButton;
 	}
-	
-	private void performMove(final IMove move) {
-		perform(move);
-
-	}
-	
 	
 	public void display() { display(null); }
 
@@ -214,8 +187,8 @@ public abstract class CubePanel extends JPanel {
 			boolean ctrl = arg0.isAltDown();
 			
 			try {
-				String text = ""+c+(ctrl?"'":"");
-				IMove move = MoveParser.parse(text);
+				final String text = ""+c+(ctrl?"'":"");
+				final IMove move = MoveParser.parse(text);
 				if (move != null)
 					perform(move);
 			}
@@ -223,14 +196,10 @@ public abstract class CubePanel extends JPanel {
 		}
 
 		@Override
-		public void keyReleased(KeyEvent arg0) {
-			
-		}
+		public void keyReleased(KeyEvent arg0) {}
 
 		@Override
-		public void keyTyped(KeyEvent arg0) {
-			
-		}
+		public void keyTyped(KeyEvent arg0) {}
 	}
 	
 	public void fork() {
@@ -242,6 +211,7 @@ public abstract class CubePanel extends JPanel {
 		final String text = sequenceField.getText();
 		sequenceField.setText("");
 		newnode(text);
+		perform(MoveParser.parseSequence(text));
 	}
 	
 	
@@ -262,7 +232,7 @@ public abstract class CubePanel extends JPanel {
 		DefaultMutableTreeNode path = stateRoot;
 		
 		try {
-			int len = stateTree.getSelectionPath().getPathCount();
+			final int len = stateTree.getSelectionPath().getPathCount();
 			path = (DefaultMutableTreeNode)stateTree.getSelectionPath().getPathComponent(len-1);
 		}
 		catch (Exception e) {}
@@ -343,6 +313,4 @@ public abstract class CubePanel extends JPanel {
 //	    public void treeStructureChanged(TreeModelEvent e) {
 //	    }
 //	}
-	
-	
 }

@@ -3,8 +3,6 @@ package jRubbik.state;
 import jRubbik.utils.Utils;
 
 public class CubeState {
-
-//	private final static CubeState SOLVED_CUBE = new CubeState();
 	
 	private int[] edges;
 	private int[] corners;
@@ -127,6 +125,4 @@ public class CubeState {
 	public void setState_corners(int[] state_corners) {
 		this.state_corners = state_corners;
 	}
-
-
 }

@@ -4,11 +4,11 @@ public enum Color {
 
 	RED, ORANGE, YELLOW, WHITE, GREEN, BLUE, INVALID; 
 	
-	public final static Color[] ALL = {RED, ORANGE, YELLOW, WHITE, GREEN, BLUE};
+	public final static Color[] ALL = { RED, ORANGE, YELLOW, WHITE, GREEN, BLUE };
 	
 	
-	private static final String[] names = {  "RED", "ORANGE", "YELLOW", "WHITE", "GREEN", "BLUE", "INVALID" };
-	public static final String[] getNames() { return names; }
+	private final static String[] names = {  "RED", "ORANGE", "YELLOW", "WHITE", "GREEN", "BLUE", "INVALID" };
+	public final static String[] getNames() { return names; }
 	public String getName() { return names[ordinal()]; }
 	
 	public static Color create(int ordinal) { return Color.values()[ordinal]; }

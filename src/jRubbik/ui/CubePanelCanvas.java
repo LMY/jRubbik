@@ -1,4 +1,4 @@
-package jRubbik.state;
+package jRubbik.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 
 import jRubbik.constants.Color;
 import jRubbik.moves.IMove;
-import jRubbik.ui.CubePanel;
+import jRubbik.state.CubeDisplayer;
+import jRubbik.state.CubeState;
 import jRubbik.utils.Point2i;
 
 public abstract class CubePanelCanvas extends CubePanel {

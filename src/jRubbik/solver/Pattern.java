@@ -1,7 +1,7 @@
 package jRubbik.solver;
 
 import jRubbik.moves.IMove;
-import jRubbik.moves.NullMove;
+import jRubbik.moves.MoveNull;
 import jRubbik.state.CubeState;
 
 public class Pattern {
@@ -49,7 +49,7 @@ public class Pattern {
 	public IMove getAdjMatch(CubeState state, IMove auf)
 	{
 		if (matches(state))
-			return NullMove.NULL;
+			return MoveNull.NULL;
 		
 		if (matches(auf.get(state)))
 			return auf;

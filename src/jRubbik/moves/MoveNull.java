@@ -2,11 +2,11 @@ package jRubbik.moves;
 
 import jRubbik.state.CubeState;
 
-public class NullMove extends IMove {
+public class MoveNull extends IMove {
 
-	public final static IMove NULL = new NullMove();
+	public final static IMove NULL = new MoveNull();
 	
-	private NullMove() {}
+	private MoveNull() {}
 	
 
 	@Override

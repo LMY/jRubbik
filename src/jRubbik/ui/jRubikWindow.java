@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
 import jRubbik.solver.SolverCFOP;
 import jRubbik.state.CubeState;
@@ -26,6 +27,9 @@ import jRubbik.utils.Utils;
 
 public class jRubikWindow extends JFrame {
 
+	public final static boolean DEBUG = false;
+	
+	
 	private static final long serialVersionUID = 1370028090893596099L;
 	public final static double ASPECT_RATIO = 16.0/9.0;
 	public final static int WINDOW_WIDTH = 1100;
@@ -62,6 +66,12 @@ public class jRubikWindow extends JFrame {
 		// pack and display
 		pack();
 		Utils.centerWindow(this);
+		
+		if (DEBUG) {
+			for (IMove[] col : BasicMoves.ALL_COLLECTIONS)
+				for (IMove move : col)
+					System.out.println(""+move.toString()+" "+move.reverse().toString()+" "+move.reverse().reverse().toString());
+		}
 	}
 	
 

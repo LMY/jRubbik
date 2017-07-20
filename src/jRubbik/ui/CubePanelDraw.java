@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 
 import jRubbik.constants.Color;
-import jRubbik.state.CubePanelCanvas;
 import jRubbik.state.CubeState;
 import jRubbik.utils.Point2i;
 

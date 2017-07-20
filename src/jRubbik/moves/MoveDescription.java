@@ -22,12 +22,16 @@ public class MoveDescription extends IMove {
 
 	@Override
 	public IMove reverse() {
-		return new MoveDescription(move.reverse(), description+"'", suppress_original);
+		
+		final String newdescription = description.isEmpty() ? "" :
+										description.endsWith("'") ? description.substring(0, description.length()-1) : description+"'";
+		
+		return new MoveDescription(move.reverse(), newdescription, suppress_original);
 	}
 
 	@Override
 	public IMove times(int n) {
-		return new MoveDescription(move.reverse(), description+"2", suppress_original);
+		return new MoveDescription(move.times(n), description+n, suppress_original);
 	}
 
 	@Override
@@ -43,6 +47,6 @@ public class MoveDescription extends IMove {
 	@Override
 	public String toString()
 	{
-		return description+(suppress_original?"":":"+move.toString());
+		return description + (suppress_original ? "" : ":"+move.toString());
 	}
 }

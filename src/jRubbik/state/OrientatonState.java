@@ -26,7 +26,6 @@ public class OrientatonState {
 	public OrientatonState clone() {  return new OrientatonState(this); }
 
 	
-	
 	public void setFront(Color front) {
 		this.front = front;
 	}
@@ -34,8 +33,6 @@ public class OrientatonState {
 	public void setUp(Color up) {
 		this.up = up;
 	}
-	
-
 	
 	
 	public Color getFront() { return front; }
@@ -84,7 +81,6 @@ public class OrientatonState {
 		return Color.BLUE;
 	}
 	
-	
 
 	public int[] edges_permutations(Color dir) {
 		return Constants.edges_permutations[get(dir).toInt()];
@@ -106,5 +102,4 @@ public class OrientatonState {
 		
 		return false;
 	}
-	
 }
