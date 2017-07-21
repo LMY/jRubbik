@@ -95,7 +95,7 @@ public abstract class CubePanel extends JPanel {
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_ORIENTATION, BasicMoves.PUBLIC_ALL_ORIENTATION_INV, BasicMoves.PUBLIC_ALL_ORIENTATION2);
 
 		final JPanel Panelbasic = new JPanel();
-		Panelbasic.setLayout(new GridLayout(2, 0));
+		Panelbasic.setLayout(new GridLayout(3, 0));
 		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {
@@ -114,6 +114,18 @@ public abstract class CubePanel extends JPanel {
 			}
 		});
 		Panelbasic.add(reset);
+		
+		final JButton resetorient = new JButton("Reset Orientation");
+		resetorient.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final CubeState newstate = getState().clone();
+				newstate.resetOrientation();
+				setState(newstate);
+			}
+		});
+		Panelbasic.add(resetorient);
+		
 		movePanel.add(Panelbasic);
 		
 		init();
