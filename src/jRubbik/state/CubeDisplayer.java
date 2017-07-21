@@ -5,36 +5,11 @@ import jRubbik.constants.Constants;
 
 public class CubeDisplayer {
 
-	public static Color[][] CORNER_COLORS = {
-			{ Color.WHITE, Color.RED, Color.BLUE },
-			{ Color.WHITE, Color.RED, Color.GREEN },
-			{ Color.WHITE, Color.ORANGE, Color.GREEN },
-			{ Color.WHITE, Color.ORANGE, Color.BLUE },
-			{ Color.YELLOW, Color.RED, Color.BLUE },
-			{ Color.YELLOW, Color.RED, Color.GREEN },
-			{ Color.YELLOW, Color.ORANGE, Color.GREEN },
-			{ Color.YELLOW, Color.ORANGE, Color.BLUE },
-	};
-
-	public static Color[][] EDGE_COLORS = {
-			{ Color.WHITE, Color.BLUE },
-			{ Color.WHITE, Color.RED },
-			{ Color.WHITE, Color.GREEN },
-			{ Color.WHITE, Color.ORANGE },
-
-			{ Color.RED, Color.BLUE },
-			{ Color.RED, Color.GREEN },
-			{ Color.ORANGE, Color.GREEN },
-			{ Color.ORANGE, Color.BLUE },
-
-			{ Color.YELLOW, Color.BLUE },
-			{ Color.YELLOW, Color.RED },
-			{ Color.YELLOW, Color.GREEN },
-			{ Color.YELLOW, Color.ORANGE },
-	};
-
-
-	
+	/**
+	 * returns 6 arrays of 9 colors ((x,y) -> idx=3*y+x) considering orientation
+	 * @param cube
+	 * @return value[COLOR.toInt()} is an array of 9 colors, that represents a face
+	 */
 	public static Color[][] getColors(CubeState cube)
 	{
 		final Color[][] colors = getUnorientedColors(cube);
@@ -61,7 +36,11 @@ public class CubeDisplayer {
 		return newcolors;
 	}
 	
-
+	/**
+	 * returns 6 arrays of 9 colors ((x,y) -> idx=3*y+x) NOT considering orientation
+	 * @param cube
+	 * @return value[COLOR.toInt()} is an array of 9 colors, that represents a face
+	 */
 	public static Color[][] getUnorientedColors(CubeState state) {
 
 		final int[] corners = state.getCorners();
@@ -159,7 +138,12 @@ public class CubeDisplayer {
 		return colors;
 	}
 
-	
+	/**
+	 * For a given orientation (up, front) find, for face, how many times it should be rotated
+	 * @param up
+	 * @param front
+	 * @param face
+	 */
 	private static int obtain_rot(Color up, Color front, Color face)
 	{
 		final int upidx = up.toInt();
@@ -172,6 +156,14 @@ public class CubeDisplayer {
 		return -1;
 	}
 	
+	/**
+	 * get color of a corner for a face=0,1,2 and CubeState of corners
+	 * @param idx desired place
+	 * @param face state of the corner. 0=up,down 1=front,back 2=left,right
+	 * @param corners CubeState.corners array
+	 * @param state_corners CubeState.corners state_corners
+	 * @return color of this Face Quad
+	 */
 	private static Color getEffectiveCornerColor(int idx, int face, int[] corners, int[] state_corners) {
 
 		final int state = state_corners[corners[idx]];
@@ -179,41 +171,66 @@ public class CubeDisplayer {
 		final int colorIdx = state == face ? 0 :
 			!((state+1)%3 == face)^(Constants.how_many_colors_in_common_corners(idx, corners[idx]) % 2 == 1) ? 1 : 2;
 
-		return CORNER_COLORS[corners[idx]][colorIdx];
+		return Constants.CORNER_COLORS[corners[idx]][colorIdx];
 	}
 
+	/**
+	 * get color of edge for a face=0,1 and CubeState of edges
+	 * @param idx desired place
+	 * @param face face state of the corner. 0=up,down,left,right
+	 * @param edges CubeState.edges array
+	 * @param state_edges CubeState.state_edges state_corners
+	 * @return
+	 */
 	private static Color getEffectiveEdgeColor(int idx, int face, int[] edges, int[] state_edges) {
 
 		final int state = state_edges[edges[idx]];
 		idx = edges[idx];
 		
 		if (state == 0)
-			return EDGE_COLORS[idx][0 != face ? 1 : 0];
+			return Constants.EDGE_COLORS[idx][0 != face ? 1 : 0];
 		else
 		{
-			boolean good_edge = Constants.isEdgeBad(idx, state);
+			final boolean good_edge = isEdgeBad(idx, state);
 
-			if (good_edge)
-				return EDGE_COLORS[idx][face==0 ? 1 : 0];
-			else
-				return EDGE_COLORS[idx][face==0 ? 0 : 1];
+//			if (good_edge)
+//				return Constants.EDGE_COLORS[idx][face==0 ? 1 : 0];
+//			else
+//				return Constants.EDGE_COLORS[idx][face==0 ? 0 : 1];
+			return Constants.EDGE_COLORS[idx][(face==0 ? good_edge : !good_edge) ?1:0];
 		}
 	}
 
+	/**
+	 * checks if this a badge edge
+	 * bad edges color faces are swapped during display
+	 * @param edge  0..12
+	 * @param state  0..1
+	 */
+	public static boolean isEdgeBad(int edge, int state) {
+		return (state==1 && (edge < 4 || edge >= 8)) || !(state==0 && (edge >= 4 && edge < 8));
+	}
 	
-
+	/**
+	 * swap two elements in an array
+	 */
 	private static void swap(Color[] colors, int i1, int i2) {
 		final Color temp = colors[i1];
 		colors[i1] = colors[i2];
 		colors[i2] = temp;
 	}
 
-	
+	/**
+	 * rotate an array of 9 (3x3) q * 90 deg.
+	 * q=3 is inverse, q=2 is mirror, q=0 does nothing
+	 * this function accepts any int, even negative and >=4 values
+	 * @param colors
+	 * @param q
+	 */
 	private static void rotate(Color[] colors, int q) {
 
-		while (q < 0)
-			q += 4;
-		q = q%4;
+		if (q < 0) q = 3 - ((-q) & 3);	// while (n < 0) n+=4;
+		else if (q > 3) q &= 3; 		// if (n > 3) n %= 4;
 
 		if (q == 0)
 			;
@@ -243,8 +260,9 @@ public class CubeDisplayer {
 		}
 	}
 	
-	
-	
+	/**
+	 * String rep of a CubeState	
+	 */
 	public static String toString(CubeState state) {
 
 		final StringBuilder ret = new StringBuilder();

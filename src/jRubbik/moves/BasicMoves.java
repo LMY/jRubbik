@@ -2,6 +2,10 @@ package jRubbik.moves;
 
 import jRubbik.constants.Color;
 
+/**
+ * Defines all elementar moves, pll, oll and sequences as constants
+ * Moves do not take much memory, there aren't many and we are going to use a lot of them, so we use ~FlyWeight and avoid a lot of new/delete-s 
+ */
 public class BasicMoves {
 	
 	public final static int MODIFIER_PLAIN = 0;

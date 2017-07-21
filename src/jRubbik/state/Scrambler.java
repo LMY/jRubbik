@@ -14,21 +14,27 @@ public class Scrambler {
 	
 	private Random random;
 	
+	/**
+	 * create a scrambler
+	 */
 	public Scrambler()
-	{
-		reset();
-	}
-	
-	public void reset()
 	{
 		random = new Random();
 	}
 	
+	/**
+	 * get a scramble Algorithm (as IMove) of default length
+	 * @return
+	 */
 	public IMove scramble()
 	{
 		return scramble(LEN);
 	}
 	
+	/**
+	 * get a scramble Algorithm (as IMove) of desired length
+	 * @param len
+	 */
 	public IMove scramble(int len)
 	{
 		final Algorithm ret = new Algorithm();
@@ -57,10 +63,16 @@ public class Scrambler {
 		return ret;		
 	}
 	
+	/**
+	 * Get a scramble of default length, as a static function.
+	 */
 	public static IMove getScramble() {
 		return getScramble(LEN);
 	}
 	
+	/**
+	 * Get a scramble of desired length, as a static function.
+	 */
 	public static IMove getScramble(int len) { 
 		return new Scrambler().scramble(len);
 	}

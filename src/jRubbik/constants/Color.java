@@ -21,6 +21,10 @@ public enum Color {
 		return INVALID;
 	}
 	
+	/**
+	 * The color opposite to this.
+	 * TODO: move into Constants
+	 */
 	public Color opposite()
 	{
 		switch (this) {
@@ -33,22 +37,20 @@ public enum Color {
 			default: return INVALID;
 		}
 	}
-	
-	public final static Color[][] ORDER = new Color[][]{
-			{ RED, GREEN, ORANGE, BLUE },			// X: yellow up
-			{ YELLOW, RED, WHITE, ORANGE },			// Y: green up
-			{ YELLOW, BLUE, WHITE, GREEN },			// Z: red up
-	};
-	
-	
-	// front next up = right
+
+	/**
+	 * in an orientation (front, up) returns the color to the right
+	 * returns the color to the right if up is up and front = this
+	 * @param up
+	 * @return
+	 */
 	public Color next(Color up) {
 		boolean inverse = up == WHITE | up == BLUE | up == ORANGE;
 		
 		final Color[] order =
-				up == YELLOW || up == WHITE ? ORDER[0] :
-				up == GREEN || up == BLUE ? ORDER[1] :
-				/* up == RED || up == ORANGE ? */ ORDER[2];
+				up == YELLOW || up == WHITE ? Constants.COLOR_ORDER[0] :
+				up == GREEN || up == BLUE ? Constants.COLOR_ORDER[1] :
+				/* up == RED || up == ORANGE ? */ Constants.COLOR_ORDER[2];
 		
 		return this == order[0] ?
 				order[ inverse ? order.length-1 : 1] :
@@ -63,6 +65,9 @@ public enum Color {
 		return ordinal();
 	}
 	
+	/**
+	 * Convert to java.awt.Color, for display
+	 */
 	public java.awt.Color toAwtColor() {
 		switch (this) {
 			case RED: return java.awt.Color.RED;
@@ -75,6 +80,9 @@ public enum Color {
 		}
 	}
 			
+	/**
+	 * Convert to char, for display
+	 */
 	public char toChar() {
 		switch (this) {
 			case RED: return 'r';

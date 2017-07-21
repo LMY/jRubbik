@@ -91,7 +91,7 @@ public class OrientatonState {
 	}
 	
 		public int const_rot_axis(Color dir) {
-		return Constants.move_final_rot_axis(get(dir).toInt());
+		return Constants.move_const_rot_axis(get(dir).toInt());
 	}
 
 	public boolean inverts_edges(Color dir) {
