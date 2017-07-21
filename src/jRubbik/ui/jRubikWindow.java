@@ -80,60 +80,14 @@ public class jRubikWindow extends JFrame {
 		final JMenuBar menubar = new JMenuBar();
 		
 		final JMenu filemenu = new JMenu("File");
+		
 		filemenu.setMnemonic(KeyEvent.VK_F);
 		final JMenuItem menunew = new JMenuItem("New");
 		menunew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { }
-		});
-		menunew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
-
-		final JMenuItem openmenu = new JMenuItem("Open...");
-		openmenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {  }
-		});
-		openmenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
-
-		final JMenuItem closemenu = new JMenuItem("Close");
-		closemenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { tabs.remove(tabs.getSelectedComponent()); }
-		});
-		closemenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK));
-
-		final JMenuItem savemenu = new JMenuItem("Save");
-		savemenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { }
-		});
-		savemenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-
-		final JMenuItem saveasmenu = new JMenuItem("Save as...");
-		saveasmenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {  }
-		});
-		saveasmenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
-
-		final JMenuItem exitmenu = new JMenuItem("Quit");
-		exitmenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { System.exit(0); }
-		});
-
-
-		filemenu.add(menunew);
-		filemenu.addSeparator();
-		filemenu.add(openmenu);
-		filemenu.addSeparator();
-		filemenu.add(closemenu);
-		filemenu.addSeparator();
-		filemenu.add(savemenu);
-		filemenu.add(saveasmenu);
-		filemenu.addSeparator();
-		filemenu.add(exitmenu);
-		
-		final JMenu cubemenu = new JMenu("Cube");
-		final JMenuItem newcubemenu = new JMenuItem("New Cube");
-		newcubemenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) { addPanelCube(new CubeState()); }
 		});
-		cubemenu.add(newcubemenu);
+		menunew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+		filemenu.add(menunew);
 		
 		final JMenuItem clonecubemenu = new JMenuItem("Clone Cube");
 		clonecubemenu.addActionListener(new ActionListener() {
@@ -143,9 +97,47 @@ public class jRubikWindow extends JFrame {
 					addPanelCube(act.clone());
 			}
 		});
-		cubemenu.add(clonecubemenu);
+		filemenu.add(clonecubemenu);
+		filemenu.addSeparator();
+		
+		final JMenuItem openmenu = new JMenuItem("Open...");
+		openmenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {  }
+		});
+		openmenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+		filemenu.add(openmenu);
+		filemenu.addSeparator();
 		
 		
+		final JMenuItem closemenu = new JMenuItem("Close");
+		closemenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { tabs.remove(tabs.getSelectedComponent()); }
+		});
+		closemenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK));
+		filemenu.add(closemenu);
+		filemenu.addSeparator();
+		
+		final JMenuItem savemenu = new JMenuItem("Save");
+		savemenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { }
+		});
+		savemenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+		filemenu.add(savemenu);
+		
+		final JMenuItem saveasmenu = new JMenuItem("Save as...");
+		saveasmenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {  }
+		});
+		saveasmenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
+		filemenu.add(saveasmenu);
+		filemenu.addSeparator();
+		
+		final JMenuItem exitmenu = new JMenuItem("Quit");
+		exitmenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { System.exit(0); }
+		});
+		filemenu.add(exitmenu);
+
 //		final JMenu debugmenu = new JMenu("Debug");
 //		final JMenuItem debugmenu1 = new JMenuItem("Fork");
 //		debugmenu1.addActionListener(new ActionListener() {
@@ -189,11 +181,11 @@ public class jRubikWindow extends JFrame {
 		
 
 		menubar.add(filemenu);
-		menubar.add(cubemenu);
 //		menubar.add(debugmenu);
+		menubar.add(createMenuMovesList("Custom", BasicMoves.COMMON_SEQUENCES));
+		menubar.add(createMenuMovesGrid("OLL", BasicMoves.OLLs));
+		menubar.add(createMenuMovesList("PLL", BasicMoves.PLLs));
 		menubar.add(solvermenu);
-		menubar.add(createMenuMovesOLL("OLL", BasicMoves.OLLs));
-		menubar.add(createMenuMovesPLL("PLL", BasicMoves.PLLs));
 		
 		
 		// add the following aligned to the right
@@ -204,7 +196,7 @@ public class jRubikWindow extends JFrame {
 	
 	// align OLLs in a grid. there are too many for a normal vertical menu...
 	// https://stackoverflow.com/questions/7913938/java-swing-how-to-align-menu-items-in-rows-and-columns
-	private JMenu createMenuMovesOLL(String name, IMove[] moves) {
+	private JMenu createMenuMovesGrid(String name, IMove[] moves) {
 	    
 		final JMenu menu = new JMenu(name);
 	    final JPopupMenu popupMenu = menu.getPopupMenu();
@@ -249,9 +241,8 @@ public class jRubikWindow extends JFrame {
 	}
     
     
-	private JMenu createMenuMovesPLL(String name, IMove[] moves) {
+	private JMenu createMenuMovesList(String name, IMove[] moves) {
 		final JMenu solvermenu = new JMenu(name);
-		
 
 		for (IMove move : moves) {
 			final JMenuItem debugmenu2 = new JMenuItem(move.toString());
@@ -265,7 +256,6 @@ public class jRubikWindow extends JFrame {
 			});
 			solvermenu.add(debugmenu2);
 		}
-		
 		
 		return solvermenu;
 	}

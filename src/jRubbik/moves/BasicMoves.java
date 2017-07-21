@@ -126,6 +126,10 @@ public class BasicMoves {
 	
 	
 
+	public final static IMove MOVE_SEQ_SEXY = MoveParser.parseLine("Sexy;(R U R' U')");
+	public final static IMove MOVE_SEQ_SEXY_INV = MOVE_SEQ_SEXY.reverse();
+	public final static IMove MOVE_SEQ_SLEDGE = MoveParser.parseLine("SH;(R' F R F')");
+	public final static IMove MOVE_SEQ_SLEDGE_INV = MOVE_SEQ_SLEDGE.reverse();
 	
 	// CUSTOM SEQUENCES
 	public static IMove OFFICIAL_SCRAMBLE = new MoveDescription(MoveParser.parseSequence("R2 B2 R2 L' B' R2 U2 B2 F R U2 B2 F' D' R' F R2 L2 B' U'"), "OFFICIAL SCRAMBLE", true);
@@ -223,12 +227,12 @@ public class BasicMoves {
 			OLL_F1, OLL_F2, OLL_F3, OLL_F4, OLL_A1, OLL_A2, OLL_A3, OLL_A4, OLL_LB1, OLL_LB2, OLL_LB3, OLL_LB4, OLL_LB5, OLL_LB6, OLL_T1, OLL_Xy, OLL_C1,
 			OLL_C2, OLL_I1, OLL_I2, OLL_I3, OLL_I4, OLL_K1, OLL_K2, OLL_K3, OLL_K4, OLL_O1, OLL_O2, OLL_O3, OLL_O4, OLL_O5, OLL_O6, OLL_O7, OLL_O8 };
 	
-	public final static IMove[] CUSTOM_SEQUENCES = {
-//			PLL_Y, PLL_T, PLL_F,
-			PLL_Ua, PLL_Ub,
-			PLL_Aa, PLL_Ab,
+	public final static IMove[] COMMON_SEQUENCES = {
+			MOVE_SEQ_SEXY, MOVE_SEQ_SEXY_INV,
+			MOVE_SEQ_SLEDGE, MOVE_SEQ_SLEDGE_INV,
+	};
+			
 //			OFFICIAL_SCRAMBLE 
-			};
 	
 	
 	public final static IMove[][] ALL_COLLECTIONS = { 
@@ -240,7 +244,7 @@ public class BasicMoves {
 			OLLs,
 			PLLs,
 			
-//			CUSTOM_SEQUENCES,
+			COMMON_SEQUENCES
 	};
 	
 	
