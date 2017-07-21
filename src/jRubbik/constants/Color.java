@@ -82,7 +82,7 @@ public enum Color {
 			case YELLOW: return 'y';
 			case WHITE: return 'w';
 			case GREEN: return 'g';
-			case BLUE: return 'g';
+			case BLUE: return 'b';
 			default: return '?';
 		}
 	}

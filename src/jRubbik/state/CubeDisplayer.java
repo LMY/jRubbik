@@ -298,14 +298,14 @@ public class CubeDisplayer {
 		
 		
 		// WHITE FACE
-		ret.append("        ---------\n");
+		ret.append("---------------------------------\n");
 		ret.append("        | ");
 		ret.append(colors[Color.WHITE.toInt()][0].toChar()+" "+colors[Color.WHITE.toInt()][1].toChar()+" "+colors[Color.WHITE.toInt()][2].toChar()+" |\n");
 		ret.append("        | ");
 		ret.append(colors[Color.WHITE.toInt()][3].toChar()+" "+colors[Color.WHITE.toInt()][4].toChar()+" "+colors[Color.WHITE.toInt()][5].toChar()+" |\n");
 		ret.append("        | ");
 		ret.append(colors[Color.WHITE.toInt()][6].toChar()+" "+colors[Color.WHITE.toInt()][7].toChar()+" "+colors[Color.WHITE.toInt()][8].toChar()+" |\n");
-		ret.append("---------------------------------\n");
+		ret.append("        ---------\n");
 		
 		ret.append("\n");
 //		ret.append(appendArray("pC", corners, state_corners));

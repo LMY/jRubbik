@@ -1,6 +1,7 @@
 package jRubbik.ui;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -8,11 +9,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
@@ -26,9 +27,6 @@ import jRubbik.utils.Utils;
 
 
 public class jRubikWindow extends JFrame {
-
-	public final static boolean DEBUG = false;
-	
 	
 	private static final long serialVersionUID = 1370028090893596099L;
 	public final static double ASPECT_RATIO = 16.0/9.0;
@@ -66,12 +64,6 @@ public class jRubikWindow extends JFrame {
 		// pack and display
 		pack();
 		Utils.centerWindow(this);
-		
-		if (DEBUG) {
-			for (IMove[] col : BasicMoves.ALL_COLLECTIONS)
-				for (IMove move : col)
-					System.out.println(""+move.toString()+" "+move.reverse().toString()+" "+move.reverse().reverse().toString());
-		}
 	}
 	
 
@@ -154,28 +146,28 @@ public class jRubikWindow extends JFrame {
 		cubemenu.add(clonecubemenu);
 		
 		
-		final JMenu debugmenu = new JMenu("Debug");
-		final JMenuItem debugmenu1 = new JMenuItem("Fork");
-		debugmenu1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { 
-				try{
-					getActiveCubePanel().fork();
-				}
-				catch (Exception e) {}
-			}
-		});
-		debugmenu.add(debugmenu1);
-		
-		final JMenuItem debugmenu2 = new JMenuItem("New");
-		debugmenu2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { 
-				try{
-					getActiveCubePanel().newnode();
-				}
-				catch (Exception e) {}
-			}
-		});
-		debugmenu.add(debugmenu2);
+//		final JMenu debugmenu = new JMenu("Debug");
+//		final JMenuItem debugmenu1 = new JMenuItem("Fork");
+//		debugmenu1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent ae) { 
+//				try{
+//					getActiveCubePanel().fork();
+//				}
+//				catch (Exception e) {}
+//			}
+//		});
+//		debugmenu.add(debugmenu1);
+//		
+//		final JMenuItem debugmenu2 = new JMenuItem("New");
+//		debugmenu2.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent ae) { 
+//				try{
+//					getActiveCubePanel().newnode();
+//				}
+//				catch (Exception e) {}
+//			}
+//		});
+//		debugmenu.add(debugmenu2);
 		
 		
 		final JMenu solvermenu = new JMenu("Solver");
@@ -195,18 +187,90 @@ public class jRubikWindow extends JFrame {
 			solvermenu.add(cfopmenu);
 		}
 		
-		
-		
+
 		menubar.add(filemenu);
 		menubar.add(cubemenu);
-		menubar.add(debugmenu);
+//		menubar.add(debugmenu);
 		menubar.add(solvermenu);
+		menubar.add(createMenuMovesOLL("OLL", BasicMoves.OLLs));
+		menubar.add(createMenuMovesPLL("PLL", BasicMoves.PLLs));
 		
-		menubar.add(Box.createHorizontalGlue());
+		
+		// add the following aligned to the right
+//		menubar.add(Box.createHorizontalGlue());
 
 		setJMenuBar(menubar);
 	}
 	
+	// align OLLs in a grid. there are too many for a normal vertical menu...
+	// https://stackoverflow.com/questions/7913938/java-swing-how-to-align-menu-items-in-rows-and-columns
+	private JMenu createMenuMovesOLL(String name, IMove[] moves) {
+	    
+		final JMenu menu = new JMenu(name);
+	    final JPopupMenu popupMenu = menu.getPopupMenu();
+	    
+	    final int columns = 7;
+	    @SuppressWarnings("unused")
+		final int rows = moves.length/(columns == 0 ? 1 : columns) + 1;
+	    
+	    popupMenu.setLayout(new GridLayout(rows, columns));
+	    
+	    int idx = 0;
+	    
+	    for (int r = 0; r < rows; r++) {
+	    	if (idx == moves.length)
+	    		break;
+	    	
+	        for (int c = 0; c < columns; c++) {
+	            //popupMenu.add(new JMenuItem("(" + (r + 1) + ", " + (c + 1) + ")"));
+	        	
+		    	if (idx == moves.length)
+		    		break;
+		    	
+	        	final IMove move = moves[idx++];
+	        	
+	        	if (move == null)
+	        		continue;
+	        	
+	        	final JMenuItem debugmenu2 = new JMenuItem(move.toString());
+				debugmenu2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) { 
+						try{
+							getActiveCubePanel().perform(move);
+						}
+						catch (Exception e) {}
+					}
+				});
+				popupMenu.add(debugmenu2);
+	        }
+	    }
+
+    	return menu;
+	}
+    
+    
+	private JMenu createMenuMovesPLL(String name, IMove[] moves) {
+		final JMenu solvermenu = new JMenu(name);
+		
+
+		for (IMove move : moves) {
+			final JMenuItem debugmenu2 = new JMenuItem(move.toString());
+			debugmenu2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) { 
+					try{
+						getActiveCubePanel().perform(move);
+					}
+					catch (Exception e) {}
+				}
+			});
+			solvermenu.add(debugmenu2);
+		}
+		
+		
+		return solvermenu;
+	}
+
+
 	public CubePanel getActiveCubePanel() {
 		return (CubePanel) tabs.getSelectedComponent();
 	}

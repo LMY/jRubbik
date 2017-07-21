@@ -203,15 +203,15 @@ public class BasicMoves {
 	public final static IMove PLL_Ja = MoveParser.parseLine("PLL_Ja;(R' U L')(U2 R U' R' U2)(R L U')");
 	public final static IMove PLL_Jb = MoveParser.parseLine("PLL_Jb;(R U R' F')((R U R' U')(R' F)(R2 U' R') U')");
 	public final static IMove PLL_T = MoveParser.parseLine("PLL_T;(R U R' U')(R' F)(R2 U' R') U' (R U R' F')");
-	public final static IMove PLL_F = MoveParser.parseLine("PLL_F;(R' U2 R' d')(R' F')(R2 U' R' U)(R' F R U' F)");
-	public final static IMove PLL_V = MoveParser.parseLine("PLL_V;(R' U R' d')(R' F')(R2 U' R' U)(R' F R F)");
+	public final static IMove PLL_F = MoveParser.parseLine("PLL_F;(R' U2 R' d')(R' F')(R2 U' R' U)(R' F R U' F) y'");
+	public final static IMove PLL_V = MoveParser.parseLine("PLL_V;(R' U R' d')(R' F')(R2 U' R' U)(R' F R F) y'");
 	public final static IMove PLL_Y = MoveParser.parseLine("PLL_Y;F R U' R' U' (R U R' F')((R U R' U')(R' F R F'))");
 	public final static IMove PLL_Na = MoveParser.parseLine("PLL_Na;((L U' R) U2 (L' U R'))((L U' R) U2 (L' U R')) U");
 	public final static IMove PLL_Nb = MoveParser.parseLine("PLL_Nb;((R' U L') U2 (R U' L))((R' U L') U2 (R U' L)) U'");
-	public final static IMove PLL_Ga = MoveParser.parseLine("PLL_Ga;R2 u R' U R' U' R u' R2 (y' R' U R)");
-	public final static IMove PLL_Gb = MoveParser.parseLine("PLL_Gb;(R' U' R) y R2 u R' U R U' R u' R2");
-	public final static IMove PLL_Gc = MoveParser.parseLine("PLL_Gc;R2 u' R U' R U R' u R2 (y R U' R')");
-	public final static IMove PLL_Gd = MoveParser.parseLine("PLL_Gd;(R U R') y' R2 u' R U' R' U R' u R2");
+	public final static IMove PLL_Ga = MoveParser.parseLine("PLL_Ga;R2 u R' U R' U' R u' R2 (y' R' U R) y");
+	public final static IMove PLL_Gb = MoveParser.parseLine("PLL_Gb;(R' U' R) y R2 u R' U R U' R u' R2 y'");
+	public final static IMove PLL_Gc = MoveParser.parseLine("PLL_Gc;R2 u' R U' R U R' u R2 (y R U' R') y'");
+	public final static IMove PLL_Gd = MoveParser.parseLine("PLL_Gd;(R U R') y' R2 u' R U' R' U R' u R2 y");
 	
 
 	public final static IMove[] PLLs = {

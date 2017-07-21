@@ -93,8 +93,10 @@ public abstract class CubePanel extends JPanel {
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_DOUBLE, BasicMoves.PUBLIC_ALL_DOUBLE_INV, BasicMoves.PUBLIC_ALL_DOUBLE2);
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_MIDDLE, BasicMoves.PUBLIC_ALL_MIDDLE_INV, BasicMoves.PUBLIC_ALL_MIDDLE2);
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_ORIENTATION, BasicMoves.PUBLIC_ALL_ORIENTATION_INV, BasicMoves.PUBLIC_ALL_ORIENTATION2);
-		addMovesToPanel(movePanel, BasicMoves.CUSTOM_SEQUENCES, null, null);
 
+		final JPanel Panelbasic = new JPanel();
+		Panelbasic.setLayout(new GridLayout(2, 0));
+		
 		final JButton scramble = new JButton("Scramble");
 		scramble.addActionListener(new ActionListener() {
 			@Override
@@ -102,7 +104,7 @@ public abstract class CubePanel extends JPanel {
 				perform(new Scrambler().scramble());
 			}
 		});
-		movePanel.add(scramble);
+		Panelbasic.add(scramble);
 		
 		final JButton reset = new JButton("Reset");
 		reset.addActionListener(new ActionListener() {
@@ -111,7 +113,8 @@ public abstract class CubePanel extends JPanel {
 				setState(new CubeState());
 			}
 		});
-		movePanel.add(reset);
+		Panelbasic.add(reset);
+		movePanel.add(Panelbasic);
 		
 		init();
 		

@@ -19,6 +19,7 @@ public class SolverCFOP implements Solver {
 	
 	
 	private Library PLLs;
+	private Library OLLs;
 	
 	
 	
@@ -26,7 +27,11 @@ public class SolverCFOP implements Solver {
 	{
 		PLLs = new Library();
 		for (IMove x : BasicMoves.PLLs)
-				PLLs.addAlgorithm(x);
+				PLLs.addPLLAlgorithm(x);
+
+		OLLs = new Library();
+		for (IMove x : BasicMoves.PLLs)
+			OLLs.addOLLAlgorithm(x);
 	}
 	
 	
@@ -54,25 +59,23 @@ public class SolverCFOP implements Solver {
 //		inspect(state);
 //		solveCross(state);
 		
-		System.out.println("solving:");
+//		System.out.println("solving:");
 //		CubeDisplayer.display(state);
-		
+		IMove ollmove = OLLs.matches(state, BasicMoves.MOVE_U);
+		if (ollmove != null) state = ollmove.get(state);
 		IMove pllmove = PLLs.matches(state, BasicMoves.MOVE_U);
 
 		if (pllmove == null)
-			System.out.println("NO MATCH SORRY);");
+			System.out.println("NO MATCH SORRY");
 		else {
 			ret.addMove(pllmove);
-			System.out.println("match for: "+pllmove.toString());
-			System.out.println("che porta a:");
-			CubeState PLLdone = pllmove.get(state);
-//			CubeDisplayer.display(PLLdone);
-			
-			IMove aufmove = auf(PLLdone, BasicMoves.MOVE_U);
-			System.out.println("AUF:");
-//			CubeDisplayer.display(aufmove.get(PLLdone));
+			final CubeState PLLdone = pllmove.get(state);
+			final IMove aufmove = auf(PLLdone, BasicMoves.MOVE_U);
 			ret.addMove(aufmove);
+			
+			System.out.println("match for: "+ollmove.toString()+"\t"+pllmove.toString()+"\tAUF: "+aufmove.toString()+"\t"+(aufmove.get(PLLdone).isSolved()?"solved":"FAIL"));
 		}
+		
 		
 
 		return ret;
@@ -80,19 +83,13 @@ public class SolverCFOP implements Solver {
 	
 	
 
-	private IMove auf(CubeState pLLdone, IMove mOVE_U) {
-		if (pLLdone.isSolved())
-			return MoveNull.NULL;
-		if (mOVE_U.get(pLLdone).isSolved())
-			return mOVE_U;
+	private IMove auf(CubeState state, IMove move) {
 		
-		IMove twice =  mOVE_U.times(2);
-		if (twice.get(pLLdone).isSolved())
-			return twice;
-		
-		IMove rev =  mOVE_U.reverse();
-		if (rev.get(pLLdone).isSolved())
-			return rev;
+		for (int i=0; i<4; i++) {
+			final IMove mm = move.times(i);
+			if (mm.get(state).isSolved())
+				return mm;
+		}
 		
 		return null;
 	}

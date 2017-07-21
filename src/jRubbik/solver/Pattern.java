@@ -100,7 +100,7 @@ public class Pattern {
 				solved_sc[i] = NOT_SET;
 		}
 		
-		Pattern ret = new Pattern(new CubeState(solved_e, solved_c, solved_se, solved_sc, state.getOrientation().clone()));
+		final Pattern ret = new Pattern(new CubeState(solved_e, solved_c, solved_se, solved_sc, state.getOrientation().clone()));
 		
 //		System.out.println("FROM: ");
 //		CubeDisplayer.display(state);

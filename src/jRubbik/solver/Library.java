@@ -56,18 +56,15 @@ public class Library {
 		patterns = new ArrayList<Pattern>();
 	}
 	
-	public void addAlgorithm(IMove alg) {
-		try {
-			algorithms.add(alg);
-			final IMove revAlg = alg.reverse();
-			patterns.add(Pattern.createPLL_fromState(revAlg.get()));
-		}	
-		catch (Exception e) {
-			@SuppressWarnings("unused")
-			int xsd = 4;
-			alg.reverse();
-	//		Utils.MessageBox(e.toString()+" "+e.getMessage(), "");
-	//		PLLs.addAlgorithm(x);
-		}
+	public void addPLLAlgorithm(IMove alg) {
+		algorithms.add(alg);
+		final IMove revAlg = alg.reverse();
+		patterns.add(Pattern.createPLL_fromState(revAlg.get()));
+	}
+	
+	public void addOLLAlgorithm(IMove alg) {
+		algorithms.add(alg);
+		final IMove revAlg = alg.reverse();
+		patterns.add(Pattern.createOLL_fromState(revAlg.get()));
 	}
 }

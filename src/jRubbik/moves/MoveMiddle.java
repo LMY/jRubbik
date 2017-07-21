@@ -32,21 +32,23 @@ public class MoveMiddle extends FlyWeightMove {
 	@Override
 	public void apply(CubeState state) {
 		final Color dir = getDir();
+		final int reps = getReps();
 		
-		if (dir == Color.GREEN || dir == Color.BLUE) {
-			(isReverse() ? BasicMoves.MOVE_Ri : BasicMoves.MOVE_R).apply(state);
-			(isReverse() ? BasicMoves.MOVE_L : BasicMoves.MOVE_Li).apply(state);
-			(isReverse() ? BasicMoves.MOVE_x : BasicMoves.MOVE_xi).apply(state);
-		}
-		else if (dir == Color.RED || dir == Color.ORANGE) {
-			(isReverse() ? BasicMoves.MOVE_F : BasicMoves.MOVE_Fi).apply(state);
-			(isReverse() ? BasicMoves.MOVE_Bi : BasicMoves.MOVE_B).apply(state);
-			(isReverse() ? BasicMoves.MOVE_zi : BasicMoves.MOVE_z).apply(state);
-		}
-		else /*if (dir == Color.WHITE || dir == Color.YELLOW)*/ {
-			(isReverse() ? BasicMoves.MOVE_Ui : BasicMoves.MOVE_U).apply(state);
-			(isReverse() ? BasicMoves.MOVE_D : BasicMoves.MOVE_Di).apply(state);
-			(isReverse() ? BasicMoves.MOVE_y : BasicMoves.MOVE_yi).apply(state);
-		}		
+		for (int r=0;r<(reps==2?2:1); r++)
+			if (dir == Color.GREEN || dir == Color.BLUE) {
+				(isReverse() ? BasicMoves.MOVE_Ri : BasicMoves.MOVE_R).apply(state);
+				(isReverse() ? BasicMoves.MOVE_L : BasicMoves.MOVE_Li).apply(state);
+				(isReverse() ? BasicMoves.MOVE_x : BasicMoves.MOVE_xi).apply(state);
+			}
+			else if (dir == Color.RED || dir == Color.ORANGE) {
+				(isReverse() ? BasicMoves.MOVE_F : BasicMoves.MOVE_Fi).apply(state);
+				(isReverse() ? BasicMoves.MOVE_Bi : BasicMoves.MOVE_B).apply(state);
+				(isReverse() ? BasicMoves.MOVE_zi : BasicMoves.MOVE_z).apply(state);
+			}
+			else /*if (dir == Color.WHITE || dir == Color.YELLOW)*/ {
+				(isReverse() ? BasicMoves.MOVE_Ui : BasicMoves.MOVE_U).apply(state);
+				(isReverse() ? BasicMoves.MOVE_D : BasicMoves.MOVE_Di).apply(state);
+				(isReverse() ? BasicMoves.MOVE_y : BasicMoves.MOVE_yi).apply(state);
+			}		
 	}
 }
