@@ -71,22 +71,31 @@ public abstract class CubePanel extends JPanel {
 		sequenceField.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				newnode();
+				eventBtnSequenceField();
 			}
 		});
+		
+		final JButton btnDoIt = new JButton("Apply");
+		btnDoIt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				eventBtnSequenceField();	
+			}
+		});
+		
 		
 		final JPanel movePanel = new JPanel();
 		movePanel.setLayout(new FlowLayout());
 		
-		
 		south.add(new JLabel("Sequence: "), BorderLayout.WEST);
 		south.add(sequenceField, BorderLayout.CENTER);
+		south.add(btnDoIt, BorderLayout.EAST);
 		south.add(movePanel, BorderLayout.SOUTH);
 		add(south, BorderLayout.SOUTH);
 		
 		final JScrollPane scrolltree = new JScrollPane(stateTree);
 //		scrolltree.setMinimumSize(new Dimension(100,0));
-		scrolltree.setPreferredSize(new Dimension(100,0));
+		scrolltree.setPreferredSize(new Dimension(200,0));
 		add(scrolltree, BorderLayout.EAST);
 		
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_SIMPLE, BasicMoves.PUBLIC_ALL_SIMPLE_INV, BasicMoves.PUBLIC_ALL_SIMPLE2);
@@ -142,23 +151,24 @@ public abstract class CubePanel extends JPanel {
 		
 		if (normal != null)
 			for (int i = 0; i<normal.length; i++)
-				Panelbasic.add(buttonMove(normal[i]));
+				Panelbasic.add(createButtonMove(normal[i]));
 		
 		if (inverse != null)
 			for (int i = 0; i<inverse.length; i++)
-				Panelbasic.add(buttonMove(inverse[i]));
+				Panelbasic.add(createButtonMove(inverse[i]));
 		
 		if (mdouble != null)
 			for (int i = 0; i<inverse.length; i++)
-				Panelbasic.add(buttonMove(mdouble[i]));
+				Panelbasic.add(createButtonMove(mdouble[i]));
 		
 		movePanel.add(Panelbasic);
 	}
 	
 	
-	
-	public JButton buttonMove(final IMove move) {
+	public JButton createButtonMove(final IMove move) {
+		
 		final JButton clearButton = new JButton(move.toString());
+		
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -167,6 +177,7 @@ public abstract class CubePanel extends JPanel {
 			}
 		});
 		clearButton.addKeyListener(new MyKeyListener());
+		
 		return clearButton;
 	}
 	
@@ -187,6 +198,68 @@ public abstract class CubePanel extends JPanel {
 		display();
 	}
 
+
+	public void eventBtnSequenceField() {
+		final String text = sequenceField.getText().trim();
+		sequenceField.setText("");
+		
+		if (text.isEmpty())
+			return;
+		
+		perform(MoveParser.parseSequence(text));
+	}
+	
+	
+	
+	public void fork(String text) {
+		
+		DefaultMutableTreeNode path = stateRoot;	// if there is no selection, default: add to root
+				
+		try {
+			path = (DefaultMutableTreeNode)stateTree.getSelectionPath().getLastPathComponent();
+		}
+		catch (Exception e) {}
+		
+		treeModel.insertNodeInto(new DefaultMutableTreeNode(new DescribedState(text, state.clone())), path, path.getChildCount());
+	}
+	
+//	public void newnode(String text) {
+//		DefaultMutableTreeNode path = stateRoot;
+//		
+//		try {
+//			final int len = stateTree.getSelectionPath().getPathCount();
+//			path = (DefaultMutableTreeNode)stateTree.getSelectionPath().getPathComponent(len-1);
+//		}
+//		catch (Exception e) {}
+//		
+//		treeModel.insertNodeInto(new DefaultMutableTreeNode(new DescribedState(text, state.clone())), path, path.getChildCount());
+//	}
+//	
+	
+	class DescribedState
+	{
+		public String desc;
+		public CubeState state;
+		
+		public DescribedState(String desc, CubeState state) {
+			this.desc = desc;
+			this.state = state;
+		}
+		
+		public String toString() {
+			return desc;
+		}
+	}
+	
+//	public DescribedState getSelectedNode() {
+//		try {
+//			return (DescribedState)stateTree.getSelectionPath().getLastPathComponent();
+//		}
+//		catch (Exception e) {
+//			return null;
+//		}
+//	}
+	
 	public class MyKeyListener implements KeyListener
 	{
 		@Override
@@ -216,70 +289,6 @@ public abstract class CubePanel extends JPanel {
 		@Override
 		public void keyTyped(KeyEvent arg0) {}
 	}
-	
-	public void fork() {
-//		final String text = sequenceField.getText();
-//		sequenceField.setText("");
-		fork("FORK");
-	}
-	public void newnode() {
-		final String text = sequenceField.getText();
-		sequenceField.setText("");
-		newnode(text);
-		perform(MoveParser.parseSequence(text));
-	}
-	
-	
-	
-	public void fork(String text) {
-		
-		DefaultMutableTreeNode path = stateRoot;
-				
-		try {
-			path = (DefaultMutableTreeNode)stateTree.getSelectionPath().getLastPathComponent();
-		}
-		catch (Exception e) {}
-		
-		treeModel.insertNodeInto(new DefaultMutableTreeNode(new DescribedState(text, state.clone())), path, path.getChildCount());
-	}
-	
-	public void newnode(String text) {
-		DefaultMutableTreeNode path = stateRoot;
-		
-		try {
-			final int len = stateTree.getSelectionPath().getPathCount();
-			path = (DefaultMutableTreeNode)stateTree.getSelectionPath().getPathComponent(len-1);
-		}
-		catch (Exception e) {}
-		
-		treeModel.insertNodeInto(new DefaultMutableTreeNode(new DescribedState(text, state.clone())), path, path.getChildCount());
-	}
-	
-	
-	class DescribedState
-	{
-		public String desc;
-		public CubeState state;
-		
-		public DescribedState(String desc, CubeState state) {
-			this.desc = desc;
-			this.state = state;
-		}
-		
-		public String toString() {
-			return desc;
-		}
-	}
-	
-//	public DescribedState getSelectedNode() {
-//		try {
-//			return (DescribedState)stateTree.getSelectionPath().getLastPathComponent();
-//		}
-//		catch (Exception e) {
-//			return null;
-//		}
-//	}
-	
 	
 	class MyTreeSelectionListener implements TreeSelectionListener {
 		public void valueChanged(TreeSelectionEvent e) {
