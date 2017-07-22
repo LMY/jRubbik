@@ -69,4 +69,9 @@ public class CubePanelDraw extends CubePanelCanvas {
 	private static Point2i offset(Color color) {
 		return COLOR_OFFSETS[color.toInt()];
 	}
+
+	@Override
+	protected Color[] getColorsInOrder() {
+		return Color.ALL;
+	}
 }

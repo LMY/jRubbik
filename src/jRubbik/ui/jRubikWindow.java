@@ -55,7 +55,7 @@ public class jRubikWindow extends JFrame {
 		CreateMenuBar();
 		
 		tabs = new JTabbedPane();
-		addPanelCube(new CubeState());
+		addPanelCube(new CubeState(), true);
 		
 		this.add(tabs);
 
@@ -67,9 +67,9 @@ public class jRubikWindow extends JFrame {
 	}
 	
 
-	public void addPanelCube(CubeState state)
+	public void addPanelCube(CubeState state, boolean use3d)
 	{
-		tabs.add("Cube", new CubePanelDraw(state));
+		tabs.add("Cube", use3d ? new CubePanelDraw3D(state) : new CubePanelDraw(state));
 		tabs.setSelectedComponent(tabs.getComponent(tabs.getTabCount()-1));
 	}
 	
@@ -84,7 +84,7 @@ public class jRubikWindow extends JFrame {
 		filemenu.setMnemonic(KeyEvent.VK_F);
 		final JMenuItem menunew = new JMenuItem("New");
 		menunew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) { addPanelCube(new CubeState()); }
+			public void actionPerformed(ActionEvent ae) { addPanelCube(new CubeState(), true); }
 		});
 		menunew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
 		filemenu.add(menunew);
@@ -94,10 +94,19 @@ public class jRubikWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) { 
 				final CubeState act = getActiveCubeState();
 				if (act != null)
-					addPanelCube(act.clone());
+					addPanelCube(act.clone(), true);
 			}
 		});
 		filemenu.add(clonecubemenu);
+		final JMenuItem clonecubemenu2 = new JMenuItem("Clone Cube 2D");
+		clonecubemenu2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) { 
+				final CubeState act = getActiveCubeState();
+				if (act != null)
+					addPanelCube(act.clone(), false);
+			}
+		});
+		filemenu.add(clonecubemenu2);
 		filemenu.addSeparator();
 		
 		final JMenuItem openmenu = new JMenuItem("Open...");

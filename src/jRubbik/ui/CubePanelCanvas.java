@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+import javax.swing.event.MouseInputAdapter;
 
 import jRubbik.constants.Color;
 import jRubbik.moves.IMove;
@@ -47,6 +49,7 @@ public abstract class CubePanelCanvas extends CubePanel {
 	@Override
 	protected void init(){
 		canvasPanel = new PanelCanvas();
+		
 //		final MouseTranslator mousetranslator = new MouseTranslator();
 //		canvasPanel.addMouseMotionListener(mousetranslator);
 //		canvasPanel.addMouseWheelListener(mousetranslator);
@@ -56,6 +59,14 @@ public abstract class CubePanelCanvas extends CubePanel {
 		add(canvasPanel, BorderLayout.CENTER);
 	}
 
+	public void setMouseListener(MouseListener ml)
+	{
+		canvasPanel.addMouseListener(ml);
+	}
+	public void addMouseMotionListener(MouseInputAdapter ml)
+	{
+		canvasPanel.addMouseMotionListener(ml);
+	}
 	
 	private void draw(Graphics g, int width, int height)
 	{
@@ -73,8 +84,9 @@ public abstract class CubePanelCanvas extends CubePanel {
 		final Color[][] colors = CubeDisplayer.getColors(state);
 
 		// draw all faces
-		for (Color color : Color.ALL)
+		for (Color color : getColorsInOrder())
 			drawFace(g, colors, color, pad);
+
 
 		
 		if (message != null && !message.isEmpty()) {
@@ -86,6 +98,8 @@ public abstract class CubePanelCanvas extends CubePanel {
 //		System.out.println(CubeDisplayer.toString2(state));
 	}
 	
+	protected abstract Color[] getColorsInOrder();
+
 	protected abstract Point2i getPadding(int width, int height);
 	protected abstract void drawFace(Graphics g, Color[][] colors, Color facecolor, Point2i pad);
 
