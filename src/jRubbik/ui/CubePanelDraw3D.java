@@ -139,16 +139,15 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		pts[3] = Point3d.add(offset, Point3d.add(Point3d.multiply(deltax, 0), Point3d.multiply(deltay, 1)));
 		
 		g.setColor(java.awt.Color.BLACK);
-		fillQuad_3D(g, pts, true);
+		fillQuad_3D(g, pts, false);
 		
 		pts[0] = Point3d.add(pts[0], Point3d.add(Point3d.multiply(sdeltax, +1), Point3d.multiply(sdeltay, +1)));
 		pts[1] = Point3d.add(pts[1], Point3d.add(Point3d.multiply(sdeltax, -1), Point3d.multiply(sdeltay, +1)));
 		pts[2] = Point3d.add(pts[2], Point3d.add(Point3d.multiply(sdeltax, -1), Point3d.multiply(sdeltay, -1)));
 		pts[3] = Point3d.add(pts[3], Point3d.add(Point3d.multiply(sdeltax, +1), Point3d.multiply(sdeltay, -1)));
 		
-		
 		g.setColor(drawColor.toAwtColor());
-		fillQuad_3D(g, pts, true);
+		fillQuad_3D(g, pts, false);
 	}
 	
 
