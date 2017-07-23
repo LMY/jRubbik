@@ -188,6 +188,26 @@ public class jRubikWindow extends JFrame {
 			solvermenu.add(cfopmenu);
 		}
 		
+		final JMenu viewmenu = new JMenu("View");
+		{
+			final JMenuItem cfopmenu = new JMenuItem("2D");
+			cfopmenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) { 
+
+				}
+			});
+			viewmenu.add(cfopmenu);
+			
+			final JMenuItem cfopmenu2 = new JMenuItem("3D");
+			cfopmenu2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) { 
+
+				}
+			});
+			viewmenu.add(cfopmenu2);
+		}
+		
+		
 
 		menubar.add(filemenu);
 //		menubar.add(debugmenu);
@@ -195,6 +215,7 @@ public class jRubikWindow extends JFrame {
 		menubar.add(createMenuMovesGrid("OLL", BasicMoves.OLLs));
 		menubar.add(createMenuMovesList("PLL", BasicMoves.PLLs));
 		menubar.add(solvermenu);
+		menubar.add(viewmenu);
 		
 		
 		// add the following aligned to the right

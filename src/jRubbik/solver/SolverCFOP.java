@@ -3,7 +3,6 @@ package jRubbik.solver;
 import jRubbik.moves.Algorithm;
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
-import jRubbik.moves.MoveNull;
 import jRubbik.state.CubeState;
 
 public class SolverCFOP implements Solver {

@@ -31,6 +31,7 @@ import jRubbik.moves.MoveParser;
 import jRubbik.state.CubeState;
 import jRubbik.state.Scrambler;
 
+@SuppressWarnings("unused")
 public abstract class CubePanel extends JPanel {
 
 	private static final long serialVersionUID = -8791902983413545183L;
