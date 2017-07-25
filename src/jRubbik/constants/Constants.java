@@ -75,6 +75,16 @@ public class Constants {
 			{ Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN },			// Z: red up
 	};
 
+	public final static Color[][] COLOR_ORDER_UP = new Color[][]{
+		{ Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN },			// Z: red up
+		{ Color.GREEN, Color.WHITE, Color.BLUE, Color.YELLOW },			// Z: orange up
+		
+		{ Color.RED, Color.GREEN, Color.ORANGE, Color.BLUE },			// X: yellow up
+		{ Color.BLUE, Color.ORANGE, Color.GREEN, Color.RED },			// X: white up
+		
+		{ Color.YELLOW, Color.RED, Color.WHITE, Color.ORANGE },			// Y: green up
+		{ Color.ORANGE, Color.WHITE, Color.RED, Color.YELLOW },			// Y: blue up
+	};
 	
 	/**
 	 * corners of the F face

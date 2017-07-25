@@ -23,9 +23,15 @@ public class PatternOLL implements Pattern {
 	{
 		final Color up = state.getOrientation().getUp();
 		final Color[][] colors = CubeDisplayer.getColors(state);
-		final boolean[] bcrown = toBoolArray(CubeDisplayer.getCrown(colors, up), up);
-		final boolean[] bface = toBoolArray(CubeDisplayer.getFace(colors, up), up);
-		final IMove auf = BasicMoves.color2simpleMove(up, 0);
+		
+		final Color[] cface = CubeDisplayer.getFace(colors, Color.YELLOW);
+		final Color[] ccrown = CubeDisplayer.getCrown(colors, Color.YELLOW);
+
+		final boolean[] bface = toBoolArray(cface, up);
+		final boolean[] bcrown = toBoolArray(ccrown, up);
+		
+		final IMove auf = BasicMoves.color2simpleMove(Color.YELLOW, 0);
+		
 		
 		if (arrayEquals(bface, pface) && arrayEquals(bcrown, pcrown))
 			return MoveNull.NULL;

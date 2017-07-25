@@ -18,11 +18,10 @@ public class PatternPLL implements Pattern {
 	@Override
 	public IMove matches(CubeState state)
 	{
-		final Color up = state.getOrientation().getUp();
-		final IMove auf = BasicMoves.color2simpleMove(up, 0);
+		final IMove auf = BasicMoves.color2simpleMove(Color.YELLOW, 0);
 	
 		final Color[][] colors = CubeDisplayer.getColors(state);
-		final Color[] crown = CubeDisplayer.getCrown(colors, up);
+		final Color[] crown = CubeDisplayer.getCrown(colors, Color.YELLOW);
 		
 		for (int shift=0; shift<12; shift += 3) {
 	

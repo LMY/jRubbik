@@ -335,7 +335,8 @@ public class CubeDisplayer {
 	public static Color[] getCrown(Color[][] colors, Color up) {
 		final Color[] ret = new Color[12];
 		
-		final Color[] order = { Color.RED, Color.GREEN, Color.ORANGE, Color.BLUE };
+		final Color[] order = Constants.COLOR_ORDER_UP[up.toInt()];	//{ Color.RED, Color.GREEN, Color.ORANGE, Color.BLUE };
+											
 		int idx = 0;
 		
 		for (Color face : order) {
