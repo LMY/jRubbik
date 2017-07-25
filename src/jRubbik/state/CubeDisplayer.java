@@ -331,6 +331,30 @@ public class CubeDisplayer {
 		
 		return ret.toString();
 	}
+
+	public static Color[] getCrown(Color[][] colors, Color up) {
+		final Color[] ret = new Color[12];
+		
+		final Color[] order = { Color.RED, Color.GREEN, Color.ORANGE, Color.BLUE };
+		int idx = 0;
+		
+		for (Color face : order) {
+			ret[idx++] = colors[face.toInt()][0];
+			ret[idx++] = colors[face.toInt()][1];
+			ret[idx++] = colors[face.toInt()][2];
+		}
+		
+		return ret;
+	}
+
+	public static Color[] getFace(Color[][] colors, Color face) {
+		final Color[] ret = new Color[9];
+		
+		for (int i=0; i<9;i++)
+			ret[i] = colors[face.toInt()][i];
+		
+		return ret;
+	}
 	
 //	private static String appendArray(String string, int[] s2, int[] state) {
 //		StringBuilder sb = new StringBuilder();

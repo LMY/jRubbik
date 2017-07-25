@@ -176,13 +176,8 @@ public class jRubikWindow extends JFrame {
 			final JMenuItem cfopmenu = new JMenuItem("CFOP");
 			cfopmenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) { 
-					try{
-						final IMove solve = new SolverCFOP().solve(getActiveCubeState());
-						getActiveCubePanel().perform(solve);
-					}
-					catch (Exception e) {
-						Utils.MessageBox(e.toString(), "");
-					}
+					final IMove solve = new SolverCFOP().solve(getActiveCubeState());
+					getActiveCubePanel().perform(solve);
 				}
 			});
 			solvermenu.add(cfopmenu);

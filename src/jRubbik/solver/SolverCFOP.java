@@ -29,7 +29,7 @@ public class SolverCFOP implements Solver {
 				PLLs.addPLLAlgorithm(x);
 
 		OLLs = new Library();
-		for (IMove x : BasicMoves.PLLs)
+		for (IMove x : BasicMoves.OLLs)
 			OLLs.addOLLAlgorithm(x);
 	}
 	
@@ -51,7 +51,7 @@ public class SolverCFOP implements Solver {
 	@Override
 	public IMove solve(CubeState state) {
 		
-		state.resetOrientation();
+//		state.resetOrientation();
 		
 		final Algorithm ret = new Algorithm();
 		
@@ -60,29 +60,36 @@ public class SolverCFOP implements Solver {
 		
 //		System.out.println("solving:");
 //		CubeDisplayer.display(state);
-		IMove ollmove = OLLs.matches(state, BasicMoves.MOVE_U);
-		if (ollmove != null) state = ollmove.get(state);
-		IMove pllmove = PLLs.matches(state, BasicMoves.MOVE_U);
+		
+		
+		final IMove ollauf = OLLs.matches(state);
+		if (ollauf == null) {
+			System.out.println("OLL Fail");
+			return ret;
+		}
+		
+		ret.addMove(ollauf);
+		state = ollauf.get(state);
+		final IMove pllmove = PLLs.matches(state);
 
 		if (pllmove == null)
-			System.out.println("NO MATCH SORRY");
+			System.out.println("PLL Fail");
 		else {
 			ret.addMove(pllmove);
 			final CubeState PLLdone = pllmove.get(state);
-			final IMove aufmove = auf(PLLdone, BasicMoves.MOVE_U);
+			final IMove aufmove = auf(PLLdone);
 			ret.addMove(aufmove);
 			
-			System.out.println("match for: "+ollmove.toString()+"\t"+pllmove.toString()+"\tAUF: "+aufmove.toString()+"\t"+(aufmove.get(PLLdone).isSolved()?"solved":"FAIL"));
+			System.out.println("match for: "+ollauf.toString()+"\t"+pllmove.toString()+"\tAUF: "+aufmove.toString()+"\t"+(aufmove.get(PLLdone).isSolved()?"solved":"FAIL"));
+//			System.out.println("match for: "+pllmove.toString()+"\tAUF: "+aufmove.toString()+"\t"+(aufmove.get(PLLdone).isSolved()?"solved":"FAIL"));
 		}
-		
-		
 
 		return ret;
 	}
-	
-	
 
-	private IMove auf(CubeState state, IMove move) {
+	private IMove auf(CubeState state) {
+		
+		final IMove move = BasicMoves.color2simpleMove(state.getOrientation().getUp(), 0);
 		
 		for (int i=0; i<4; i++) {
 			final IMove mm = move.times(i);

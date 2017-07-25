@@ -18,31 +18,28 @@ public class Library {
 		reset();
 	}
 	
-	public IMove matches(CubeState state, IMove up)
+	public IMove matches(CubeState state)
 	{
 		for (int i=0, imax=algorithms.size(); i<imax; i++)
 		{
-			IMove alg = algorithms.get(i);
-			Pattern pattern = patterns.get(i);
+			final IMove alg = algorithms.get(i);
+			final Pattern pattern = patterns.get(i);
 			
 			if (pattern == null || alg == null)
 				continue;
 
-			// for each pattern of this alg
-			for (int k=0; k<4; k++) {
-				final IMove auf = pattern.getAdjMatch(up.times(k).get(state), up);
-				
-				// if matches
-				if (auf != null) {
-					if (auf == MoveNull.NULL)	// without auf, simply return the algorithm
-						return alg;		
-					else						// with auf, add auf sequence and then algorithm
-					{						
-						Algorithm retalg = new Algorithm();
-						retalg.addMove(auf);
-						retalg.addMove(alg);
-						return retalg;
-					}
+			// if matches
+			final IMove auf = pattern.matches(state);
+			
+			if (auf != null) {
+				if (auf == MoveNull.NULL)	// without auf, simply return the algorithm
+					return alg;		
+				else						// with auf, add auf sequence and then algorithm
+				{						
+					final Algorithm retalg = new Algorithm();
+					retalg.addMove(auf);
+					retalg.addMove(alg);
+					return retalg;
 				}
 			}
 		}
@@ -58,13 +55,11 @@ public class Library {
 	
 	public void addPLLAlgorithm(IMove alg) {
 		algorithms.add(alg);
-		final IMove revAlg = alg.reverse();
-		patterns.add(Pattern.createPLL_fromState(revAlg.get()));
+		patterns.add(PatternPLL.create(alg));
 	}
 	
 	public void addOLLAlgorithm(IMove alg) {
 		algorithms.add(alg);
-		final IMove revAlg = alg.reverse();
-		patterns.add(Pattern.createOLL_fromState(revAlg.get()));
+		patterns.add(PatternOLL.create(alg));
 	}
 }
