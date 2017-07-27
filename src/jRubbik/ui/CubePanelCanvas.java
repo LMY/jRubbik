@@ -2,6 +2,7 @@ package jRubbik.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
@@ -68,6 +69,8 @@ public abstract class CubePanelCanvas extends CubePanel {
 		canvasPanel.addMouseMotionListener(ml);
 	}
 	
+	 private static Font serifFont = new Font(Font.decode(null).getName(), Font.BOLD, 14);
+	 
 	private void draw(Graphics g, int width, int height)
 	{
 		// clear
@@ -78,6 +81,7 @@ public abstract class CubePanelCanvas extends CubePanel {
 			return;
 		
 		final Point2i pad = getPadding(width, height);
+		g.setFont(serifFont);
 		final FontMetrics fm = g.getFontMetrics();
 		final int htext = fm.getAscent();
 		
