@@ -62,4 +62,9 @@ public class Library {
 		algorithms.add(alg);
 		patterns.add(PatternOLL.create(alg));
 	}
+
+	public void addF2LAlgorithm(IMove alg) {
+		algorithms.add(alg);
+		patterns.add(PatternF2L.create(alg));
+	}
 }

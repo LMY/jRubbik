@@ -20,7 +20,7 @@ public class SolverCFOP implements Solver {
 	
 	private Library PLLs;
 	private Library OLLs;
-	
+	private Library F2Ls;
 	
 	
 	public SolverCFOP()
@@ -32,6 +32,10 @@ public class SolverCFOP implements Solver {
 		OLLs = new Library();
 		for (IMove x : BasicMoves.OLLs)
 			OLLs.addOLLAlgorithm(x);
+		
+		F2Ls = new Library();
+		for (IMove x : BasicMoves.F2Ls)
+			F2Ls.addF2LAlgorithm(x);
 	}
 	
 	
