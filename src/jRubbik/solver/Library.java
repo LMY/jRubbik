@@ -48,6 +48,28 @@ public class Library {
 		return null;
 	}
 	
+	public IMove simlpeMatches(CubeState state)
+	{
+		for (int i=0, imax=algorithms.size(); i<imax; i++)
+		{
+			final IMove alg = algorithms.get(i);
+			final Pattern pattern = patterns.get(i);
+			
+			if (pattern == null || alg == null)
+				continue;
+
+			// if matches
+			final IMove auf = pattern.matches(state);
+			
+			if (auf != null)
+				return auf;		
+		}
+		
+		// no match
+		return null;
+	}
+	
+	
 	public void reset() {
 		algorithms = new ArrayList<IMove>();
 		patterns = new ArrayList<Pattern>();

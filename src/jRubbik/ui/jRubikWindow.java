@@ -174,6 +174,43 @@ public class jRubikWindow extends JFrame {
 		
 		final JMenu solvermenu = new JMenu("Solver");
 		{
+			final JMenuItem cfopF2l_menu = new JMenuItem("CFOP: F2L");
+			cfopF2l_menu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) {
+					
+					final List<IMove> solve = new SolverCFOP().solveF2L(getActiveCubeState());
+					
+					for (IMove move : solve)
+						getActiveCubePanel().perform(move);
+				}
+			});
+			solvermenu.add(cfopF2l_menu);
+			final JMenuItem cfopOLL_menu = new JMenuItem("CFOP: OLL");
+			cfopOLL_menu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) {
+					
+					final List<IMove> solve = new SolverCFOP().solveOLL(getActiveCubeState());
+					
+					for (IMove move : solve)
+						getActiveCubePanel().perform(move);
+				}
+			});
+			solvermenu.add(cfopOLL_menu);
+			final JMenuItem cfopPLL_menu = new JMenuItem("CFOP: PLL");
+			cfopPLL_menu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent ae) {
+					
+					final List<IMove> solve = new SolverCFOP().solvePLL(getActiveCubeState());
+					
+					for (IMove move : solve)
+						getActiveCubePanel().perform(move);
+				}
+			});
+			solvermenu.add(cfopPLL_menu);
+			
+			
+			solvermenu.addSeparator();
+			
 			final JMenuItem cfopmenu = new JMenuItem("CFOP");
 			cfopmenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent ae) {

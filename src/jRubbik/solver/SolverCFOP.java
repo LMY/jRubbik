@@ -30,7 +30,7 @@ public class SolverCFOP implements Solver {
 	{
 		PLLs = new Library();
 		for (IMove x : BasicMoves.PLLs)
-				PLLs.addPLLAlgorithm(x);
+			PLLs.addPLLAlgorithm(x);
 
 		OLLs = new Library();
 		for (IMove x : BasicMoves.OLLs)
@@ -57,22 +57,18 @@ public class SolverCFOP implements Solver {
 	
 	
 	@Override
-	public  List<IMove> solve(CubeState state) {
-		
-//		state.resetOrientation();
+	public List<IMove> solve(CubeState state) {
 		
 		final List<IMove> ret = new ArrayList<IMove>();
+		ret.add(MoveDescription.createMoveMessage("solve start"));
 		
 //		inspect(state);
 //		solveCross(state);
 		
-//		System.out.println("solving:");
-//		CubeDisplayer.display(state);
-		ret.add(MoveDescription.createMoveMessage("solve start"));
 		
 		final IMove ollauf = OLLs.matches(state);
 		if (ollauf == null) {
-			System.out.println("OLL Fail");
+			ret.add(MoveDescription.createMoveMessage("OLL Fail"));
 			return ret;
 		}
 		ret.add(ollauf);
@@ -81,7 +77,7 @@ public class SolverCFOP implements Solver {
 		
 		final IMove pllmove = PLLs.matches(state);
 		if (pllmove == null) {
-			System.out.println("PLL Fail");
+			ret.add(MoveDescription.createMoveMessage("PLL Fail"));
 			return ret;
 		}
 		ret.add(pllmove);
@@ -90,7 +86,7 @@ public class SolverCFOP implements Solver {
 		
 		final IMove aufmove = auf(state);
 		if (aufmove == null) {
-			System.out.println("AUF Fail");
+			ret.add(MoveDescription.createMoveMessage("AUF Fail"));
 			return ret;
 		}
 		ret.add(aufmove);
@@ -99,6 +95,45 @@ public class SolverCFOP implements Solver {
 
 		return ret;
 	}
+	
+	
+	public List<IMove> solveF2L(CubeState state) {
+		
+		final List<IMove> ret = new ArrayList<IMove>();
+		final IMove f2l = F2Ls.simlpeMatches(state);
+		if (f2l == null) {
+			ret.add(MoveDescription.createMoveMessage("F2L Fail"));
+			return ret;
+		}
+		ret.add(f2l);
+		
+		return ret;
+	}
+
+	public List<IMove> solveOLL(CubeState state) {
+		final List<IMove> ret = new ArrayList<IMove>();
+		final IMove oll = OLLs.matches(state);
+		if (oll == null) {
+			ret.add(MoveDescription.createMoveMessage("OLL Fail"));
+			return ret;
+		}
+		ret.add(oll);
+		
+		return ret;
+	}
+
+	public List<IMove> solvePLL(CubeState state) {
+		final List<IMove> ret = new ArrayList<IMove>();
+		final IMove pll = PLLs.matches(state);
+		if (pll == null) {
+			ret.add(MoveDescription.createMoveMessage("PLL Fail"));
+			return ret;
+		}
+		ret.add(pll);
+		
+		return ret;
+	}
+	
 
 	private IMove auf(CubeState state) {
 		
@@ -236,4 +271,6 @@ public class SolverCFOP implements Solver {
 	public static boolean isUpE(int pos)		{ return pos>=8; }
 	public static boolean isMiddleE(int pos)	{ return pos>=4 && pos<8; }
 	public static boolean isDownE(int pos)		{ return pos<4; }
+
+
 }

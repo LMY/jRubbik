@@ -4,40 +4,47 @@ import jRubbik.constants.Color;
 import jRubbik.moves.IMove;
 import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class PatternF2L implements Pattern  {
 
-	public PatternF2L()
+	private IMove alg;
+	
+	public PatternF2L(IMove alg)
 	{
-		
+		this.alg = alg;
 	}
 	
 	
 	@Override
 	public IMove matches(CubeState state) {
-		return null;
+		
+		final OrientatonState orient = state.getOrientation().clone();
+		final CubeState resstate = alg.get(state.clone());			// possibly sets a new orient
+		resstate.setOrientation(orient);							// restore the original orient
+		
+		final Color[][] colors = CubeDisplayer.getColors(resstate);
+		
+		final Color colorDown = orient.getDown();
+		final Color colorFront = orient.getFront();
+		final Color colorRight = orient.getRight();
+		
+		final Color[] downface = CubeDisplayer.getFace(colors, colorDown);
+		final Color[] frontface = CubeDisplayer.getFace(colors, colorFront);
+		final Color[] rightface = CubeDisplayer.getFace(colors, colorRight);
+
+		if (downface[2] == colorDown && frontface[8] == colorFront && rightface[6] == colorRight && // corner
+			frontface[5] == colorFront && rightface[3] == colorRight)								// edge
+		
+				return alg;
+		
+		else
+			return null;
 	}
 	
 	
 	public static Pattern create(IMove alg)
 	{	
-		final IMove rev = alg.reverse();
-		final CubeState state = rev.get();
-		final Color up = state.getOrientation().getUp();
-	
-		final Color[][] colors = CubeDisplayer.getColors(state);
-		final Color[] crown = CubeDisplayer.getCrown(colors, up);
-		final Color[] face = CubeDisplayer.getFace(colors, up);
-
-		final boolean[] pface = new boolean[face.length];
-		final boolean[] pcorona = new boolean[crown.length];
-		
-		for (int i=0; i<face.length; i++)
-			pface[i] = (face[i] == up);
-		
-		for (int i=0; i<crown.length; i++)
-			pcorona[i] = (crown[i] == up);
-
-		return new PatternF2L();
+		return new PatternF2L(alg);
 	}
 }
