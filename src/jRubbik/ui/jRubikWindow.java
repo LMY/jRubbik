@@ -8,6 +8,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -175,9 +176,12 @@ public class jRubikWindow extends JFrame {
 		{
 			final JMenuItem cfopmenu = new JMenuItem("CFOP");
 			cfopmenu.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) { 
-					final IMove solve = new SolverCFOP().solve(getActiveCubeState());
-					getActiveCubePanel().perform(solve);
+				public void actionPerformed(ActionEvent ae) {
+					
+					final List<IMove> solve = new SolverCFOP().solve(getActiveCubeState());
+					
+					for (IMove move : solve)
+						getActiveCubePanel().perform(move);
 				}
 			});
 			solvermenu.add(cfopmenu);

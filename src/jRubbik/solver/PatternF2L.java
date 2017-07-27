@@ -40,6 +40,4 @@ public class PatternF2L implements Pattern  {
 
 		return new PatternF2L();
 	}
-
-
 }

@@ -49,4 +49,10 @@ public class MoveDescription extends IMove {
 	{
 		return description + (suppress_original ? "" : ":"+move.toString());
 	}
+	
+	
+	public static IMove createMoveMessage(String message)
+	{
+		return new MoveDescription(MoveNull.NULL, message, true);
+	}
 }

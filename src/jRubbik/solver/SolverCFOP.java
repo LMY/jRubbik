@@ -1,9 +1,12 @@
 package jRubbik.solver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jRubbik.constants.Color;
-import jRubbik.moves.Algorithm;
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
+import jRubbik.moves.MoveDescription;
 import jRubbik.state.CubeState;
 
 public class SolverCFOP implements Solver {
@@ -54,25 +57,25 @@ public class SolverCFOP implements Solver {
 	
 	
 	@Override
-	public IMove solve(CubeState state) {
+	public  List<IMove> solve(CubeState state) {
 		
 //		state.resetOrientation();
 		
-		final Algorithm ret = new Algorithm();
+		final List<IMove> ret = new ArrayList<IMove>();
 		
 //		inspect(state);
 //		solveCross(state);
 		
 //		System.out.println("solving:");
 //		CubeDisplayer.display(state);
-		
+		ret.add(MoveDescription.createMoveMessage("solve start"));
 		
 		final IMove ollauf = OLLs.matches(state);
 		if (ollauf == null) {
 			System.out.println("OLL Fail");
 			return ret;
 		}
-		ret.addMove(ollauf);
+		ret.add(ollauf);
 		state = ollauf.get(state);
 		
 		
@@ -81,7 +84,7 @@ public class SolverCFOP implements Solver {
 			System.out.println("PLL Fail");
 			return ret;
 		}
-		ret.addMove(pllmove);
+		ret.add(pllmove);
 		state = pllmove.get(state);
 		
 		
@@ -90,7 +93,7 @@ public class SolverCFOP implements Solver {
 			System.out.println("AUF Fail");
 			return ret;
 		}
-		ret.addMove(aufmove);
+		ret.add(aufmove);
 		
 //		System.out.println("match for: "+ollauf.toString()+"\t"+pllmove.toString()+"\tAUF: "+aufmove.toString()+"\t"+(aufmove.get(state).isSolved()?"solved":"FAIL"));
 
