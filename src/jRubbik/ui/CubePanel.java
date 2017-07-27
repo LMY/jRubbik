@@ -27,6 +27,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
+import jRubbik.moves.MoveDescription;
 import jRubbik.moves.MoveParser;
 import jRubbik.state.CubeState;
 import jRubbik.state.Scrambler;
@@ -302,7 +303,11 @@ public abstract class CubePanel extends JPanel {
 		    
 		    try {
 //		    if (node.isLeaf())
-		        setState(e.getPath().getPathCount() == 1 ? new CubeState() : ((DescribedState)nodeInfo).state);
+		    	
+		    	final DescribedState descstate = (DescribedState)nodeInfo;
+		    	
+		    	display(MoveDescription.createMoveMessage(descstate.desc));	// this is a little ugly, but ok
+		        setState(e.getPath().getPathCount() == 1 ? new CubeState() : descstate.state);
 		    }
 		    catch (Exception exc) {}
 //		    else

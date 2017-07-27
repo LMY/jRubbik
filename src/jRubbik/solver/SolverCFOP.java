@@ -97,42 +97,73 @@ public class SolverCFOP implements Solver {
 	}
 	
 	
-	public List<IMove> solveF2L(CubeState state) {
+	private List<IMove> solveF2L_internal(CubeState state) {
 		
 		final List<IMove> ret = new ArrayList<IMove>();
 		final IMove f2l = F2Ls.simlpeMatches(state);
-		if (f2l == null) {
+		
+		if (f2l != null)
+			ret.add(f2l);
+		
+		return ret;
+	}
+
+	private List<IMove> solveOLL_internal(CubeState state) {
+		final List<IMove> ret = new ArrayList<IMove>();
+		final IMove oll = OLLs.matches(state);
+		
+		if (oll != null)
+			ret.add(oll);
+		
+		return ret;
+	}
+
+	private List<IMove> solvePLL_internal(CubeState state) {
+		final List<IMove> ret = new ArrayList<IMove>();
+		final IMove pll = PLLs.matches(state);
+
+		if (pll != null)
+			ret.add(pll);
+		
+		return ret;
+	}
+	
+	public List<IMove> solveF2L(CubeState state) {
+		
+		List<IMove> ret = solveF2L_internal(state);
+		if (ret.size() == 0) {
+			ret = new ArrayList<IMove>();
 			ret.add(MoveDescription.createMoveMessage("F2L Fail"));
 			return ret;
 		}
-		ret.add(f2l);
 		
 		return ret;
 	}
 
 	public List<IMove> solveOLL(CubeState state) {
-		final List<IMove> ret = new ArrayList<IMove>();
-		final IMove oll = OLLs.matches(state);
-		if (oll == null) {
+
+		List<IMove> ret = solveOLL_internal(state);
+		if (ret.size() == 0) {
+			ret = new ArrayList<IMove>();
 			ret.add(MoveDescription.createMoveMessage("OLL Fail"));
 			return ret;
 		}
-		ret.add(oll);
 		
 		return ret;
 	}
 
 	public List<IMove> solvePLL(CubeState state) {
-		final List<IMove> ret = new ArrayList<IMove>();
-		final IMove pll = PLLs.matches(state);
-		if (pll == null) {
+		
+		List<IMove> ret = solvePLL_internal(state);
+		if (ret.size() == 0) {
+			ret = new ArrayList<IMove>();
 			ret.add(MoveDescription.createMoveMessage("PLL Fail"));
 			return ret;
 		}
-		ret.add(pll);
 		
 		return ret;
 	}
+	
 	
 
 	private IMove auf(CubeState state) {
