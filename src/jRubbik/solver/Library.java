@@ -18,6 +18,11 @@ public class Library {
 		reset();
 	}
 	
+	/**
+	 * find a matching alg, using AUF = state.getOrient.getUp()
+	 * @param state
+	 * @return null if no match, the alg if matches, an algorithm with AUF + alg if matches with U/U'/U2
+	 */
 	public IMove matches(CubeState state)
 	{
 		for (int i=0, imax=algorithms.size(); i<imax; i++)
@@ -48,7 +53,13 @@ public class Library {
 		return null;
 	}
 	
-	public IMove simlpeMatches(CubeState state)
+	/**
+	 * as matches(state), but discard auf move.
+	 * @param state
+	 * @return null if no match, matching alg otherwise
+	 */
+	
+	public IMove simlpeMatches(final CubeState state)
 	{
 		for (int i=0, imax=algorithms.size(); i<imax; i++)
 		{
@@ -59,10 +70,10 @@ public class Library {
 				continue;
 
 			// if matches
-			final IMove auf = pattern.matches(state);
+			final IMove auf = pattern.matches(state.clone());
 			
 			if (auf != null)
-				return auf;		
+				return alg;		
 		}
 		
 		// no match

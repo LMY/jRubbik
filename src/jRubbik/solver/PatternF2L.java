@@ -1,7 +1,9 @@
 package jRubbik.solver;
 
 import jRubbik.constants.Color;
+import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
+import jRubbik.moves.MoveNull;
 import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
 import jRubbik.state.OrientatonState;
@@ -18,6 +20,29 @@ public class PatternF2L implements Pattern  {
 	
 	@Override
 	public IMove matches(CubeState state) {
+		
+		IMove ret;
+		
+		ret = doesMatch(state);
+		if (ret != null)
+			return MoveNull.NULL;
+		
+		ret = doesMatch(BasicMoves.MOVE_U.get(state));
+		if (ret != null)
+			return BasicMoves.MOVE_U;
+
+		ret = doesMatch(BasicMoves.MOVE_Ui.get(state));
+		if (ret != null)
+			return BasicMoves.MOVE_Ui;
+
+		ret = doesMatch(BasicMoves.MOVE_U2.get(state));
+		if (ret != null)
+			return BasicMoves.MOVE_U2;
+		
+		return null;
+	}
+	
+	private IMove doesMatch(CubeState state) {
 		
 		final OrientatonState orient = state.getOrientation().clone();
 		final CubeState resstate = alg.get(state.clone());			// possibly sets a new orient
@@ -36,7 +61,7 @@ public class PatternF2L implements Pattern  {
 		if (downface[2] == colorDown && frontface[8] == colorFront && rightface[6] == colorRight && // corner
 			frontface[5] == colorFront && rightface[3] == colorRight)								// edge
 		
-				return alg;
+				return MoveNull.NULL; // matches with no auf
 		
 		else
 			return null;

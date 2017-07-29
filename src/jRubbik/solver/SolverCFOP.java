@@ -100,7 +100,7 @@ public class SolverCFOP implements Solver {
 	private List<IMove> solveF2L_internal(CubeState state) {
 		
 		final List<IMove> ret = new ArrayList<IMove>();
-		final IMove f2l = F2Ls.simlpeMatches(state);
+		final IMove f2l = F2Ls.matches(state);
 		
 		if (f2l != null)
 			ret.add(f2l);
