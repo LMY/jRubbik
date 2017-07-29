@@ -53,7 +53,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		super(state);
 		final MouseClickAndMotionListener ml = new MouseClickAndMotionListener();
 
-		setMouseListener(ml);
+		addMouseListener(ml);
 //		addMouseMotionListener(ml);
 	}
 

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
@@ -39,7 +40,6 @@ public abstract class CubePanel extends JPanel {
 
 	
 	public abstract void display(IMove move);
-	protected abstract void init();
 
 	
 	protected CubeState state;
@@ -59,6 +59,13 @@ public abstract class CubePanel extends JPanel {
 		treeModel = new DefaultTreeModel(stateRoot);
 //		treeModel.addTreeModelListener(new MyTreeModelListener());
 
+//		final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, west_info_panel, table);
+//		final int MIN_WEST_SIZE = 100;
+//		west_info_panel.setMinimumSize(new Dimension(MIN_WEST_SIZE, 0));
+//		split.setOneTouchExpandable(true);
+////		split.setResizeWeight(0);
+//		split.setDividerLocation(MIN_WEST_SIZE);
+		
 		stateTree = new JTree(treeModel);
 		stateTree.setEditable(true);
 		stateTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -138,9 +145,8 @@ public abstract class CubePanel extends JPanel {
 		Panelbasic.add(resetorient);
 		
 		movePanel.add(Panelbasic);
-		
-		init();
-		
+
+
 		display();
 	}
 	

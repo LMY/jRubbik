@@ -1,7 +1,5 @@
 package jRubbik.ui;
 
-import java.awt.BorderLayout;
-
 import jRubbik.moves.IMove;
 import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
@@ -15,12 +13,6 @@ public class CubePanelText extends CubePanel {
 	
 	public CubePanelText(CubeState state) {
 		super(state);
-	}
-	
-	@Override
-	protected void init(){
-		debug = new DebugPanel();
-		add(debug, BorderLayout.CENTER);
 	}
 	
 	@Override
