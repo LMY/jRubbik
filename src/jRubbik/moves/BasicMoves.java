@@ -139,6 +139,7 @@ public class BasicMoves {
 	public static IMove OFFICIAL_SCRAMBLE = new MoveDescription(MoveParser.parseSequence("R2 B2 R2 L' B' R2 U2 B2 F R U2 B2 F' D' R' F R2 L2 B' U'"), "OFFICIAL SCRAMBLE", true);
 	
 	
+	public final static IMove OLL_solved = MoveParser.parseLine("OLL_solved;");
 	public final static IMove OLL_OCLL1 = MoveParser.parseLine("OLL_OCLL1;(R U R' U) R U2 R'");
 	public final static IMove OLL_OCLL2 = MoveParser.parseLine("OLL_OCLL2;R U2 R' U' R U' R'");
 	public final static IMove OLL_OCLL3 = MoveParser.parseLine("OLL_OCLL3;f (R U R' U') f' F (R U R' U') F'");
@@ -146,7 +147,6 @@ public class BasicMoves {
 	public final static IMove OLL_OCLL5 = MoveParser.parseLine("OLL_OCLL5;(r U R' U') (r' F R F')");
 	public final static IMove OLL_OCLL6 = MoveParser.parseLine("OLL_OCLL6;F' (r U R' U') (r' F R )");
 	public final static IMove OLL_OCLL7 = MoveParser.parseLine("OLL_OCLL7;R2 (D (R' U2) R) (D' (R' U2) R')");
-	public final static IMove OLL_solved = MoveParser.parseLine("OLL_solved;");
 	public final static IMove OLL_E1 = MoveParser.parseLine("OLL_E1;(R U R' U') M' (U R U' r')");
 	public final static IMove OLL_E2 = MoveParser.parseLine("OLL_E2; M' U M U2 M' U M");
 	public final static IMove OLL_P1 = MoveParser.parseLine("OLL_P1;f (R U R' U') f'");
@@ -198,6 +198,7 @@ public class BasicMoves {
 	public final static IMove OLL_O7 = MoveParser.parseLine("OLL_O7;(R U R' U) (R' F R F') U2 (R' F R F')");
 	public final static IMove OLL_O8 = MoveParser.parseLine("OLL_O8;M U (R U R' U') M2 (U R U' r')");
 	
+	public final static IMove PLL_solved = MoveParser.parseLine("PLL_solved;");
 	public final static IMove PLL_Ua = MoveParser.parseLine("PLL_Ua;(R U')(R U)(R U)(R U') R' U' R2");
 	public final static IMove PLL_Ub = MoveParser.parseLine("PLL_Ub;R2 U (R U R' U')(R' U')(R' U R')");
 	public final static IMove PLL_Z = MoveParser.parseLine("PLL_Z;U2 (R U R' U)(R' U' R' U)(R U' R' U') R2 U R");
@@ -205,7 +206,6 @@ public class BasicMoves {
 	public final static IMove PLL_Aa = MoveParser.parseLine("PLL_Aa;x ((R' U R') D2)((R U' R') D2) R2 x'");
 	public final static IMove PLL_Ab = MoveParser.parseLine("PLL_Ab;x' ((R U' R) D2)((R' U R) D2) R2 x");
 	public final static IMove PLL_E = MoveParser.parseLine("PLL_E;x'((R U' R') D (R U R')) D' ((R U R') D (R U' R')) D' x");
-	public final static IMove PLL_solved = MoveParser.parseLine("PLL_solved;");
 	public final static IMove PLL_Ra = MoveParser.parseLine("PLL_Ra;(L U2 L' U2)(L F')(L' U' L U)(L F) L2 U");
 	public final static IMove PLL_Rb = MoveParser.parseLine("PLL_Rb;(R' U2 R U2)(R' F)(R U R' U')(R' F') R2 U'");
 	public final static IMove PLL_Ja = MoveParser.parseLine("PLL_Ja;(R' U L')(U2 R U' R' U2)(R L U')");
@@ -221,109 +221,106 @@ public class BasicMoves {
 	public final static IMove PLL_Gc = MoveParser.parseLine("PLL_Gc;R2 u' R U' R U R' u R2 (y R U' R') y'");
 	public final static IMove PLL_Gd = MoveParser.parseLine("PLL_Gd;(R U R') y' R2 u' R U' R' U R' u R2 y");
 	
+	
+	public final static IMove F2L_Solved = MoveParser.parseLine("F2L_Solved;", false);
 	public final static IMove F2L_Easy1 = MoveParser.parseLine("F2L_Easy1;U (R U' R')", false);
 	public final static IMove F2L_Easy2 = MoveParser.parseLine("F2L_Easy2;y' U' (R' U R)", false);
 	public final static IMove F2L_Easy3 = MoveParser.parseLine("F2L_Easy3;y' (R' U' R)", false);
 	public final static IMove F2L_Easy4 = MoveParser.parseLine("F2L_Easy4;(R U R')", false);
 	public final static IMove F2L_RepositionEdge1 = MoveParser.parseLine("F2L_Reposition Edge1;(U' R U R') U2 (R U' R')", false);
 	public final static IMove F2L_RepositionEdge2 = MoveParser.parseLine("F2L_Reposition Edge2;d (R' U' R) U2 (R' U R)", false);
-	public final static IMove F2L_RepositionEdge3 = MoveParser.parseLine("F2L_Reposition Edge3;y' (U R' U' R) U2 (R' U R)", false);
-	public final static IMove F2L_RepositionEdge4 = MoveParser.parseLine("F2L_Reposition Edge4;U' (R U2 R') U2 (R U' R')", false);
-	public final static IMove F2L_RepositionEdge5 = MoveParser.parseLine("F2L_Reposition Edge5;d (R' U2 R) U2 (R' U R)", false);
-	public final static IMove F2L_RepositionEdge6 = MoveParser.parseLine("F2L_Reposition Edge6;y' U (R' U2 R) U2 (R' U R)", false);
+	public final static IMove F2L_RepositionEdge2b = MoveParser.parseLine("F2L_Reposition Edge2b;y' (U R' U' R) U2 (R' U R)", false);
+	public final static IMove F2L_RepositionEdge3 = MoveParser.parseLine("F2L_Reposition Edge3;U' (R U2 R') U2 (R U' R')", false);
+	public final static IMove F2L_RepositionEdge4 = MoveParser.parseLine("F2L_Reposition Edge4;d (R' U2 R) U2 (R' U R)", false);
+	public final static IMove F2L_RepositionEdge4b = MoveParser.parseLine("F2L_Reposition Edge4b;y' U (R' U2 R) U2 (R' U R)", false);
 	public final static IMove F2L_RepositionEdgFlipCorner1 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner1;d (R' U' R U')(R' U' R)", false);
-	public final static IMove F2L_RepositionEdgFlipCorner2 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner2;y2 U' (L U') d' (L' U' L)", false);
-	public final static IMove F2L_RepositionEdgFlipCorner3 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner3;U' (R U R' U)(R U R')", false);
-	public final static IMove F2L_RepositionEdgFlipCorner4 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner4;U' (R U2 R') d (R' U' R) d (R' U2 R) d' (R U R')", false);
-	public final static IMove F2L_RepositionEdgFlipCorner5 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner5;d (R' U R U')(R' U' R)", false);
-	public final static IMove F2L_RepositionEdgFlipCorner6 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner6;y' U (R' U R U')(R' U' R)", false);
-	public final static IMove F2L_RepositionEdgFlipCorner7 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner7;U' (R U' R' U)(R U R')", false);
+	public final static IMove F2L_RepositionEdgFlipCorner1b = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner1b;y2 U' (L U') d' (L' U' L)", false);
+	public final static IMove F2L_RepositionEdgFlipCorner2 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner2;U' (R U R' U)(R U R')", false);
+	public final static IMove F2L_RepositionEdgFlipCorner3 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner3;U' (R U2 R') d (R' U' R)", false);
+	public final static IMove F2L_RepositionEdgFlipCorner4 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner4;d (R' U R U')(R' U' R)", false);
+	public final static IMove F2L_RepositionEdgFlipCorner4b = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner4b;y' U (R' U R U')(R' U' R)", false);
+	public final static IMove F2L_RepositionEdgFlipCorner5 = MoveParser.parseLine("F2L_Reposition Edge and Flip Corner5;U' (R U' R' U)(R U R')", false);
 	public final static IMove F2L_SplitPairGoingOver1 = MoveParser.parseLine("F2L_Split Pair by Going Over1;y' (R' U R U') d' (R U R')", false);
-	public final static IMove F2L_SplitPairGoingOver2 = MoveParser.parseLine("F2L_Split Pair by Going Over2;y (L' U L) U2 y (R U R')", false);
-	public final static IMove F2L_SplitPairGoingOver3 = MoveParser.parseLine("F2L_Split Pair by Going Over3(R U' R' U) d (R' U' R)", false);
-	public final static IMove F2L_SplitPairGoingOver4 = MoveParser.parseLine("F2L_Split Pair by Going Over4(R U' R') U2 (F' U' F)", false);
-	public final static IMove F2L_SplitPairGoingOver5 = MoveParser.parseLine("F2L_Split Pair by Going Over5(R U2 R') U' (R U R') y' (R' U2 R) U (R' U' R)", false);
-	public final static IMove F2L_PairMadeOnSide1 = MoveParser.parseLine("F2L_Pair Made on Side1;U (R U2 R') U (R U' R') y' U' (R' U2 R) U' (R' U R)", false);
-	public final static IMove F2L_PairMadeOnSide2 = MoveParser.parseLine("F2L_Pair Made on Side2;U2 (R U R' U)(R U' R') y' U2 (R' U' R U')(R' U R)", false);
+	public final static IMove F2L_SplitPairGoingOver1b = MoveParser.parseLine("F2L_Split Pair by Going Over1b;y (L' U L) U2 y (R U R')", false);
+	public final static IMove F2L_SplitPairGoingOver2 = MoveParser.parseLine("F2L_Split Pair by Going Over2;(R U' R' U) d (R' U' R)", false);
+	public final static IMove F2L_SplitPairGoingOver2b = MoveParser.parseLine("F2L_Split Pair by Going Over2b;(R U' R') U2 (F' U' F)", false);
+	public final static IMove F2L_SplitPairGoingOver3 = MoveParser.parseLine("F2L_Split Pair by Going Over3;(R U2 R') U' (R U R')", false);
+	public final static IMove F2L_SplitPairGoingOver4 = MoveParser.parseLine("F2L_Split Pair by Going Over4;y' (R' U2 R) U (R' U' R)", false);
+	public final static IMove F2L_PairMadeOnSide1 = MoveParser.parseLine("F2L_Pair Made on Side1;U (R U2 R') U (R U' R')", false);
+	public final static IMove F2L_PairMadeOnSide2 = MoveParser.parseLine("F2L_Pair Made on Side2;y' U2 (R' U' R U')(R' U R)", false);
+	public final static IMove F2L_PairMadeOnSide3 = MoveParser.parseLine("F2L_Pair Made on Side2;U2 (R U R' U)(R U' R')", false);
+	public final static IMove F2L_PairMadeOnSide4 = MoveParser.parseLine("F2L_Pair Made on Side2;y' U2 (R' U' R U')(R' U R)", false);
 	public final static IMove F2L_Weird1 = MoveParser.parseLine("F2L_Weird1;(R U R' U') U' (R U R' U')(R U R')", false);
-	public final static IMove F2L_Weird2 = MoveParser.parseLine("F2L_Weird2;U2 R2 U2 (R' U' R U') R2", false);
-	public final static IMove F2L_Weird3 = MoveParser.parseLine("F2L_Weird3;y' (R' U' R U) U (R' U' R U)(R' U' R)", false);
-	public final static IMove F2L_Weird4 = MoveParser.parseLine("F2L_Weird4;y' U2 R2 U2 (R U R' U) R2", false);
+	public final static IMove F2L_Weird1b = MoveParser.parseLine("F2L_Weird1b;U2 R2 U2 (R' U' R U') R2", false);
+	public final static IMove F2L_Weird2 = MoveParser.parseLine("F2L_Weird2;y' (R' U' R U) U (R' U' R U)(R' U' R)", false);
+	public final static IMove F2L_Weird2b = MoveParser.parseLine("F2L_Weird2b;y' U2 R2 U2 (R U R' U) R2", false);
 	public final static IMove F2L_CornerInPlaceEdgeInU1 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face1;d' (L' U L) d (R U' R')", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU2 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face2;y U' (L' U' L) U (F U F')", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU3 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face3;U' (F' U F) U (R U' R')", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU4 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face4;U (R U' R') d' (L' U L)", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU5 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face5;U (R U' R') U' (F' U F)", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU6 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face6;(R U' R' U)(R U' R')", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU7 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face7;y' (R' U R U')(R' U R)", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU8 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face8;(R U' R') U2 (F' U F)", false);
-	public final static IMove F2L_CornerInPlaceEdgeInU9 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face9;y' (R' U' R U)(R' U' R) (R U R' U')(R U R')", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU1b = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face1b;y U' (L' U' L) U (F U F')", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU1c = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face1c;U' (F' U F) U (R U' R')", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU2 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face2;U (R U' R') d' (L' U L)", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU2b = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face2b;U (R U' R') U' (F' U F)", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU3 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face3;(R U' R' U)(R U' R')", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU4 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face4;y' (R' U R U')(R' U R)", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU4b = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face4b;(R U' R') U2 (F' U F)", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU5 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face5;y' (R' U' R U)(R' U' R)", false);
+	public final static IMove F2L_CornerInPlaceEdgeInU6 = MoveParser.parseLine("F2L_Corner in Place, Edge in U Face;(R U R' U')(R U R')", false);
 	public final static IMove F2L_EdgeInPlaceCornerIU1 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face1;(R U' R') d (R' U R)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU2 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face2;(R U' R' U)(F' U F)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU3 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face3;(R U R' U')(R U R' U')(R U R')", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU4 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face4;(U' R U' R') U2 (R U' R')", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU5 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face5;y U' (L U' L') U2 (L U' L)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU6 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face6;U' (R U2 R') U (R U R')", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU7 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face7;U (R U R') U2 (R U R')", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU8 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face8;d (R' U R) U2 (R' U R)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU9 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face9;(U' R U R') d (R' U' R)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU10 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face10;U2 (R U' R') U' (F' U' F)", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU11 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face11;d (R' U' R) d' (R U R')", false);
-	public final static IMove F2L_EdgeInPlaceCornerIU12 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face12;y U2 (L' U L) U (F U F')", false);
-	public final static IMove F2L_Solved = MoveParser.parseLine("F2L_Solved;", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU1b = MoveParser.parseLine("F2L_Edge in Place, Corner in U face1b;(R U' R' U)(F' U F)", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU2 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face2;(R U R' U')(R U R' U')(R U R')", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU3 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face3;(U' R U' R') U2 (R U' R')", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU3b = MoveParser.parseLine("F2L_Edge in Place, Corner in U face3b;y U' (L U' L') U2 (L U' L)", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU4 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face4;U' (R U2 R') U (R U R')", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU4b = MoveParser.parseLine("F2L_Edge in Place, Corner in U face4b;U (R U R') U2 (R U R')", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU4c = MoveParser.parseLine("F2L_Edge in Place, Corner in U face4c;d (R' U R) U2 (R' U R)", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU5 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face5;(U' R U R') d (R' U' R)", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU5b = MoveParser.parseLine("F2L_Edge in Place, Corner in U face5b;U2 (R U' R') U' (F' U' F)", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU6 = MoveParser.parseLine("F2L_Edge in Place, Corner in U face6;d (R' U' R) d' (R U R')", false);
+	public final static IMove F2L_EdgeInPlaceCornerIU6b = MoveParser.parseLine("F2L_Edge in Place, Corner in U face6b;y U2 (L' U L) U (F U F')", false);
+
 	public final static IMove F2L_EdgeAndCornerInPlace1 = MoveParser.parseLine("F2L_Edge and Corner in Place1;(R U' R') d (R' U2 R) U2 (R' U R)", false);
-	public final static IMove F2L_EdgeAndCornerInPlace2 = MoveParser.parseLine("F2L_Edge and Corner in Place2;(R U R') U2 (R U2 R') d (R' U' R)", false);
-	public final static IMove F2L_EdgeAndCornerInPlace3 = MoveParser.parseLine("F2L_Edge and Corner in Place3;(R U' R') U' (R U R') U2 (R U' R')", false);
-	public final static IMove F2L_EdgeAndCornerInPlace4 = MoveParser.parseLine("F2L_Edge and Corner in Place4;y (L' U' L) U2 (L' U L U')(L' U' L)", false);
-	public final static IMove F2L_EdgeAndCornerInPlace5 = MoveParser.parseLine("F2L_Edge and Corner in Place5;(R U' R' U)(R U2 R') U (R U' R')", false);
-	public final static IMove F2L_EdgeAndCornerInPlace6 = MoveParser.parseLine("F2L_Edge and Corner in Place6;(R U R') U2 (R U' R' U)(R U R')", false);
-	public final static IMove F2L_EdgeAndCornerInPlace7 = MoveParser.parseLine("F2L_Edge and Corner in Place7;(R U' R') d (R' U' R U')(R' U' R)", false);
-	public final static IMove F2L_EdgeAndCornerInPlace8 = MoveParser.parseLine("F2L_Edge and Corner in Place8;y (L' U' L U)(L' U L) U2 (F U F')", false);
-	public final static IMove F2L_EdgeAndCornerInPlace9 = MoveParser.parseLine("F2L_Edge and Corner in Place9;(R U' R') d2 y (R' U' R U')(R' U R)", false);
-	public final static IMove F2L_EdgeAndCornerInPlace10 = MoveParser.parseLine("F2L_Edge and Corner in Place10;(R U R' U')(R U' R') U2 (F' U' F", false);
+	public final static IMove F2L_EdgeAndCornerInPlace1b = MoveParser.parseLine("F2L_Edge and Corner in Place1b;(R U R') U2 (R U2 R') d (R' U' R)", false);
+	public final static IMove F2L_EdgeAndCornerInPlace2 = MoveParser.parseLine("F2L_Edge and Corner in Place2;(R U' R') U' (R U R') U2 (R U' R')", false);
+	public final static IMove F2L_EdgeAndCornerInPlace2b = MoveParser.parseLine("F2L_Edge and Corner in Place2b;y (L' U' L) U2 (L' U L U')(L' U' L)", false);
+	public final static IMove F2L_EdgeAndCornerInPlace3 = MoveParser.parseLine("F2L_Edge and Corner in Place3;(R U' R' U)(R U2 R') U (R U' R')", false);
+	public final static IMove F2L_EdgeAndCornerInPlace3b = MoveParser.parseLine("F2L_Edge and Corner in Place3b;(R U R') U2 (R U' R' U)(R U R')", false);
+	public final static IMove F2L_EdgeAndCornerInPlace4 = MoveParser.parseLine("F2L_Edge and Corner in Place4;(R U' R') d (R' U' R U')(R' U' R)", false);
+	public final static IMove F2L_EdgeAndCornerInPlace4b = MoveParser.parseLine("F2L_Edge and Corner in Place4b;y (L' U' L U)(L' U L) U2 (F U F')", false);
+	public final static IMove F2L_EdgeAndCornerInPlace5 = MoveParser.parseLine("F2L_Edge and Corner in Place5;(R U' R') d2 y (R' U' R U')(R' U R)", false);
+	public final static IMove F2L_EdgeAndCornerInPlace5b = MoveParser.parseLine("F2L_Edge and Corner in Place5b;(R U R' U')(R U' R') U2 (F' U' F", false);
 	
 			
 	
 	public final static IMove[] F2Ls = {
-			
 			F2L_Solved,
-			
 			F2L_Easy1, F2L_Easy2, F2L_Easy3, F2L_Easy4,
-			
-			F2L_RepositionEdge1, F2L_RepositionEdge2, F2L_RepositionEdge3, F2L_RepositionEdge4, F2L_RepositionEdge5, F2L_RepositionEdge6,
-			
+			F2L_RepositionEdge1, F2L_RepositionEdge2, F2L_RepositionEdge3, F2L_RepositionEdge4,
 			F2L_RepositionEdgFlipCorner1, F2L_RepositionEdgFlipCorner2, F2L_RepositionEdgFlipCorner3, F2L_RepositionEdgFlipCorner4,
-			F2L_RepositionEdgFlipCorner5, F2L_RepositionEdgFlipCorner6, F2L_RepositionEdgFlipCorner7,
-			F2L_SplitPairGoingOver1, F2L_SplitPairGoingOver2, F2L_SplitPairGoingOver3, F2L_SplitPairGoingOver4, F2L_SplitPairGoingOver5,
+			F2L_RepositionEdgFlipCorner5,
+			F2L_SplitPairGoingOver1, F2L_SplitPairGoingOver2, F2L_SplitPairGoingOver3, F2L_SplitPairGoingOver4,
 			F2L_PairMadeOnSide1, F2L_PairMadeOnSide2,
-			F2L_Weird1, F2L_Weird2, F2L_Weird3, F2L_Weird4,
-			F2L_CornerInPlaceEdgeInU1, F2L_CornerInPlaceEdgeInU2, F2L_CornerInPlaceEdgeInU3, F2L_CornerInPlaceEdgeInU4,
-			F2L_CornerInPlaceEdgeInU5, F2L_CornerInPlaceEdgeInU6, F2L_CornerInPlaceEdgeInU7, F2L_CornerInPlaceEdgeInU8, F2L_CornerInPlaceEdgeInU9,
-			F2L_EdgeInPlaceCornerIU1, F2L_EdgeInPlaceCornerIU2, F2L_EdgeInPlaceCornerIU3, F2L_EdgeInPlaceCornerIU4, F2L_EdgeInPlaceCornerIU5,
-			F2L_EdgeInPlaceCornerIU6, F2L_EdgeInPlaceCornerIU7, F2L_EdgeInPlaceCornerIU8, F2L_EdgeInPlaceCornerIU9, F2L_EdgeInPlaceCornerIU10,
-			F2L_EdgeInPlaceCornerIU11, F2L_EdgeInPlaceCornerIU12,
+			F2L_Weird1, F2L_Weird2,
+			F2L_CornerInPlaceEdgeInU1, F2L_CornerInPlaceEdgeInU2, F2L_CornerInPlaceEdgeInU3, F2L_CornerInPlaceEdgeInU4, F2L_CornerInPlaceEdgeInU5, F2L_CornerInPlaceEdgeInU6,
+			F2L_EdgeInPlaceCornerIU1, F2L_EdgeInPlaceCornerIU2, F2L_EdgeInPlaceCornerIU3, F2L_EdgeInPlaceCornerIU4, F2L_EdgeInPlaceCornerIU5, F2L_EdgeInPlaceCornerIU6,
 			F2L_EdgeAndCornerInPlace1, F2L_EdgeAndCornerInPlace2, F2L_EdgeAndCornerInPlace3, F2L_EdgeAndCornerInPlace4, F2L_EdgeAndCornerInPlace5,
-			F2L_EdgeAndCornerInPlace6, F2L_EdgeAndCornerInPlace7, F2L_EdgeAndCornerInPlace8, F2L_EdgeAndCornerInPlace9, F2L_EdgeAndCornerInPlace10
-		};
-					
-	public final static IMove[] PLLs = {
-			PLL_solved, PLL_Ua, PLL_Ub, PLL_Z, PLL_H, PLL_Aa, PLL_Ab, PLL_E, PLL_Ra, PLL_Rb, PLL_Ja, 
-			PLL_Jb, PLL_T, PLL_F, PLL_V, PLL_Y, PLL_Na, PLL_Nb, PLL_Ga, PLL_Gb, PLL_Gc, PLL_Gd
-		};
+	};
 	
 	public final static IMove[] OLLs = { OLL_OCLL1, OLL_OCLL2, OLL_OCLL3, OLL_OCLL4, OLL_OCLL5, OLL_OCLL6, OLL_OCLL7, OLL_solved,
 			OLL_E1, OLL_E2, OLL_P1, OLL_P2, OLL_P3, OLL_P4, OLL_W1, OLL_W2, OLL_S1, OLL_S2, OLL_L1, OLL_L2, OLL_L3, OLL_L4, OLL_L5, OLL_L6,
 			OLL_F1, OLL_F2, OLL_F3, OLL_F4, OLL_A1, OLL_A2, OLL_A3, OLL_A4, OLL_LB1, OLL_LB2, OLL_LB3, OLL_LB4, OLL_LB5, OLL_LB6, OLL_T1, OLL_Xy, OLL_C1,
 			OLL_C2, OLL_I1, OLL_I2, OLL_I3, OLL_I4, OLL_K1, OLL_K2, OLL_K3, OLL_K4, OLL_O1, OLL_O2, OLL_O3, OLL_O4, OLL_O5, OLL_O6, OLL_O7, OLL_O8
-		};
+	};
+					
+	public final static IMove[] PLLs = {
+			PLL_solved, PLL_Ua, PLL_Ub, PLL_Z, PLL_H, PLL_Aa, PLL_Ab, PLL_E, PLL_Ra, PLL_Rb, PLL_Ja, 
+			PLL_Jb, PLL_T, PLL_F, PLL_V, PLL_Y, PLL_Na, PLL_Nb, PLL_Ga, PLL_Gb, PLL_Gc, PLL_Gd
+	};
+
 	
 	public final static IMove[] COMMON_SEQUENCES = {
 			MOVE_SEQ_SEXY, MOVE_SEQ_SEXY_INV,
 			MOVE_SEQ_SLEDGE, MOVE_SEQ_SLEDGE_INV,
 	};
-			
-//			OFFICIAL_SCRAMBLE 
-	
+
 	
 	public final static IMove[][] ALL_COLLECTIONS = { 
 			ALL_SIMPLE, ALL_SIMPLE_INV, ALL_SIMPLE2,
