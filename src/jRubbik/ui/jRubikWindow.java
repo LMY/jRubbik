@@ -248,7 +248,8 @@ public class jRubikWindow extends JFrame {
 		menubar.add(filemenu);
 //		menubar.add(debugmenu);
 		menubar.add(createMenuMovesList("Custom", BasicMoves.COMMON_SEQUENCES));
-		menubar.add(createMenuMovesGrid("OLL", BasicMoves.OLLs));
+		menubar.add(createMenuMovesGrid("F2L", BasicMoves.F2Ls, 2));
+		menubar.add(createMenuMovesGrid("OLL", BasicMoves.OLLs, 7));
 		menubar.add(createMenuMovesList("PLL", BasicMoves.PLLs));
 		menubar.add(solvermenu);
 		menubar.add(viewmenu);
@@ -262,14 +263,12 @@ public class jRubikWindow extends JFrame {
 	
 	// align OLLs in a grid. there are too many for a normal vertical menu...
 	// https://stackoverflow.com/questions/7913938/java-swing-how-to-align-menu-items-in-rows-and-columns
-	private JMenu createMenuMovesGrid(String name, IMove[] moves) {
+	private JMenu createMenuMovesGrid(String name, IMove[] moves, final int columns) {
 	    
 		final JMenu menu = new JMenu(name);
 	    final JPopupMenu popupMenu = menu.getPopupMenu();
 	    
-	    final int columns = 7;
-	    @SuppressWarnings("unused")
-		final int rows = moves.length/(columns == 0 ? 1 : columns) + 1;
+		final int rows = (int) Math.ceil((double) moves.length/(columns == 0 ? 1 : columns));
 	    
 	    popupMenu.setLayout(new GridLayout(rows, columns));
 	    

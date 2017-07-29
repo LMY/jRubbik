@@ -19,52 +19,38 @@ public class PatternF2L implements Pattern  {
 	
 	
 	@Override
-	public IMove matches(CubeState state) {
-		
-		IMove ret;
-		
-		ret = doesMatch(state);
-		if (ret != null)
-			return MoveNull.NULL;
-		
-		ret = doesMatch(BasicMoves.MOVE_U.get(state));
-		if (ret != null)
-			return BasicMoves.MOVE_U;
-
-		ret = doesMatch(BasicMoves.MOVE_Ui.get(state));
-		if (ret != null)
-			return BasicMoves.MOVE_Ui;
-
-		ret = doesMatch(BasicMoves.MOVE_U2.get(state));
-		if (ret != null)
-			return BasicMoves.MOVE_U2;
-		
-		return null;
-	}
-	
-	private IMove doesMatch(CubeState state) {
+	public boolean matches(CubeState state) {
 		
 		final OrientatonState orient = state.getOrientation().clone();
-		final CubeState resstate = alg.get(state.clone());			// possibly sets a new orient
-		resstate.setOrientation(orient);							// restore the original orient
+		final CubeState resstate = alg.get(state);			// possibly sets a new orient
+		resstate.setOrientation(orient);					// restore the original orient
 		
 		final Color[][] colors = CubeDisplayer.getColors(resstate);
 		
-		final Color colorDown = orient.getDown();
-		final Color colorFront = orient.getFront();
-		final Color colorRight = orient.getRight();
-		
-		final Color[] downface = CubeDisplayer.getFace(colors, colorDown);
-		final Color[] frontface = CubeDisplayer.getFace(colors, colorFront);
-		final Color[] rightface = CubeDisplayer.getFace(colors, colorRight);
+		final Color[] downface = CubeDisplayer.getFace(colors, Color.WHITE);
+		final Color[] frontface = CubeDisplayer.getFace(colors, Color.RED);
+		final Color[] rightface = CubeDisplayer.getFace(colors, Color.GREEN);
 
-		if (downface[2] == colorDown && frontface[8] == colorFront && rightface[6] == colorRight && // corner
-			frontface[5] == colorFront && rightface[3] == colorRight)								// edge
+		return (downface[2] == downface[4] && frontface[8] == frontface[4] && rightface[6] == rightface[4] && // corner
+			frontface[5] == frontface[4] && rightface[3] == rightface[4]);									// edge
+	}
+	
+	@Override
+	public IMove matchesAUF(CubeState state) {
 		
-				return MoveNull.NULL; // matches with no auf
+		if (matches(state))
+			return MoveNull.NULL;
 		
-		else
-			return null;
+		if (matches(BasicMoves.MOVE_U.get(state)))
+			return BasicMoves.MOVE_U;
+
+		if (matches(BasicMoves.MOVE_Ui.get(state)))
+			return BasicMoves.MOVE_Ui;
+		
+		if (matches(BasicMoves.MOVE_U2.get(state)))
+			return BasicMoves.MOVE_U2;
+		
+		return null;
 	}
 	
 	

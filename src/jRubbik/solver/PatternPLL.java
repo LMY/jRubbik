@@ -16,7 +16,43 @@ public class PatternPLL implements Pattern {
 	}
 	
 	@Override
-	public IMove matches(CubeState state)
+	public boolean matches(CubeState state)
+	{
+		final Color[][] colors = CubeDisplayer.getColors(state);
+		final Color[] crown = CubeDisplayer.getCrown(colors, Color.YELLOW);
+
+		final Color value = crown[(pattern[0][0])%12];
+		boolean ok = true;
+		
+		for (int k=1; k<3; k++)
+			if (value != crown[(pattern[0][k])%12]) {
+				ok = false;
+				break;
+			}
+			
+		if (ok)		
+			for (int p=1; p<4; p++) {
+				Color value2 = crown[(pattern[p][0])%12];
+				boolean ok2 = true;
+				
+				for (int k=1; k<3; k++)
+					if (value2 != crown[(pattern[p][k])%12]) {
+						ok2 = false;
+						break;
+					}
+				
+				if (!ok2)
+					continue;
+			
+				return true;
+	
+			}
+	
+		return false;
+	}
+	
+	@Override
+	public IMove matchesAUF(CubeState state)
 	{
 		final IMove auf = BasicMoves.color2simpleMove(Color.YELLOW, 0);
 	

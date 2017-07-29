@@ -19,7 +19,22 @@ public class PatternOLL implements Pattern {
 	}
 	
 	@Override
-	public IMove matches(CubeState state)
+	public boolean matches(CubeState state)
+	{
+		final Color up = state.getOrientation().getUp();
+		final Color[][] colors = CubeDisplayer.getColors(state);
+		
+		final Color[] cface = CubeDisplayer.getFace(colors, Color.YELLOW);
+		final Color[] ccrown = CubeDisplayer.getCrown(colors, Color.YELLOW);
+
+		final boolean[] bface = toBoolArray(cface, up);
+		final boolean[] bcrown = toBoolArray(ccrown, up);
+		
+		return (arrayEquals(bface, pface) && arrayEquals(bcrown, pcrown));
+	}
+
+	@Override
+	public IMove matchesAUF(CubeState state)
 	{
 		final Color up = state.getOrientation().getUp();
 		final Color[][] colors = CubeDisplayer.getColors(state);
@@ -56,8 +71,6 @@ public class PatternOLL implements Pattern {
 		
 		return null;
 	}
-
-
 
 	private static boolean arrayEquals(boolean[] a, boolean[] b) {
 		if (a.length != b.length)

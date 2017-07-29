@@ -34,7 +34,7 @@ public class Library {
 				continue;
 
 			// if matches
-			final IMove auf = pattern.matches(state);
+			final IMove auf = pattern.matchesAUF(state);
 			
 			if (auf != null) {
 				if (auf == MoveNull.NULL)	// without auf, simply return the algorithm
@@ -70,7 +70,7 @@ public class Library {
 				continue;
 
 			// if matches
-			final IMove auf = pattern.matches(state.clone());
+			final IMove auf = pattern.matchesAUF(state.clone());
 			
 			if (auf != null)
 				return alg;		
