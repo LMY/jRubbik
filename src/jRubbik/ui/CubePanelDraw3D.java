@@ -1,10 +1,6 @@
 package jRubbik.ui;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.event.MouseInputListener;
 
 import jRubbik.constants.Color;
 import jRubbik.state.CubeState;
@@ -14,46 +10,49 @@ import jRubbik.utils.Point3d;
 
 public class CubePanelDraw3D extends CubePanelCanvas {
 
-	class MouseClickAndMotionListener implements MouseListener, MouseInputListener {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			updatestuff(e);
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			updatestuff(e);
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {}
-		
-		private void updatestuff(MouseEvent e) {
-			setCenter(e.getX(), e.getY(), zclip);
-			repaint();
-//			invalidate();
-		}
-		
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-		
-		@Override
-		public void mouseExited(MouseEvent e) {}
-		
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-		}
+//	class MouseClickAndMotionListener implements MouseListener, MouseInputListener {
+//		@Override
+//		public void mousePressed(MouseEvent e) {
+//			updatestuff(e);
+//		}
+//
+//		@Override
+//		public void mouseDragged(MouseEvent e) {
+//			updatestuff(e);
+//		}
+//
+//		@Override
+//		public void mouseMoved(MouseEvent e) {}
+//		
+//		private void updatestuff(MouseEvent e) {
+//			setCenter(e.getX(), e.getY(), zclip);
+//			repaint();
+////			invalidate();
+//		}
+//		
+//		@Override
+//		public void mouseReleased(MouseEvent e) {}
+//		
+//		@Override
+//		public void mouseExited(MouseEvent e) {}
+//		
+//		@Override
+//		public void mouseEntered(MouseEvent e) {}
+//		
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//		}
+//	}
+//	
+	public CubePanelDraw3D() {
+		this(null);
 	}
-	
 	
 	public CubePanelDraw3D(CubeState state) {
 		super(state);
-		final MouseClickAndMotionListener ml = new MouseClickAndMotionListener();
+//		final MouseClickAndMotionListener ml = new MouseClickAndMotionListener();
 
-		addMouseListener(ml);
+//		addMouseListener(ml);
 //		addMouseMotionListener(ml);
 	}
 
@@ -64,7 +63,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		
 //		setCenter(width/2, height/2, zclip);
 		
-		return new Point2i();
+		return new Point2i((width - -50)/2, (height - 300)/2);
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 				final Color drawColor = colors[facecolor.toInt()][idx];
 				
 				if (drawColor == null) continue;
-				drawQuad(g, drawColor, x, y, facecolor);
+				drawQuad(g, drawColor, x, y, facecolor, pad);
 			}
 	}
 	
@@ -117,7 +116,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		};
 	
 	
-	private void drawQuad(Graphics g, Color drawColor, int x, int y, Color facecolor) {
+	private void drawQuad(Graphics g, Color drawColor, int x, int y, Color facecolor, Point2i pad) {
 
 
 		
@@ -139,7 +138,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		pts[3] = Point3d.add(offset, Point3d.add(Point3d.multiply(deltax, 0), Point3d.multiply(deltay, 1)));
 		
 		g.setColor(java.awt.Color.BLACK);
-		fillQuad_3D(g, pts, false);
+		fillQuad_3D(g, pts, false, pad);
 		
 		pts[0] = Point3d.add(pts[0], Point3d.add(Point3d.multiply(sdeltax, +1), Point3d.multiply(sdeltay, +1)));
 		pts[1] = Point3d.add(pts[1], Point3d.add(Point3d.multiply(sdeltax, -1), Point3d.multiply(sdeltay, +1)));
@@ -147,7 +146,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 		pts[3] = Point3d.add(pts[3], Point3d.add(Point3d.multiply(sdeltax, +1), Point3d.multiply(sdeltay, -1)));
 		
 		g.setColor(drawColor.toAwtColor());
-		fillQuad_3D(g, pts, false);
+		fillQuad_3D(g, pts, false, pad);
 	}
 	
 
@@ -164,7 +163,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 	 * @param g
 	 * @param points
 	 */
-	private void fillQuad_3D(Graphics g, Point3d[] points, boolean debug)
+	private void fillQuad_3D(Graphics g, Point3d[] points, boolean debug, Point2i pad)
 	{
 		final Point2d[] pts = new Point2d[points.length];
 		
@@ -185,7 +184,7 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 				System.out.println(points[i].toString()+" -> "+pts[i].toString()  );
 		}
 		
-		fillQuad_2D(g, pts);
+		fillQuad_2D(g, pts, pad);
 	}
 	
 	/**
@@ -193,14 +192,14 @@ public class CubePanelDraw3D extends CubePanelCanvas {
 	 * @param g
 	 * @param points
 	 */
-	private void fillQuad_2D(Graphics g, Point2d[] points)
+	private void fillQuad_2D(Graphics g, Point2d[] points, Point2i pad)
 	{
 		final int[] xPoints = new int[points.length];
 		final int[] yPoints = new int[points.length];
 		
 		for (int i=0; i<points.length; i++) {
-			xPoints[i] = (int)points[i].getX();
-			yPoints[i] = (int)points[i].getY();
+			xPoints[i] = (int)points[i].getX() - pad.getX();
+			yPoints[i] = (int)points[i].getY() - pad.getY();
 		}
 		
 		g.fillPolygon(xPoints, yPoints, xPoints.length);

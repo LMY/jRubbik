@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
+import javax.swing.JPanel;
 
 import jRubbik.constants.Color;
 import jRubbik.moves.IMove;
@@ -12,7 +13,7 @@ import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
 import jRubbik.utils.Point2i;
 
-public abstract class CubePanelCanvas extends CubePanel {
+public abstract class CubePanelCanvas extends JPanel {
 
 	private static final long serialVersionUID = -67198559360623931L;
 
@@ -27,9 +28,12 @@ public abstract class CubePanelCanvas extends CubePanel {
 		draw(g, (int)width, (int)height);
 	}
 
+	private CubeState state;
 	
 	public CubePanelCanvas(CubeState state) {
-		super(state);
+		super();
+		
+		this.state = state;
 	}
 	
 
@@ -73,12 +77,21 @@ public abstract class CubePanelCanvas extends CubePanel {
 
 	private String message = "";
 	
-	@Override
+//	@Override
 	public void display(IMove move) {
 		
 		if (move != null)
 			message = move.toString();
 		
+		repaint();
+	}
+
+	public CubeState getState() {
+		return state;
+	}
+
+	public void setState(CubeState state) {
+		this.state = state;
 		repaint();
 	}
 }

@@ -10,6 +10,10 @@ import jRubbik.utils.Point2i;
 public class CubePanelDraw2D extends CubePanelCanvas {
 	private static final long serialVersionUID = -309685209173596186L;
 
+	public CubePanelDraw2D() {
+		this(null);
+	}
+	
 	public CubePanelDraw2D(CubeState state) {
 		super(state);
 	}

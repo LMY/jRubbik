@@ -4,19 +4,19 @@ import jRubbik.moves.IMove;
 import jRubbik.state.CubeDisplayer;
 import jRubbik.state.CubeState;
 
-public class CubePanelText extends CubePanel {
+public class CubePanelText extends DebugPanel {
 
 	private static final long serialVersionUID = -309685209173596186L;
 	
 	
-	private DebugPanel debug;
+	private CubeState state;
 	
 	public CubePanelText(CubeState state) {
-		super(state);
+		super();
+		this.state = state;
 	}
 	
-	@Override
 	public void display(IMove move) {
-		debug.setText((move!=null?move.toString():"")+"\n" + CubeDisplayer.toString(state));
+		setText((move!=null?move.toString():"")+"\n" + CubeDisplayer.toString(state));
 	}
 }

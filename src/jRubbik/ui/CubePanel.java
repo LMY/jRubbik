@@ -3,6 +3,7 @@ package jRubbik.ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,15 +35,22 @@ import jRubbik.state.CubeState;
 import jRubbik.state.Scrambler;
 
 @SuppressWarnings("unused")
-public abstract class CubePanel extends JPanel {
+public class CubePanel extends JPanel {
 
 	private static final long serialVersionUID = -8791902983413545183L;
 
 	
-	public abstract void display(IMove move);
+	public void display(IMove move) {
+		canvas2D.setState(state);
+		canvas3D.setState(state);
+		canvas2D.display(move);
+		canvas3D.display(move);
+	}
 
+	private CubePanelCanvas canvas2D;
+	private CubePanelCanvas canvas3D;
 	
-	protected CubeState state;
+	private CubeState state;
 	private JTextField sequenceField;
 	private JTree stateTree;
 	private DefaultTreeModel treeModel;
@@ -59,13 +67,7 @@ public abstract class CubePanel extends JPanel {
 		treeModel = new DefaultTreeModel(stateRoot);
 //		treeModel.addTreeModelListener(new MyTreeModelListener());
 
-//		final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, west_info_panel, table);
-//		final int MIN_WEST_SIZE = 100;
-//		west_info_panel.setMinimumSize(new Dimension(MIN_WEST_SIZE, 0));
-//		split.setOneTouchExpandable(true);
-////		split.setResizeWeight(0);
-//		split.setDividerLocation(MIN_WEST_SIZE);
-		
+
 		stateTree = new JTree(treeModel);
 		stateTree.setEditable(true);
 		stateTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -102,10 +104,39 @@ public abstract class CubePanel extends JPanel {
 		south.add(movePanel, BorderLayout.SOUTH);
 		add(south, BorderLayout.SOUTH);
 		
+		
 		final JScrollPane scrolltree = new JScrollPane(stateTree);
 //		scrolltree.setMinimumSize(new Dimension(100,0));
 		scrolltree.setPreferredSize(new Dimension(200,0));
 		add(scrolltree, BorderLayout.EAST);
+		
+		
+		
+
+			canvas2D = new CubePanelDraw2D();
+			
+			canvas3D = new CubePanelDraw3D();
+			
+			
+			
+			
+			split1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, canvas2D, canvas3D);
+			split1.setOneTouchExpandable(true);
+
+			
+//			final int MIN_WEST_SIZE = 100;
+//			scrolltree.setMinimumSize(new Dimension(MIN_WEST_SIZE, 0));
+	//		split.setResizeWeight(0);
+//			split.setDividerLocation(MIN_WEST_SIZE);
+			
+			
+			add(split1, BorderLayout.CENTER);
+
+		
+		
+		
+		
+		
 		
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_SIMPLE, BasicMoves.PUBLIC_ALL_SIMPLE_INV, BasicMoves.PUBLIC_ALL_SIMPLE2);
 		addMovesToPanel(movePanel, BasicMoves.PUBLIC_ALL_DOUBLE, BasicMoves.PUBLIC_ALL_DOUBLE_INV, BasicMoves.PUBLIC_ALL_DOUBLE2);
@@ -149,6 +180,22 @@ public abstract class CubePanel extends JPanel {
 
 		display();
 	}
+	
+	
+	// https://stackoverflow.com/questions/2311449/jsplitpane-splitting-50-precisely
+	private boolean painted;
+	private JSplitPane split1;
+
+	@Override
+	public void paint(Graphics g) {
+	    super.paint(g);
+
+	    if (!painted) {
+	        painted = true;
+	        split1.setDividerLocation(0.5);
+	    }
+	}
+	
 	
 	public void addMovesToPanel(final JPanel movePanel, IMove[] normal, IMove[] inverse, IMove[] mdouble)
 	{

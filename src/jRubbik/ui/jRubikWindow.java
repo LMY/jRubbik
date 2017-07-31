@@ -70,7 +70,7 @@ public class jRubikWindow extends JFrame {
 
 	public void addPanelCube(CubeState state, boolean use3d)
 	{
-		tabs.add("Cube", use3d ? new CubePanelDraw3D(state) : new CubePanelDraw2D(state));
+		tabs.add("Cube", new CubePanel(new CubeState())); //use3d ? new CubePanelDraw3D() : new CubePanelDraw2D());
 		tabs.setSelectedComponent(tabs.getComponent(tabs.getTabCount()-1));
 	}
 	
