@@ -19,13 +19,25 @@ public class CubePanelDraw2D extends CubePanelCanvas {
 	}
 
 	
-	private final static int PADDING = 5;
-	private final static int PADDING_FACE = 3;
-	private final static int LAT = 40;
-	
 
+	
+	private final static double Kpadding_face = 1/15d;
+	private final static double K_face = 2/15d;
+
+	private int PADDING = 4;
+	private int PADDING_FACE = 2;
+	private int LAT = 30;
+	
 	@Override
 	protected Point2i getPadding(int width, int height) {
+		
+		int latx = (int) ((double)width/(12d*(K_face+1)-3*Kpadding_face));
+		int laty = (int) ((double)height/(9d*(K_face+1)-2*Kpadding_face));
+		
+		LAT = Math.min(latx, laty);
+		PADDING = (int) Math.round(LAT*K_face);
+		PADDING_FACE = (int) Math.round(LAT*Kpadding_face);
+		
 		return new Point2i((width - 12*(PADDING+LAT)-2*PADDING_FACE)/2, (height - 9*(PADDING+LAT)-2*PADDING_FACE)/2);
 	}
 	
@@ -49,7 +61,7 @@ public class CubePanelDraw2D extends CubePanelCanvas {
 		
 	}
 	
-	private static void drawQuad(Graphics g, Point2i offset, Color c, int x, int y, Color facecolor) {
+	private void drawQuad(Graphics g, Point2i offset, Color c, int x, int y, Color facecolor) {
 		
 		g.setColor(c.toAwtColor());
 		
@@ -59,19 +71,29 @@ public class CubePanelDraw2D extends CubePanelCanvas {
 		g.fillRect(offset.getX() + x*(PADDING+LAT), offset.getY() + y*(PADDING+LAT), LAT, LAT);
 	}
 	
+	private Point2i[] get_COLOR_OFFSETS() {
+		return new Point2i[] {
+				/* RED */ new Point2i(3*(PADDING+LAT), 3*(PADDING+LAT)),
+				/* ORANGE */ new Point2i(9*(PADDING+LAT)+2*PADDING_FACE, 3*(PADDING+LAT)),
+				/* YELLOW */ new Point2i(3*(PADDING+LAT), 0-PADDING_FACE),
+				/* WHITE */ new Point2i(3*(PADDING+LAT), 6*(PADDING+LAT)+PADDING_FACE),
+				/* GREEN */ new Point2i(6*(PADDING+LAT)+PADDING_FACE, 3*(PADDING+LAT)),
+				/* BLUE */ new Point2i(0-PADDING_FACE, 3*(PADDING+LAT)),
+			};
+	}
 	
-	private final static Point2i[] COLOR_OFFSETS = new Point2i[]{
-		/* RED */ new Point2i(3*(PADDING+LAT), 3*(PADDING+LAT)),
-		/* ORANGE */ new Point2i(9*(PADDING+LAT)+2*PADDING_FACE, 3*(PADDING+LAT)),
-		/* YELLOW */ new Point2i(3*(PADDING+LAT), 0-PADDING_FACE),
-		/* WHITE */ new Point2i(3*(PADDING+LAT), 6*(PADDING+LAT)+PADDING_FACE),
-		/* GREEN */ new Point2i(6*(PADDING+LAT)+PADDING_FACE, 3*(PADDING+LAT)),
-		/* BLUE */ new Point2i(0-PADDING_FACE, 3*(PADDING+LAT)),
-	};
+//	private final static Point2i[] COLOR_OFFSETS = new Point2i[]{
+//		/* RED */ new Point2i(3*(PADDING+LAT), 3*(PADDING+LAT)),
+//		/* ORANGE */ new Point2i(9*(PADDING+LAT)+2*PADDING_FACE, 3*(PADDING+LAT)),
+//		/* YELLOW */ new Point2i(3*(PADDING+LAT), 0-PADDING_FACE),
+//		/* WHITE */ new Point2i(3*(PADDING+LAT), 6*(PADDING+LAT)+PADDING_FACE),
+//		/* GREEN */ new Point2i(6*(PADDING+LAT)+PADDING_FACE, 3*(PADDING+LAT)),
+//		/* BLUE */ new Point2i(0-PADDING_FACE, 3*(PADDING+LAT)),
+//	};
 	
 	
-	private static Point2i offset(Color color) {
-		return COLOR_OFFSETS[color.toInt()];
+	private Point2i offset(Color color) {
+		return get_COLOR_OFFSETS()[color.toInt()];
 	}
 
 	@Override
