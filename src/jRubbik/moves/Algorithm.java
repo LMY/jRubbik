@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class Algorithm extends IMove {
 
@@ -112,4 +113,14 @@ public class Algorithm extends IMove {
 	}
 
 
+	
+	@Override
+	public IMove orient(OrientatonState state) {
+		final Algorithm ret = new Algorithm();
+		
+		for (IMove m : moves)
+			ret.addMove(m.orient(state));
+		
+		return ret;
+	}
 }

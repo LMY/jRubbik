@@ -2,6 +2,7 @@ package jRubbik.moves;
 
 import jRubbik.constants.Color;
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveMiddle extends FlyWeightMove {
 
@@ -50,5 +51,10 @@ public class MoveMiddle extends FlyWeightMove {
 				(isReverse() ? BasicMoves.MOVE_D : BasicMoves.MOVE_Di).apply(state);
 				(isReverse() ? BasicMoves.MOVE_y : BasicMoves.MOVE_yi).apply(state);
 			}		
+	}
+
+	@Override
+	public IMove orient(OrientatonState state) {
+		return BasicMoves.color2middleMove(state.get(getDir()), getReps());
 	}
 }

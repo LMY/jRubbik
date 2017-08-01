@@ -1,6 +1,7 @@
 package jRubbik.moves;
 
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveNull extends IMove {
 
@@ -37,5 +38,11 @@ public class MoveNull extends IMove {
 
 	@Override
 	public void apply(CubeState state) {
+	}
+
+
+	@Override
+	public IMove orient(OrientatonState state) {
+		return this;
 	}
 }

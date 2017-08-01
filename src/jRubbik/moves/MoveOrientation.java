@@ -56,4 +56,9 @@ public class MoveOrientation extends FlyWeightMove {
 			op.setUp(reps == 2 ? up.opposite() : up.next(reverse ? front.opposite() : front));
 		}
 	}
+	
+	@Override
+	public IMove orient(OrientatonState state) {
+		return BasicMoves.color2orientationMove(state.get(getDir()), getReps());
+	}
 }

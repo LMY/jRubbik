@@ -1,6 +1,7 @@
 package jRubbik.moves;
 
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public abstract class IMove {
 	
@@ -21,4 +22,6 @@ public abstract class IMove {
 	public abstract IMove times(int n);
 	public abstract int length();
 	public abstract int length_htm();
+	
+	public abstract IMove orient(OrientatonState state);
 }

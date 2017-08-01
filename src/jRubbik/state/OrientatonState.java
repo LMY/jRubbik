@@ -42,6 +42,9 @@ public class OrientatonState {
 	public Color getRight() { return front.next(up); }
 	public Color getLeft() { return getRight().opposite(); }
 	
+	/**
+	 * returns the color of the face in a direction (front=red, up=yellow, ...)
+	 */
 	public Color get(Color direction) {
 		switch (direction) {
 			case BLUE:
@@ -63,19 +66,22 @@ public class OrientatonState {
 		}
 	}
 
-	public Color whereis(Color direction) {
+	/**
+	 * get(color) inverse, equivalent to "in what direction of std orient is color" 
+	 */
+	public Color whereis(Color color) {
 		
-		if (direction == up)
+		if (color == up)
 			return Color.YELLOW;
-		if (direction == up.opposite())
+		if (color == up.opposite())
 			return Color.WHITE;
 		
-		if (direction == front)
+		if (color == front)
 			return Color.RED;
-		if (direction == front.opposite())
+		if (color == front.opposite())
 			return Color.ORANGE;
 		
-		if (direction == front.next(up))
+		if (color == front.next(up))
 			return Color.GREEN;
 		
 		return Color.BLUE;

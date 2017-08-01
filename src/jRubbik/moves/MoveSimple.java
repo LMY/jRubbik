@@ -3,6 +3,7 @@ package jRubbik.moves;
 import jRubbik.constants.Color;
 import jRubbik.constants.Constants;
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveSimple extends FlyWeightMove {
 
@@ -77,5 +78,10 @@ public class MoveSimple extends FlyWeightMove {
 			// permutation of corners
 			Constants.permutate(dispo, permutation, reverse);
 		}
+	}
+	
+	@Override
+	public IMove orient(OrientatonState state) {
+		return BasicMoves.color2simpleMove(state.get(getDir()), getReps());
 	}
 }

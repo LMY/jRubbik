@@ -1,11 +1,15 @@
 package jRubbik;
 
+
 import javax.swing.UIManager;
 
-
+import jRubbik.constants.Color;
+import jRubbik.moves.Algorithm;
+import jRubbik.moves.BasicMoves;
 import jRubbik.moves.IMove;
 import jRubbik.solver.SolverCFOP;
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 import jRubbik.ui.jRubikWindow;
 import jRubbik.utils.Utils;
 
@@ -20,6 +24,20 @@ public class jRubbik {
 			Utils.MessageBox(null, "Invalid look and feel.", "ERROR");
 		}
 				
+		
+		
+		Algorithm alg = new Algorithm();
+		alg.addMove(BasicMoves.MOVE_r);
+		alg.addMove(BasicMoves.MOVE_u);
+		alg.addMove(BasicMoves.MOVE_ri);
+		alg.addMove(BasicMoves.MOVE_ui);
+		
+		IMove aalg = alg.orient(new OrientatonState(Color.GREEN, Color.YELLOW));
+		System.out.println(aalg.toString());
+		
+		
+		
+		
 		final jRubikWindow main = new jRubikWindow();
 		
 		main.setVisible(true);

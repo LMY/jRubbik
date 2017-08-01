@@ -2,6 +2,7 @@ package jRubbik.moves;
 
 import jRubbik.constants.Color;
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveDouble extends FlyWeightMove {
 
@@ -39,5 +40,10 @@ public class MoveDouble extends FlyWeightMove {
 		
 		facemove.apply(state);
 		(dir == Color.WHITE || dir == Color.ORANGE || dir == Color.BLUE ? orientmove.reverse() : orientmove).apply(state);
+	}
+	
+	@Override
+	public IMove orient(OrientatonState state) {
+		return BasicMoves.color2doubleMove(state.get(getDir()), getReps());
 	}
 }

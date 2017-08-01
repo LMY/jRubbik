@@ -1,6 +1,7 @@
 package jRubbik.moves;
 
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveDescription extends IMove {
 
@@ -54,5 +55,10 @@ public class MoveDescription extends IMove {
 	public static IMove createMoveMessage(String message)
 	{
 		return new MoveDescription(MoveNull.NULL, message, true);
+	}
+	
+	@Override
+	public IMove orient(OrientatonState state) {
+		return new MoveDescription(move.orient(state), description+"~", suppress_original);
 	}
 }

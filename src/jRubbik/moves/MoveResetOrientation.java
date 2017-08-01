@@ -1,6 +1,7 @@
 package jRubbik.moves;
 
 import jRubbik.state.CubeState;
+import jRubbik.state.OrientatonState;
 
 public class MoveResetOrientation extends IMove {
 
@@ -36,5 +37,10 @@ public class MoveResetOrientation extends IMove {
 	@Override
 	public int length_htm() {
 		return 0;
+	}
+
+	@Override
+	public IMove orient(OrientatonState state) {
+		return this; //TODO
 	}
 }
