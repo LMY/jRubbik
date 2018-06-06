@@ -1,20 +1,15 @@
 # README #
 
-fuck fuck fuck cube cube cube
+a CFOP cube solver using my cube representation
 
 ### What is this repository for? ###
 
-* Fucking cubing man. fucking cubing.
+* Some cube implementation and display
 
 ### How do I get set up? ###
 
-* you get a fucking cube and fucking cube
+* you clone the repo and build it in eclipse
 
 ### Contribution guidelines ###
 
-* Fucking
-* Cube
-
-### Who do I talk to? ###
-
-* Other fucking cubers
+* do what you want with this, this is a J4F project
